@@ -22,6 +22,8 @@ APPROVAL={'reviews':[{'decisionId':'d','covered':True,'reason':'保留版本含�
 class CoverageTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)
+        self.cli=patch.object(sem,'codex_binary',return_value='/fixture/codex')
+        self.cli.start();self.addCleanup(self.cli.stop)
     def tearDown(self):self.temp.cleanup()
     def prepare(self,units=UNITS,primary=PRIMARY):
         d=self.root/'semantic';d.mkdir(exist_ok=True)

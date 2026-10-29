@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install media tools
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg python3-pil
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg python3-pil webp
       - name: Install locked JavaScript dependencies
         run: npm ci --prefix studio/templates/remotion-base --ignore-scripts
       - run: npm test

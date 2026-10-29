@@ -1,14 +1,14 @@
 """Single source for how this repo (and visualization) invokes `codex exec`.
 
-Settings come from ``config/codex.json``; env vars override them:
+Settings come from ``.devin/codex.local.json``; env vars override them:
 
 - ``CODEX_BIN`` (legacy aliases: ROUGHCUT_CODEX_BIN, EDITOR_PLAN_CODEX_BIN,
   CODEX_BINARY, EDITOR_CODEX_BIN, EDITOR_CODEX_BINARY)
 - ``CODEX_MODEL`` (legacy alias: WORKBENCH_CODEX_MODEL)
 - ``CODEX_REASONING_EFFORT``
 
-Every call site builds its argv with :func:`exec_command`, so the model and
-reasoning effort are always explicit and never depend on ~/.codex/config.toml.
+Every call site builds its argv with :func:`exec_command`. Model and reasoning
+overrides are optional; otherwise the user's CLI configuration applies.
 """
 from __future__ import annotations
 
@@ -78,7 +78,7 @@ def model_args(model=None, effort=None, config=None):
 
 
 def exec_command(*args, approval="never", binary=None, model=None, effort=None):
-    """Return argv for ``codex exec`` with explicit model/effort.
+    """Return argv for ``codex exec`` with optional model/effort overrides.
 
     approval="never": top-level ``--ask-for-approval never`` (exec itself no longer
     accepts ``-a`` since 0.146); approval="auto": ``exec --approve-for-me``.
@@ -88,7 +88,7 @@ def exec_command(*args, approval="never", binary=None, model=None, effort=None):
     config = load_config()
     binary = binary or codex_binary(config)
     if not binary:
-        raise FileNotFoundError("未找到 Codex CLI（检查 config/codex.json 或 CODEX_BIN）")
+        raise FileNotFoundError("未找到 Codex CLI（检查 .devin/codex.local.json 或 CODEX_BIN）")
     command = [str(binary)]
     if approval == "never":
         command += ["--ask-for-approval", "never"]

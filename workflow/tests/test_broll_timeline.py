@@ -4,6 +4,7 @@
 唯一需要外部命令的是 ffprobe（读音频时长），用 monkeypatch 掉。
 """
 import json
+import shutil
 import os
 import wave
 from unittest.mock import patch
@@ -218,6 +219,7 @@ class LarkQueryParams(unittest.TestCase):
     """查询参数必须走 --params：拼在 path 里会被 lark-cli 丢掉，
     历史上 dissect 的 need_timestamp 因此从未生效。"""
 
+    @unittest.skipUnless(shutil.which("lark-cli"), "Optional lark-cli is not installed")
     def test_params_survive_dry_run(self):
         proc = subprocess.run(
             ["lark-cli", "api", "GET", "/open-apis/minutes/v1/minutes/T/transcript",
@@ -230,6 +232,7 @@ class LarkQueryParams(unittest.TestCase):
         self.assertEqual(api.get("params", {}).get("file_format"), "srt")
         self.assertIs(api.get("params", {}).get("need_timestamp"), True)
 
+    @unittest.skipUnless(shutil.which("lark-cli"), "Optional lark-cli is not installed")
     def test_query_string_in_path_is_dropped(self):
         proc = subprocess.run(
             ["lark-cli", "api", "GET",

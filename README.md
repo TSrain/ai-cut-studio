@@ -118,7 +118,7 @@ npm run audit:release
 
 源码测试默认不要求私人音效库和生成的模板预览；相应资源验收会明确显示 skipped，而不是通过。已安装自己的完整资源库时，可用 `STUDIO_ASSET_TESTS=1 npm run test:studio` 执行相关检查；该验收仍包含原资源库的历史规模断言，不是通用安装门槛。
 
-部分图像合成回归测试使用系统 `/usr/bin/python3` 的 Pillow。Ubuntu 开发环境可安装 `python3-pil`；其他系统需为该解释器配置 Pillow。它不是基础编辑器启动依赖，也不要把现有测试夹具解释器当作所有 Python 工具的统一配置。
+部分图像合成回归测试使用系统 `/usr/bin/python3` 的 Pillow，并通过 `cwebp` 生成无损 WebP 夹具。Ubuntu 开发环境可安装 `python3-pil webp`；其他系统需配置对应解释器与工具。它们不是基础编辑器启动依赖。模型单元测试使用桩，不要求安装或登录 Codex；飞书 CLI 的两项 dry-run 检查在未安装该可选 CLI 时明确跳过。
 
 源码保留了部分历史工具和合同以支持既有数据结构；标注为历史分支的入口不是第一版推荐路径。首次使用从编辑器及当前 package 合同开始，不按历史工具逐个执行。
 

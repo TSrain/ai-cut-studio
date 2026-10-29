@@ -3,6 +3,7 @@ import copy
 import json
 import os
 import subprocess
+import sys
 import tempfile
 import threading
 import unittest
@@ -1009,7 +1010,7 @@ const next=await service.createJob({projectId:job.projectId,revision:document.re
         thread = threading.Thread(target=cancel_after_started, daemon=True); thread.start()
         script = "import os,time; from pathlib import Path; Path(" + repr(str(marker)) + ").write_text(str(os.getpid())); time.sleep(20)"
         with self.assertRaises(runtime.WorkerCancelled):
-            runtime.run_process(["/opt/homebrew/bin/python3", "-c", script], self.root, store)
+            runtime.run_process([sys.executable, "-c", script], self.root, store)
         thread.join(2)
         receipt = runtime.read_json(self.root / "cancellation-receipt.json")
         self.assertEqual(receipt["pid"], int(marker.read_text()))

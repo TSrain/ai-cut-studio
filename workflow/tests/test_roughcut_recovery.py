@@ -61,6 +61,8 @@ class PartialAlignmentTests(unittest.TestCase):
 class RecoveryTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)
+        self.cli=patch.object(sem,'codex_binary',return_value='/fixture/codex')
+        self.cli.start();self.addCleanup(self.cli.stop)
         # Derived caches stay per-test: never read or write the repo workspace caches.
         self.env=patch.dict(os.environ,{'ROUGHCUT_MODEL_CACHE_DIR':str(self.root/'model-cache'),'ROUGHCUT_AUDIO_CACHE':str(self.root/'audio-cache')});self.env.start()
     def tearDown(self):self.env.stop();self.temp.cleanup()
@@ -68,7 +70,7 @@ class RecoveryTests(unittest.TestCase):
     def assert_consumable_by_editor(self,decisions,units=UNITS):
         targets=[x for item in decisions for x in item['unitIds']]
         self.assertEqual(len(targets),len(set(targets)))
-        module=Path(__file__).resolve().parents[2]/'visualization/tools/editor/roughcut-model.mjs'
+        module=Path(__file__).resolve().parents[2]/'studio/tools/editor/roughcut-model.mjs'
         if not module.is_file() or not shutil.which('node'):return None
         script="""import fs from 'node:fs';
 import {createRoughcut,roughcutSourceKey,roughcutRows} from MODULE;
