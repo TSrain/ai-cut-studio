@@ -1,0 +1,5 @@
+.timeline-hover-line{position:absolute;top:0;bottom:0;width:1px;background:#edca4c;pointer-events:none;z-index:10}
+.timeline-hover-time{position:sticky;top:0;display:block;width:max-content;transform:translateX(5px);padding:2px 5px;border-radius:3px;background:#edca4c;color:#29271c;font-size:10px;line-height:16px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.timeline-hover-time.align-left{transform:translateX(calc(-100% - 5px))}
+.preview-timecode.is-hover-preview{color:#edca4c}
+.preview-timecode.is-hover-preview small{font-size:10px;margin-right:7px}

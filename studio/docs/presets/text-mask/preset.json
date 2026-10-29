@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "id": "text-mask",
+  "name": "字形遮罩开场",
+  "compositionId": "PresetTextMask",
+  "componentSource": "templates/remotion-base/src/presets/TextMask.tsx",
+  "engine": "remotion",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 3.5,
+    "max": 6,
+    "default": 5
+  },
+  "tags": [
+    "type",
+    "opening",
+    "transition",
+    "screenshot",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 1,
+    "shader3d": 0,
+    "kineticType": 1,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "deliberate",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "第 0 帧即在场:深底上超粗大字当遮罩,笔画里透出内容(有截图用截图,没截图用抽象产品骨架流);caption 0.25s 起上浮淡入 0.4s",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "hold",
+        "seconds": 0.55,
+        "action": "字与门建立,内容在笔画里静止——先让观众读到「这是一个词」,再让世界动起来"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "字内漂移:内容匀速 3.0px/帧(线性,刻意不加缓动),漂移轴取 cover 之后余量大的那根(长页截图=纵向滚);字形一动不动。时长伸缩全部落在这一段"
+      },
+      {
+        "phase": "exit",
+        "seconds": 1.0,
+        "action": "takeover=full 的接管段:遮罩 S=7^endT 指数放大 + 笔画描边 0→0.55em 吞掉字腔(endT 0.30–0.62),内容同时归位(漂移归 0、取景 1.50→1.00),无遮罩全屏层 endT 0.50–0.90 淡入接管,caption 提前淡出",
+        "easing": "bezier(0.4,0,0.2,1)"
+      },
+      {
+        "phase": "exit",
+        "seconds": 0.9,
+        "action": "takeover=hold 的收束段(与上一条二选一):漂移 outCubic 减速停住,caption 留场,不做放大也不接管",
+        "easing": "outCubic"
+      },
+      {
+        "phase": "hold",
+        "seconds": 0.8,
+        "action": "末段真静止 24 帧(≥ 配方卡要求的 20 帧)。full 档定格在全屏产品的标准构图(cover 居中、取景 1.0);hold 档定格在字内"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "takeover": {
+      "type": "enum",
+      "values": [
+        "full",
+        "hold"
+      ],
+      "default": "full",
+      "description": "full = 末段字形胀开、画面接管全屏(当章节转场,下一镜直接接画面);hold = 全程留在字内,末段静止(当独立开场卡)"
+    }
+  },
+  "slots": {
+    "title": {
+      "label": "当遮罩的那个词",
+      "hint": "画面里的超粗大字，画面从笔画里透出来。中文 2–4 字或短英文最稳（2 字能到 460px），5 字缩到 190px 上下、笔画开始变窄，6 字直接报错",
+      "type": "text",
+      "required": true,
+      "role": "hero",
+      "fontSize": 460,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 940,
+        "shrinkFloorPx": 180
+      },
+      "description": "遮罩字。笔画就是视口——字数多或字重轻等于把画面塞进门缝。字族固定走 Archivo VF + 思源黑 VF 的 900 字重(遮罩要的是最大墨量),不跟皮肤 kit;tune.font 可覆盖"
+    },
+    "image": {
+      "label": "字里透出的画面",
+      "hint": "放在 build/public/screens/ 下的图片文件名。挑图有三条硬要求：①暗皮肤下截图要比背景亮（暗色截图会让字直接消失）；②笔画里要有边、条、卡这类结构，大片留白或大片纯色会让字读成一块纯色；③只有源图的一条窄带会透进笔画，先看那条带上是什么，别看整张图好不好看。拿不准就留空——留空走的是一段可控的产品界面骨架流，preset 样例走的就是它",
+      "type": "image",
+      "required": false,
+      "assetDir": "screens",
+      "description": "笔画里流动的产品画面,可省(preset 样例就省着)。选图硬判据见 PRESET.md「选图硬判据」:门里必须与门外拉开明度(暗皮肤下要更亮)、笔画里必须有结构而不是平色、只有源图的一条窄带会透出来。含 / 视为 public/ 完整相对路径,裸文件名自动补 screens/(与 screen-push 同一套约定)"
+    },
+    "imgW": {
+      "label": "源图宽(像素)",
+      "hint": "填了图片才需要。控制台会自动探测，手写合同用 sips -g pixelWidth 量",
+      "type": "number",
+      "required": false,
+      "derivedFrom": "image",
+      "description": "源图真实像素宽,用于按画幅铺满并算漂移距离"
+    },
+    "imgH": {
+      "label": "源图高(像素)",
+      "hint": "填了图片才需要。控制台会自动探测",
+      "type": "number",
+      "required": false,
+      "derivedFrom": "image",
+      "description": "源图真实像素高"
+    },
+    "caption": {
+      "label": "底部小注",
+      "hint": "字下面那行小字，撤场时先淡出。不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "label",
+      "fontSize": 40,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 820,
+        "shrinkFloorPx": 26
+      },
+      "description": "底部小注,撤场时淡出,可省"
+    }
+  },
+  "anchors": {
+    "start": "深底,超粗大字「{title}」占据画面中带,笔画内部透出缓慢流动的产品画面",
+    "end": "退场前：字形胀开溢出画幅,产品画面接管全屏并落在标准构图静止(takeover=hold 时仍留在字内静止)；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【字形遮罩开场 preset:text-mask@v1】用「{title}」的字形当窗口,产品画面在笔画里流动,末段字形胀开由画面接管全屏",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-26",
+      "note": "初版:从 video-shotcraft 的 text-as-mask 移植(demo 1920×1080 拉丁字母 + 灰阶占位仪表盘 → 1080×1920 中文竖版)。三处刻意偏差:①遮罩改成行内 <svg> 的 <mask><text>,不走 demo 的 CSS mask-image + SVG data-URI——后者作为图片在独立文档里栅格化,拿不到页面 FontFace 注册的字体,中文会静默回退成系统字体(本项目明令禁止),而且不报错;行内 SVG 属于当前文档,字体生效(已用 tune.font=smiley 对照渲帧验证两套字族确实渲出不同字形,不是双双回退)。②取消内容层 1/S 反向补偿:那是 CSS mask 绑元素 transform 才需要的补丁,SVG <mask> 的几何与被遮内容天生解耦,放大写在 mask 子树里内容一动不动,配方卡守的那条命门从「靠一个反向 transform 撑着」变成结构性成立。③放大原点不再手推:demo 手推到字母 L 竖笔 61.5%,配方卡自己写明「换词换字体必失效」;改成「原点=词包围盒中心 + 放大时给字加 0→0.55em 描边把字腔和字间缝吞掉」,与文案无关,用最坏文案「回口田」(三个大字腔、正中那个正压在原点上)实渲验证过。其余换算:放大倍率 26→7 且改成几何插值 S=N^endT(线性插值在 endT=0.08 就已 3 倍,字形只看得到前 8%,改指数后能读到 0.35);漂移轴按素材 cover 后的余量自动选(长页截图=纵向滚,配方卡「漂移方向选信息密的轴」在竖版里就是这个意思);字内取景 1.15→1.50(demo 的 1.15 是 1920 宽仪表盘的值,竖版里 1200 宽长页在 0.9 倍下元素太小,笔画里读不出是什么);遮罩字族硬性走 Archivo VF + 思源黑 VF 的真 900 字重,不跟当前皮肤的 minimal kit(新晰黑只有 400,460px 下笔画宽约 25px=门缝);image 槽可省,不填时走从皮肤令牌派生的抽象产品骨架流(英雄块摆在页面纵向正中,接管完成帧才落在一块像样的版面上)。2026-08-26 收尾修复(机制未动,只改样例与骨架流):四个候选样例实渲对比后把 sample 改成**不填 image**——单张真实截图能不能成立取决于漂移窗口正好压在源图哪条带上(落在 Remotion 落地页的留白带 → 「出片」读成纯白色的字;暗色截图 → 「片」直接消失),而样例是控制台里这个模板的门面,不能靠运气;image 槽本身保留。骨架流从稀疏大卡片墙改成密排产品界面(左导航栏 + 顶栏 + 指标卡 + 数据表 + 卡片墙 + 过滤条 + 英雄分析面板:KPI 条 / 16 根柱 + 3 网格线 + 趋势折线 / 右栏列表 / 图例),图元节距按**笔画宽度**标定(表格行 54 / 图表柱 36 / 迷你柱 29 骨架 px);明度阶梯改成随 P.mode **整体翻转**(暗皮肤门里是亮色 UI 卡片 L0.74,亮皮肤门里是暗色 UI 卡片 L0.40——原来亮皮肤 L0.985 贴着 paper 底 L0.98,字形化在纸上);选图硬判据三条写进 PRESET.md 与组件文件头。"
+    },
+    {
+      "version": 1,
+      "date": "2026-08-26",
+      "note": "用户看过三模板连播验收片(桌面 新模板验收-20260826.mp4,1080×1920,各自的真实中文样例文案)后回「没问题,这几个分别形成模板」——翻 verified,自此走快车道:批量出片时不再出三张 Styleframe、不逐镜全量自查,只做槽位校验 + 预览印张确认 + 输出成功 + 分辨率/时长/编码/音轨四项检查"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "slots": {
+      "title": "出片",
+      "caption": "字是门,产品在门里。"
+    }
+  },
+  "verifiedAt": "2026-08-26"
+}

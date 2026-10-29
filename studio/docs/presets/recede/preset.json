@@ -1,0 +1,232 @@
+{
+  "version": 2,
+  "id": "recede",
+  "name": "退让镜",
+  "engine": "remotion",
+  "compositionId": "PresetRecede",
+  "componentSource": "templates/remotion-base/src/presets/Recede.tsx",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 2,
+    "max": 5,
+    "default": 3
+  },
+  "tags": [
+    "type",
+    "background",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 1,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "minInk": 4,
+    "keyframes": [
+      "start",
+      "end"
+    ],
+    "note": "退让镜正当低墨:frame-audit 加 --min-ink 4,review.md 引用本文件即为豁免理由。v2 加了折行与锚点细线,墨量仍在同一量级,豁免继续有效"
+  },
+  "motion": {
+    "character": "restrained",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0.5,
+        "action": "新模板默认无出场，可选淡入、上移、下移、缩放；未指定 enterFx 的旧实例保留原上浮淡入。",
+        "easing": "ENTER bezier(0.16,1,0.3,1)"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "亮度呼吸 ±3%,周期 4s,别无动作"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "新模板默认无退场，可选文字淡出、上移、下移、缩放；未指定 exitFx 的旧实例继续整镜溶出。"
+    }
+  },
+  "variants": {
+    "level": {
+      "label": "暗度档",
+      "type": "enum",
+      "values": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "default": 2,
+      "description": "亮度档,1 最亮 → 4 全片最暗;同一批多镜退让时逐级递减。锚点细线的墨色跟着一起退",
+      "hint": "越大越暗。同一批里多个退让镜就逐级递减"
+    }
+  },
+  "slots": {
+    "line": {
+      "label": "整句话",
+      "type": "text",
+      "required": true,
+      "role": "hero",
+      "fontSize": 94,
+      "maxLines": 3,
+      "wrap": true,
+      "emphasisSlot": "hero",
+      "emphasisRatio": 1.6,
+      "fit": {
+        "maxWidthPx": 936,
+        "shrinkFloorPx": 60
+      },
+      "description": "整屏唯一一块字,自动折行(最多 3 行,约 14–18 个中文字)。整块同一字族,不许中西文手动拆段拼贴;要指定断行位置可以写 \\n",
+      "hint": "整句上屏的话。可以按回车折行"
+    },
+    "hero": {
+      "label": "旧版单处放大文字",
+      "type": "text",
+      "required": false,
+      "role": "hero",
+      "measuredIn": "line",
+      "description": "line 里要放大成主焦点的那一段,必须逐字出现在 line 中(如 line=「知识，是人类最慢的生产资料」时 hero=「最慢」)。命中的部分放大 1.6 倍并给满墨色,其余降一档字号与墨色。省略 = 整句一个字号、全是主焦点(等同 v1)",
+      "hint": "兼容旧工程；编辑器中请直接选择文字标记大小。"
+    },
+    "emphasisRanges": {
+      "label": "放大文字范围",
+      "type": "ranges",
+      "required": false,
+      "description": "UTF-16 起止位置数组，可标记多处；空数组表示全部普通，省略则兼容旧 hero。"
+    },
+    "fontSize": {
+      "label": "普通字号",
+      "type": "number",
+      "required": false,
+      "min": 8,
+      "max": 400,
+      "description": "普通字号，可在编辑器中调整。"
+    },
+    "emphasisRatio": {
+      "label": "放大倍数",
+      "type": "number",
+      "required": false,
+      "min": 1,
+      "max": 3,
+      "description": "放大倍数，可在编辑器中调整。"
+    },
+    "enterSeconds": {
+      "label": "出场时长",
+      "type": "number",
+      "required": false,
+      "min": 0.05,
+      "max": 2,
+      "description": "出场时长，可在编辑器中调整。"
+    },
+    "exitSeconds": {
+      "label": "退场时长",
+      "type": "number",
+      "required": false,
+      "min": 0.05,
+      "max": 2,
+      "description": "退场时长，可在编辑器中调整。"
+    },
+    "enterFx": {
+      "label": "出场方式",
+      "type": "enum",
+      "required": false,
+      "values": [
+        "none",
+        "fade",
+        "rise",
+        "fall",
+        "zoom"
+      ],
+      "labels": {
+        "none": "无",
+        "fade": "淡入",
+        "rise": "上移",
+        "fall": "下移",
+        "zoom": "缩放"
+      },
+      "description": "新模板默认无；缺省保留旧模板动画。"
+    },
+    "exitFx": {
+      "label": "退场方式",
+      "type": "enum",
+      "required": false,
+      "values": [
+        "none",
+        "fade",
+        "rise",
+        "fall",
+        "zoom"
+      ],
+      "labels": {
+        "none": "无",
+        "fade": "淡出",
+        "rise": "上移",
+        "fall": "下移",
+        "zoom": "缩放"
+      },
+      "description": "新模板默认无；缺省保留旧模板动画。"
+    }
+  },
+  "anchors": {
+    "start": "深蓝黑层次底(中心微光+网格点),「{line}」字块视觉居中,左缘一条锚点细线,首帧已在场",
+    "end": "退场前：同起帧构图,仅亮度轻微呼吸,静止收尾；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【退让镜 preset:recede@v2】层次深底+「{line}」视觉居中折行,{hero?主焦点「{hero}」放大一档,}亮度档 {level},禁新增元素/粒子/装饰",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-06",
+      "note": "初版:固化自 SC-0025 镜 3/11/15/20 的 RecedeStage/RecedeLine;底按用户反馈改为带色相压暗+中心微光+网格点,不再死黑"
+    },
+    {
+      "version": 2,
+      "date": "2026-08-06",
+      "note": "用户反馈「用零三这种形式,注意排版的美观度」→ 样式类,升版本下批默认生效。①line 改为可折行槽(最多 3 行,约 14–18 中文字),v1 的单行 8 字上限解除;②新增可选槽 hero,命中的子串放大 1.6 倍 + 满墨色,其余降一档字号与 62% 墨色,一句话内部有主次;③版式工艺进皮肤层 RecedeBlock:视觉居中(比几何中心上移 56px)、多行收紧行距(1/2/3 行 = 1.20/1.14/1.06)、字块左缘 88×2px 锚点细线打破纯对称(墨色随 level 递减);④折行算法与展开器共用同一份(WRAP_SAFETY 0.92 内置),两侧永远算出同一版式;⑤无 hero 时优先缩字保住单行(SHRINK_TOLERANCE 0.78),老合同样子不变。性格不变:纯底、无色板、无眉题、springAccents 0、level 1–4 亮度档照旧"
+    },
+    {
+      "version": 2,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    },
+    {
+      "version": 2,
+      "date": "2026-10-14",
+      "note": "向后兼容扩展：多位置选区、普通字号/放大倍数、独立文字出入场与时长；新实例默认无重点、无出入场，旧实例保持原样。"
+    }
+  ],
+  "verifiedAt": "2026-08-06",
+  "sample": {
+    "slots": {
+      "line": "知识，是人类最慢的生产资料",
+      "hero": "",
+      "emphasisRanges": [],
+      "emphasisRatio": 1.6,
+      "enterFx": "none",
+      "exitFx": "none",
+      "enterSeconds": 0.5,
+      "exitSeconds": 0.35
+    },
+    "variant": {
+      "level": 3
+    }
+  }
+}

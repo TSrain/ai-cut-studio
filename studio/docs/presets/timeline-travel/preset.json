@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "id": "timeline-travel",
+  "name": "时间轴横移",
+  "compositionId": "PresetTimelineTravel",
+  "componentSource": "templates/remotion-base/src/presets/TimelineTravel.tsx",
+  "engine": "remotion",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 4,
+    "max": 8,
+    "default": 5.5
+  },
+  "tags": [
+    "camera",
+    "layout",
+    "timeline",
+    "data",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 0,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "kinetic",
+    "springAccents": 1,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0.0,
+        "action": "第 0 帧轴与刻度已在场(空轨道 + 次刻度小点 + 全部刻度名);首站的卡从轨道上弹起立住,相机不动",
+        "easing": "spring(damping 11)"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.47,
+        "action": "相机沿轴横移出发:前 15% 时间只走 5.5% 距离(缓起)→ 中段 73% 时间吃掉 84.5% 距离(冲刺)→ 末 12% 时间只剩 10% 距离(急刹)。世界层只动 translateX",
+        "easing": "断点 [0,0.15,0.88,1]→[0,0.055,0.9,1] 段内 inOut(quad)"
+      },
+      {
+        "phase": "enter",
+        "seconds": "每站到达前 6f",
+        "action": "那一站的卡从平躺(轨道上 13% 高)以底边为轴弹立(明显过冲),卡下 accent 立杆同步长出,刻度名点亮。**全片唯一的弹簧名额**",
+        "easing": "spring(damping 11, stiffness 160, mass 0.9, 26f)"
+      },
+      {
+        "phase": "enter",
+        "seconds": 3.92,
+        "action": "急停在末刻度,推近层 scale 1 → 1.28(10 帧),末刻度线与刻度名转成 accent",
+        "easing": "out(cubic)"
+      },
+      {
+        "phase": "enter",
+        "seconds": 4.02,
+        "action": "结论句从底部上浮 22px 淡入(0.45s)",
+        "easing": "CALM"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "完全静止读结论,默认 5.5s 下 1.25s(37 帧,≥ 配方卡的 30 帧)。durationSeconds 的伸缩全落在这里;时长不够 nominal 时压缩行程不压缩静止"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "slots": {
+    "stops": {
+      "label": "每个刻度",
+      "hint": "一行一个刻度，3–5 个。写成「刻度 | 一句话」，竖线前是刻度名（v1.0 / 2024 / 今天），后是那一站发生了什么",
+      "type": "list",
+      "required": true,
+      "minItems": 3,
+      "maxItems": 5,
+      "role": "h1",
+      "fontSize": 88,
+      "maxLines": 1,
+      "splitOn": " | ",
+      "noteRatio": 0.59,
+      "noteMaxLines": 2,
+      "fit": {
+        "maxWidthPx": 540,
+        "shrinkFloorPx": 40
+      },
+      "description": "时间轴上的主刻度。相机加速掠过,每到一格卡片从刻度线上弹立。刻度名印在轴下方(88px),那一句话印在卡里(52px);不写竖线后半段的站只有刻度和名字,不渲空卡"
+    },
+    "title": {
+      "label": "顶部眉题",
+      "hint": "画面顶部那行小标题，比如「一年半，四个版本」。不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "label",
+      "fontSize": 42,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 820,
+        "shrinkFloorPx": 28
+      },
+      "description": "顶部眉题,全程在场,可省"
+    },
+    "caption": {
+      "label": "结论句",
+      "hint": "急停在最后一个刻度之后底部那句话。可以按回车折行，不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "body",
+      "fontSize": 44,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 888,
+        "shrinkFloorPx": 32
+      },
+      "description": "末段急停后淡入的结论句,可省"
+    }
+  },
+  "anchors": {
+    "start": "深色底,水平时间轴横贯画面中带,首刻度「{stops}」定在中央,次刻度小点向右延伸",
+    "end": "退场前：相机急停并推近末刻度,末站卡片立在轴上,「{caption}」静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【时间轴横移 preset:timeline-travel@v1】把版本史/里程碑拍成一次沿时间轴的旅行:相机加速掠过 {stops},急停推近最后一站",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-26",
+      "note": "从 video-shotcraft 的 timeline-travel(1920×1080 灰阶 demo,合成 ScTimelineTravel)移植到 1080×1920 竖版。保留本体不动:变速曲线断点 [0,0.15,0.88,1]→[0,0.055,0.9,1](缓起→冲刺→末 12% 急刹)、由 camXAt 反查到达帧再提前 6f 起弹、次刻度小点、世界层只动 translateX / 推近层只动 scale、末段静止 ≥30f。竖版重标定:轴 y 700/1080 → 1080/1920;刻度间距 1400(0.73 屏宽)→ 880(0.81 屏宽,竖版屏窄,按 0.73 取相邻卡会贴在一起);卡片 360×240 → 680×(253/328,高度按正文行数算);刻度名 88px display 移到轴下方,卡里换成真实中文一句话 52px body。与 demo 的刻意偏差六处:①首站的卡 f0 就起弹(它是出发点不是掠过来的,竖版静置段只有空轴时首帧撑不住);②加远景视差竖线层 0.35×(竖版一屏只装得下 6 个次刻度,速度参照不够,且上下有空场);③走过的轨道染 accent 并向尾端淡出(「已经走了多远」的第二信号,也是强调色面积主来源;不淡出会把整个左半屏刷成实心色);④卡片颜色按站序走明度阶梯(越接近「今天」越亮,把顺序画出来);⑤未到站的卡平躺在轨道上、到站时立起来(补住掠过两站之间那约 20 帧的空屏,并提前交代还有几站);⑥不叠 CameraMotionBlur(速度按 demo 的屏宽/帧标定过,不糊;叠了只会拿末两张卡的可读性去换)。自查发现并修掉的两个真 bug:平躺→立起写成两个分支会在起弹帧闪断;卡面内容单独一层只跟 scaleX 会悬在压扁的卡外面。"
+    },
+    {
+      "version": 1,
+      "date": "2026-08-26",
+      "note": "用户看过三模板连播验收片(桌面 新模板验收-20260826.mp4,1080×1920,各自的真实中文样例文案)后回「没问题,这几个分别形成模板」——翻 verified,自此走快车道:批量出片时不再出三张 Styleframe、不逐镜全量自查,只做槽位校验 + 预览印张确认 + 输出成功 + 分辨率/时长/编码/音轨四项检查"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "slots": {
+      "title": "一年半,四个版本",
+      "stops": [
+        "v1.0 | 只能套三个模板",
+        "v2.0 | 会自己分镜了",
+        "v3.0 | 字幕能改了",
+        "今天 | 一句话出片"
+      ],
+      "caption": "一直在发货。"
+    }
+  },
+  "verifiedAt": "2026-08-26"
+}

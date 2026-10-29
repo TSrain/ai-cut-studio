@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "id": "brand-open",
+  "name": "品牌开场卡",
+  "engine": "remotion",
+  "compositionId": "PresetBrandOpen",
+  "componentSource": "templates/remotion-base/src/presets/BrandOpen.tsx",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 2.5,
+    "max": 5,
+    "default": 3.5
+  },
+  "tags": [
+    "type",
+    "kinetic",
+    "opening",
+    "brand",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 2,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "start",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "ceremonial",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "letterspace:底+地平线光带第 0 帧已在(首帧不淡入);ink:强调色十字竖线被无形笔画出 0.3s",
+        "easing": "letterspace 无 / ink bezier(0.3,0,0.2,1)"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.27,
+        "action": "ink:十字横线画出 0.33s(与竖线搭接 0.03s,读作一笔连写)",
+        "easing": "linear"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.3,
+        "action": "letterspace:全字符**并行**显形 1.33s —— 软掩膜自底向上连续生长 + blur 9→0 + opacity,所有字符共用同一进度(同帧起、同帧收)",
+        "easing": "easeInOut(quad)"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.33,
+        "action": "ink:wordmark 逐字凸版戳印,单字 0.4s(scale 1.6→1 + blur 6→0 + 字底强调色 glint 闪过);逐字步长按字数自适应,错峰总窗口封顶 0.9s",
+        "easing": "bezier(0.2,0.7,0.25,1)"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.8,
+        "action": "ink:十字准星淡出 0.33s(画完必须撤,残留准星与字标抢焦点)",
+        "easing": "linear"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.93,
+        "action": "ink:tagline 等宽打字机 0.7 帧/字符 + 强调色方块光标(打完约 1s 后停闪转全静止)",
+        "easing": "linear"
+      },
+      {
+        "phase": "enter",
+        "seconds": 1.63,
+        "action": "letterspace:显影完成瞬间结晶提亮回落 0.27s(全字符同帧发生)",
+        "easing": "linear"
+      },
+      {
+        "phase": "enter",
+        "seconds": 1.7,
+        "action": "letterspace:tagline 上浮淡入 0.4s",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "整组静置(硬底线 0.8s;时长伸缩全部落在这里)"
+      },
+      {
+        "phase": "exit",
+        "seconds": 0.3,
+        "action": "ink 且时长 ≥4.5s 且静置够本时:整组上浮 40px + 缩 12% + 淡出 9 帧;条件不满足则不退场,静止到末帧",
+        "easing": "EXIT"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "style": {
+      "label": "开场风格",
+      "hint": "letterspace 宽字距字标整体显形（默认，仪式感、适合正片片头）；ink 墨十字定位 + 逐字戳印 + 打字机（考据感、适合栏目/系列开场）",
+      "type": "enum",
+      "values": [
+        "letterspace",
+        "ink"
+      ],
+      "default": "letterspace",
+      "description": "两种开场语义:letterspace 是「整体显形」(全字符并行,一次成型),ink 是「逐字落定」(先定位后戳印,有工序感)。不是同一手法的深浅档,选错读作换了个品牌调性"
+    }
+  },
+  "slots": {
+    "wordmark": {
+      "label": "字标",
+      "hint": "品牌名或栏目名。letterspace 档会自动转大写、按空格拆成多行竖排;字数越少越有仪式感（3–14 字符最稳）",
+      "type": "text",
+      "required": true,
+      "role": "hero",
+      "fontSize": 160,
+      "maxLines": 3,
+      "fit": {
+        "maxWidthPx": 936,
+        "shrinkFloorPx": 54
+      },
+      "description": "字标本体。letterspace:按空格/换行拆行,逐行独立估宽后取最小字号(160 起,缩至 54 硬失败);ink:单行凸版戳印(150 起,缩至 60 硬失败)。估宽用组件内的品牌专用系数(大写 0.68em/字),不走 fit.ts 的正文均值"
+    },
+    "tagline": {
+      "label": "副标语",
+      "hint": "字标下面那行小字，一句话说清你是做什么的。不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "label",
+      "fontSize": 34,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 880,
+        "shrinkFloorPx": 20
+      },
+      "description": "副标语,可省。letterspace:0.3em 宽字距上浮淡入;ink:等宽字体打字机逐字打出 + 方块光标"
+    }
+  },
+  "anchors": {
+    "start": "深色层次底已在场,「{wordmark}」尚未显形(letterspace:地平线光带已亮 / ink:强调色十字正在被画出)",
+    "end": "退场前：「{wordmark}」完全显形静止,副标语在其下方,整组居中略偏上；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【品牌开场卡 preset:brand-open@v1】片头/栏目开场的固定画面:{style} 方式让字标「{wordmark}」显形并静置",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-21",
+      "note": "初版:从 video-shotcraft 的 letterspace-materialize 与 brand-ink-open 两个效果合并移植(两者都是「字标出场」这一件事的两种语义,合成一个 preset 两档而非两个模板)。横版 demo 重排为 1080×1920 竖版:多词字标拆行竖排、字标估宽改用品牌专用系数(拉丁大写 0.68em,fit.ts 的 0.52 正文均值会放大 25% 导致溢出安全区)。颜色全部改由皮肤令牌与 accentHue 派生,原 demo 的固定紫/粉 hex 一律去掉"
+    },
+    {
+      "version": 1,
+      "date": "2026-08-22",
+      "note": "用户看过 9 个模板的连播验收片(桌面 新模板验收.mp4,每个模板的真实文案样例动效),回「都 verified」——翻 verified,自此走快车道:批量出片时不再出三张 Styleframe、不逐镜全量自查,只做槽位校验 + 预览印张确认 + 输出成功 + 分辨率/时长/编码四项检查"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "variant": {
+      "style": "letterspace"
+    },
+    "slots": {
+      "wordmark": "MOTION STUDIO",
+      "tagline": "AI 驱动的动画工作台"
+    }
+  },
+  "verifiedAt": "2026-08-22"
+}

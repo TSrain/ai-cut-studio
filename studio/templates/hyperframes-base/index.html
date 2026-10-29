@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="zh-CN" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>HyperFrames Base — Visual First</title>
+    <!--
+      DETERMINISM: GSAP is vendored locally (assets/vendor/gsap.min.js).
+      Never swap this back to a CDN <script src="https://...">: a render-time
+      network request makes frames non-reproducible and violates the project's
+      hard determinism gate.
+    -->
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      /* ------------------------------------------------------------------
+         FONTS — all local files under assets/fonts/. No Google Fonts, no CDN.
+         impact kit: SmileySans (CN display) + Archivo (latin/numerals)
+         body/CN text: Noto Sans SC   ·   mono metadata: JetBrains Mono
+         Chinese text must never fall back to a system face — if you add a new
+         CN string, confirm the glyphs are 得意黑 / 思源黑体 in a snapshot.
+      ------------------------------------------------------------------ */
+      @font-face {
+        font-family: "Smiley Sans";
+        src: url("assets/fonts/SmileySans-Oblique.ttf") format("truetype");
+        font-weight: 400;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Archivo";
+        src: url("assets/fonts/Archivo-VF.ttf") format("truetype");
+        font-weight: 100 900;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Noto Sans SC";
+        src: url("assets/fonts/NotoSansSC-VF.ttf") format("truetype");
+        font-weight: 100 900;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/fonts/JetBrainsMono-VF.ttf") format("truetype");
+        font-weight: 100 800;
+        font-display: block;
+      }
+
+      /* ------------------------------------------------------------------
+         COLOR TOKENS — declared once here, consumed by class only.
+         The skeleton is an OKLCH lightness ladder on one hue (255) plus one
+         accent hue (68); the OKLCH source values are kept in the comments so
+         the ladder stays editable perceptually.
+
+         WHY sRGB AND NOT LITERAL oklch(): `hyperframes check`'s WCAG audit
+         cannot parse oklch() and silently reports "0/0 text checks pass" —
+         measured on this very file, 40 text checks became 0 the moment the
+         tokens were written in oklch. A gate that skips itself is worse than a
+         failing gate. Author in OKLCH, ship the converted sRGB value, keep the
+         source in the comment. Never paste an unconverted oklch() back in.
+      ------------------------------------------------------------------ */
+      :root {
+        --ink-0: #040b17; /* oklch(0.15 0.028 255) */
+        --ink-1: #0c1929; /* oklch(0.21 0.038 255) */
+        --ink-2: #1c2c41; /* oklch(0.29 0.045 255) */
+        --paper-0: #f2f5fb; /* oklch(0.97 0.008 255) */
+        --paper-1: #c3cbd6; /* oklch(0.84 0.018 255) */
+        --paper-2: #959fae; /* oklch(0.70 0.024 255) */
+        --accent: #ffaa2e; /* oklch(0.81 0.165 68)  */
+        --accent-deep: #c46d00; /* oklch(0.62 0.150 62)  */
+        --accent-dim: #925000; /* oklch(0.50 0.120 62)  */
+
+        /* translucent variants of the same ladder */
+        --line: rgba(60, 78, 102, 0.55); /* ink @ L .42 */
+        --line-soft: rgba(60, 78, 102, 0.5);
+        --line-firm: rgba(60, 78, 102, 0.6);
+        --glass: rgba(28, 44, 65, 0.5); /* --ink-2 */
+        --glass-edge: rgba(152, 166, 184, 0.28);
+        --grain: rgba(242, 245, 251, 0.05); /* --paper-0 */
+        --glow-core: rgba(196, 109, 0, 0.45); /* --accent-deep */
+        --glow-halo: rgba(146, 80, 0, 0.14); /* --accent-dim  */
+        --glow-edge: rgba(196, 109, 0, 0.32);
+        --shadow: rgba(0, 3, 12, 0.55);
+        --vignette: rgba(1, 3, 10, 0.72);
+
+        --pad: 96px; /* safe area */
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--ink-0);
+      }
+      body {
+        font-family: "Noto Sans SC", "Archivo", sans-serif;
+      }
+      code,
+      pre,
+      .monospace {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* Composition root: SIZED BOX ONLY. The scene fill lives on a full-bleed
+         child (.bg-fill) — a background on the root itself can be dropped by
+         the producer's frame compositing and render black. */
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+      }
+      .clip {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* ---------------- the three declared layers ---------------- */
+      .background-layer,
+      .content-layer,
+      .foreground-layer {
+        position: absolute;
+        inset: 0;
+      }
+      /* Non-interactive ornament. Keeps decoration out of Studio's hit-testing
+         so a click lands on the text you meant to select.
+         NOTE: this does NOT exempt an element from the layout auditor —
+         `check`'s occlusion probe is geometric, not pointer-based. A full-bleed
+         overlay placed ABOVE text reports every line as `text_occluded` no
+         matter how transparent it is or what pointer-events says. The fix is
+         ordering (see .bg-vignette), not pointer-events. */
+      .decor {
+        pointer-events: none;
+      }
+      .background-layer {
+        z-index: 1;
+        overflow: hidden;
+      }
+      .content-layer {
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: var(--pad);
+      }
+      .foreground-layer {
+        z-index: 3;
+      }
+
+      /* ---------------- background ---------------- */
+      .bg-fill {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(120% 70% at 18% 8%, var(--ink-2) 0%, transparent 58%),
+          radial-gradient(100% 60% at 92% 96%, var(--ink-1) 0%, transparent 62%),
+          linear-gradient(168deg, var(--ink-1) 0%, var(--ink-0) 52%, var(--ink-0) 100%);
+      }
+      .bg-grid {
+        position: absolute;
+        inset: -60px;
+        background-image:
+          linear-gradient(to right, var(--line) 1px, transparent 1px),
+          linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+        background-size: 90px 90px;
+        opacity: 0.34;
+        -webkit-mask-image: radial-gradient(120% 78% at 50% 40%, #000 12%, transparent 82%);
+        mask-image: radial-gradient(120% 78% at 50% 40%, #000 12%, transparent 82%);
+      }
+      .bg-glow {
+        position: absolute;
+        left: -220px;
+        top: 660px;
+        width: 1180px;
+        height: 1180px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          var(--glow-core) 0%,
+          var(--glow-halo) 42%,
+          transparent 68%
+        );
+        filter: blur(18px);
+      }
+      /* Centred by explicit offsets, NOT by transform: translate(-50%, -50%) —
+         a CSS transform here would collide with the GSAP rotation tween
+         (lint: gsap_css_transform_conflict). */
+      .bg-arc {
+        position: absolute;
+        left: -190px;
+        top: 470px;
+        width: 1460px;
+        height: 1460px;
+        border-radius: 50%;
+        border: 2px solid var(--line);
+      }
+      .bg-arc.inner {
+        left: -10px;
+        top: 650px;
+        width: 1100px;
+        height: 1100px;
+        border-color: var(--glow-edge);
+        border-style: dashed;
+      }
+      /* Scanline grain — pure gradient, deterministic, no image request. */
+      .bg-grain {
+        position: absolute;
+        inset: 0;
+        background-image: repeating-linear-gradient(
+          104deg,
+          var(--grain) 0px,
+          var(--grain) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+        opacity: 0.6;
+      }
+
+      /* ---------------- content ---------------- */
+      .eyebrow {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 34px;
+      }
+      .head-mask {
+        display: block;
+        overflow: hidden;
+        height: 216px;
+      }
+      .head {
+        display: block;
+        font-family: "Smiley Sans", "Noto Sans SC", sans-serif;
+        font-size: 186px;
+        line-height: 1.14;
+        letter-spacing: 0.01em;
+        color: var(--paper-0);
+      }
+      .head.accent {
+        color: var(--accent);
+      }
+      .rule-track {
+        display: block;
+        width: 520px;
+        height: 6px;
+        margin: 44px 0 40px;
+        background: var(--line-soft);
+      }
+      .rule {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: var(--accent);
+      }
+      .sub {
+        max-width: 700px;
+        font-family: "Noto Sans SC", sans-serif;
+        font-size: 40px;
+        font-weight: 400;
+        line-height: 1.62;
+        letter-spacing: 0.01em;
+        color: var(--paper-1);
+      }
+      .sub .em {
+        color: var(--paper-0);
+        font-weight: 600;
+      }
+
+      /* ---------------- foreground ---------------- */
+      .fg-bar {
+        position: absolute;
+        left: 0;
+        top: 300px;
+        width: 14px;
+        height: 1080px;
+        background: linear-gradient(180deg, var(--accent) 0%, var(--accent-deep) 62%, transparent 100%);
+      }
+      .fg-card {
+        position: absolute;
+        right: var(--pad);
+        bottom: 236px;
+        width: 460px;
+        padding: 38px 40px 42px;
+        border: 1px solid var(--glass-edge);
+        border-radius: 26px;
+        background: var(--glass);
+        -webkit-backdrop-filter: blur(26px) saturate(1.2);
+        backdrop-filter: blur(26px) saturate(1.2);
+        box-shadow: 0 40px 90px var(--shadow);
+      }
+      .card-label {
+        display: block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 22px;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--paper-2);
+      }
+      .card-value {
+        display: inline-block;
+        font-family: "Archivo", sans-serif;
+        font-size: 118px;
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        color: var(--paper-0);
+        margin: 10px 0 2px;
+      }
+      .card-unit {
+        display: inline-block;
+        font-family: "Archivo", sans-serif;
+        font-size: 40px;
+        font-weight: 600;
+        color: var(--accent);
+        margin-left: 10px;
+      }
+      .card-meter {
+        display: block;
+        width: 100%;
+        height: 8px;
+        margin-top: 24px;
+        border-radius: 4px;
+        background: var(--line-firm);
+        overflow: hidden;
+      }
+      .card-meter-fill {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent-deep), var(--accent));
+      }
+      .fg-tag {
+        position: absolute;
+        left: var(--pad);
+        bottom: 96px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 24px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        color: var(--paper-2);
+      }
+      .fg-corner {
+        position: absolute;
+        width: 76px;
+        height: 76px;
+        border: 3px solid var(--accent);
+      }
+      .fg-corner.tr {
+        right: 56px;
+        top: 56px;
+        border-left: none;
+        border-bottom: none;
+      }
+      .fg-corner.bl {
+        left: 56px;
+        bottom: 56px;
+        border-right: none;
+        border-top: none;
+      }
+      /* Edge falloff. It lives in the BACKGROUND layer on purpose: a full-inset
+         gradient sitting above the text makes `hyperframes check` report every
+         line as `text_occluded` (the occlusion probe is geometric — it does not
+         care that the overlay is mostly transparent, and pointer-events:none
+         does not exempt it). Darkening the plate instead of the type gives the
+         same look with zero findings. */
+      .bg-vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          115% 78% at 50% 42%,
+          transparent 46%,
+          var(--vignette) 100%
+        );
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-width="1080"
+      data-height="1920"
+      data-duration="5"
+    >
+      <section id="scene-1" class="clip" data-start="0" data-duration="5" data-track-index="1">
+        <!-- LAYER 1 — background: fill + grid + glow + rings + grain.
+             All of it is decorative: `decor` (pointer-events:none) keeps the
+             layout auditor's occlusion probe reaching the text above, and
+             data-layout-allow-overflow declares the deliberate bleed. -->
+        <div class="background-layer">
+          <div id="bg-fill" class="bg-fill decor" data-layout-allow-overflow></div>
+          <div id="bg-grid" class="bg-grid decor" data-layout-allow-overflow></div>
+          <div id="bg-glow" class="bg-glow decor" data-layout-allow-overflow></div>
+          <div id="bg-arc" class="bg-arc decor" data-layout-allow-overflow></div>
+          <div id="bg-arc-inner" class="bg-arc inner decor" data-layout-allow-overflow></div>
+          <div class="bg-grain decor"></div>
+          <div class="bg-vignette decor"></div>
+        </div>
+
+        <!-- LAYER 2 — content: the message -->
+        <div class="content-layer">
+          <p id="eyebrow" class="eyebrow">Hyperframes Base</p>
+          <div class="head-mask">
+            <h1 id="head-1" class="head" data-layout-allow-overflow>视觉优先</h1>
+          </div>
+          <div class="head-mask">
+            <h1 id="head-2" class="head accent" data-layout-allow-overflow>三层结构</h1>
+          </div>
+          <div class="rule-track"><span id="rule" class="rule"></span></div>
+          <p id="sub" class="sub">
+            背景层、内容层、前景层各自独立。<span class="em">单条暂停时间线</span>，任意一帧都能独立求值。
+          </p>
+        </div>
+
+        <!-- LAYER 3 — foreground: chrome that sits in front of the content -->
+        <div class="foreground-layer">
+          <div id="fg-bar" class="fg-bar decor"></div>
+          <div id="fg-card" class="fg-card">
+            <span class="card-label">Layers</span>
+            <span id="card-value" class="card-value">3</span><span class="card-unit">/ clip</span>
+            <span class="card-meter"><span id="card-meter-fill" class="card-meter-fill"></span></span>
+          </div>
+          <span id="fg-tag" class="fg-tag">1080 × 1920 · 30 FPS · 5.0S</span>
+          <div id="corner-tr" class="fg-corner tr decor"></div>
+          <div id="corner-bl" class="fg-corner bl decor"></div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      /* ------------------------------------------------------------------
+         ONE paused timeline, built synchronously, registered under the root's
+         data-composition-id. No Date.now(), no Math.random(), no repeat:-1,
+         no network. Every frame is a fresh seek.
+
+         Structural chrome (fill, grid, bar, corners, tag) is on screen from
+         frame 0 and only drifts — that is why t=0.2 already shows all three
+         layers instead of a near-black plate. Front-load the chrome in any
+         derived shot for the same reason.
+      ------------------------------------------------------------------ */
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // — background: slow continuous drift, alive at t=0 and still moving at t=5
+      tl.fromTo("#bg-fill", { scale: 1.08 }, { scale: 1, duration: 5, ease: "none" }, 0);
+      tl.fromTo(
+        "#bg-grid",
+        { opacity: 0.12, y: -26 },
+        { opacity: 0.34, y: 0, duration: 1.6, ease: "power2.out" },
+        0
+      );
+      tl.fromTo(
+        "#bg-glow",
+        { scale: 0.86, opacity: 0.4 },
+        { scale: 1.04, opacity: 1, duration: 3.2, ease: "power2.out" },
+        0
+      );
+      tl.fromTo(
+        "#bg-arc",
+        { rotation: -14, opacity: 0.3 },
+        { rotation: 5, opacity: 1, duration: 5, ease: "none" },
+        0
+      );
+      tl.fromTo(
+        "#bg-arc-inner",
+        { rotation: 10, opacity: 0.25 },
+        { rotation: -8, opacity: 1, duration: 5, ease: "none" },
+        0
+      );
+
+      // — foreground chrome: enters inside the first 0.5s so it reads immediately
+      tl.fromTo(
+        "#fg-bar",
+        { scaleY: 0 },
+        { scaleY: 1, duration: 0.7, ease: "power3.out", transformOrigin: "50% 0%" },
+        0
+      );
+      tl.fromTo(
+        "#fg-tag",
+        { opacity: 0, x: -18 },
+        { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" },
+        0.05
+      );
+      tl.fromTo(
+        "#corner-tr",
+        { opacity: 0, scale: 0.7 },
+        { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out", transformOrigin: "100% 0%" },
+        0.05
+      );
+      tl.fromTo(
+        "#corner-bl",
+        { opacity: 0, scale: 0.7 },
+        { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out", transformOrigin: "0% 100%" },
+        0.12
+      );
+
+      // — content: masked headline reveal (the mask is the wrapper's overflow:hidden)
+      tl.fromTo(
+        "#eyebrow",
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" },
+        0
+      );
+      tl.fromTo("#head-1", { yPercent: 108 }, { yPercent: 0, duration: 0.85, ease: "power3.out" }, 0);
+      tl.fromTo("#head-2", { yPercent: 108 }, { yPercent: 0, duration: 0.85, ease: "power3.out" }, 0.14);
+      tl.fromTo(
+        "#rule",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.8, ease: "power3.inOut", transformOrigin: "0% 50%" },
+        0.55
+      );
+      tl.fromTo("#sub", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.7);
+
+      // — foreground card: the one deliberate late beat
+      tl.fromTo(
+        "#fg-card",
+        { opacity: 0, y: 46, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out" },
+        0.95
+      );
+      tl.fromTo(
+        "#card-meter-fill",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 1.1, ease: "power2.inOut", transformOrigin: "0% 50%" },
+        1.3
+      );
+
+      // Seek-safe counter: GSAP re-evaluates the proxy object on every seek, so
+      // the printed value is a pure function of time, never accumulated state.
+      const counter = { v: 0 };
+      const cardValue = document.getElementById("card-value");
+      tl.fromTo(
+        counter,
+        { v: 0 },
+        {
+          v: 3,
+          duration: 1,
+          ease: "power2.out",
+          onUpdate: () => {
+            cardValue.textContent = String(Math.round(counter.v));
+          },
+        },
+        1.25
+      );
+
+      // — hold: gentle drift on the glow so the tail frames are not frozen
+      tl.fromTo("#bg-glow", { y: 0 }, { y: -70, duration: 2.6, ease: "sine.inOut" }, 2.4);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

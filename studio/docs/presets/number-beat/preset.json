@@ -1,0 +1,204 @@
+{
+  "version": 3,
+  "id": "number-beat",
+  "name": "数字强调",
+  "engine": "remotion",
+  "compositionId": "PresetNumberBeat",
+  "componentSource": "templates/remotion-base/src/presets/NumberBeat.tsx",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 2.5,
+    "max": 5,
+    "default": 3
+  },
+  "tags": [
+    "data",
+    "metric",
+    "type",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 1,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 0,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "start",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "confident",
+    "springAccents": 1,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0.8,
+        "action": "数字 0→值滚动(前快后慢,tabular-nums 不抖宽);底+眉题第 0 帧已在",
+        "easing": "cubic out"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.8,
+        "action": "落定:变强调色 + 唯一弹簧名额 1.5% 过冲",
+        "easing": "spring(damping 15)"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.9,
+        "action": "accent 底线扫入 0.4s",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "enter",
+        "seconds": 1.0,
+        "action": "说明句上浮淡入 0.4s",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.64,
+        "action": "celebrate='confetti' 时:落定前约 5 帧「抢拍」从数字两端两簇爆出 52 片纸屑,重力弧线 + 自转,着地前淡出;数字同拍补一次 ~1.04 轻 punch(共用 landSpring 名额)",
+        "easing": "抛物线(重力)"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "静止读取"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "slots": {
+    "value": {
+      "label": "数字",
+      "type": "number",
+      "required": true,
+      "description": "要强调的数字(纯数值,千分位由组件加)。facts.mode=exact 时来源写 assets.md",
+      "hint": "要强调的数字本身，只填数字，千分位逗号会自动加"
+    },
+    "prefix": {
+      "label": "前缀",
+      "type": "text",
+      "required": false,
+      "role": "hero",
+      "fontSize": 210,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 300,
+        "shrinkFloorPx": 110
+      },
+      "description": "前缀,如 $ / ¥ / ×",
+      "hint": "数字前面的符号，比如 $ ¥ ×"
+    },
+    "suffix": {
+      "label": "后缀",
+      "type": "text",
+      "required": false,
+      "role": "hero",
+      "fontSize": 210,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 300,
+        "shrinkFloorPx": 110
+      },
+      "description": "后缀,如 万 / % / 倍",
+      "hint": "数字后面的字，比如 万 % 倍"
+    },
+    "label": {
+      "label": "说明句",
+      "type": "text",
+      "required": true,
+      "role": "body",
+      "fontSize": 44,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 936,
+        "shrinkFloorPx": 34
+      },
+      "description": "数字下方的一句话说明,\\n 折行",
+      "hint": "数字下面那句说明，告诉观众这个数意味着什么"
+    },
+    "eyebrow": {
+      "label": "顶部眉题",
+      "type": "text",
+      "required": false,
+      "role": "caption",
+      "fontSize": 24,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 600,
+        "shrinkFloorPx": 20
+      },
+      "description": "顶部眉题,可省。v2 起没有兜底文案",
+      "hint": "画面最顶上的一行小字。默认不填——解释性的标签观众看一眼就知道，写出来只是占地方"
+    }
+  },
+  "anchors": {
+    "start": "深蓝黑层次底+眉题在场,数字正在从 0 滚动",
+    "end": "退场前：「{prefix}{value}{suffix}」强调色定格+底线,说明句「{label}」在场,静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【数字强调 preset:number-beat@v1】全帧唯一放大元素 {prefix}{value}{suffix},滚动落定变色:{label}",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-06",
+      "note": "初版:固化「$2,000 是全帧唯一被放大的数字」手法(NumberTicker 滚动 + interpolateColors 落定变色 + tabular-nums)"
+    },
+    {
+      "version": 2,
+      "date": "2026-08-15",
+      "note": "眉题去掉兜底文案,不填就不显示(baseline v2:自证性标签一律不再兜底)。"
+    },
+    {
+      "version": 3,
+      "date": "2026-08-21",
+      "note": "新增 variant.celebrate='confetti'(从 video-shotcraft 的 counter-confetti 融合进来):落定拍纸屑爆开。纸屑色相由 demo 的五彩收敛到 accentHue 邻近带(一帧画面不该有二十个色),数字共用原 landSpring 名额补轻 punch 不开第二个弹簧,纸屑运动窗口按 durationSeconds 压缩保证片内落完。**默认 'none' 与 v2 逐帧一致**,历史项目原样重渲不受影响"
+    },
+    {
+      "version": 3,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "verifiedAt": "2026-08-06",
+  "sample": {
+    "slots": {
+      "value": 2000,
+      "prefix": "$",
+      "label": "十年攒下的,不过是一部手机的钱。"
+    }
+  },
+  "variants": {
+    "celebrate": {
+      "label": "落定时的庆祝",
+      "hint": "none 不加（默认）；confetti 数字撞停那一拍从两端爆出纸屑，走重力弧线落下。只在这个数字本身是好消息时才开",
+      "type": "enum",
+      "values": [
+        "none",
+        "confetti"
+      ],
+      "default": "none",
+      "description": "confetti 源自 shotcraft counter-confetti 的融合:52 片纸屑分两簇从数字两端爆出,重力弧线 + 自转 + 着地前淡出,色相收在 accentHue 邻近带内(不是彩虹)。数字共用原有的 landSpring 名额补一次约 1.04 的轻 punch,不开第二个弹簧。默认 none 与 v2 逐帧一致"
+    }
+  }
+}

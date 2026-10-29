@@ -1,0 +1,244 @@
+{
+  "version": 1,
+  "id": "trend-chart",
+  "name": "趋势图表",
+  "engine": "remotion",
+  "compositionId": "PresetTrendChart",
+  "componentSource": "templates/remotion-base/src/presets/TrendChart.tsx",
+  "status": "draft",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 4,
+    "max": 14,
+    "default": 8
+  },
+  "tags": [
+    "data",
+    "chart",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 2,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 0,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 2
+  },
+  "motion": {
+    "character": "calm",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "结论句立住;轴与网格**先于数据出现**(chart-rules §4:否则前几帧的点没有参照系)",
+        "easing": "CALM"
+      },
+      {
+        "phase": "enter",
+        "seconds": "20%–72%",
+        "action": "折线/面积/柱按时间方向左→右画出,终值为真值不冲过头",
+        "easing": "CALM"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "注解与来源浮出后完全静止读数,约占全片 28%(chart-rules §4:数字按 1 秒/个位数计)"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "slots": {
+    "headline": {
+      "label": "结论句",
+      "hint": "这一镜最大的那行字，把结论直接说出来。比如「四年,从 3% 到 61%」。可按回车折行",
+      "type": "text",
+      "required": true,
+      "role": "h1",
+      "fontSize": 88,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 880,
+        "shrinkFloorPx": 52
+      },
+      "description": "主角。口播档图表「最大字号承担当前节拍的信息,图表只负责作证」"
+    },
+    "values": {
+      "label": "数据",
+      "hint": "用逗号隔开，比如 3, 8, 19, 40, 61。中英文逗号、顿号、空格都认",
+      "type": "text",
+      "required": true,
+      "role": "caption",
+      "fontSize": 26,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 880,
+        "shrinkFloorPx": 18
+      },
+      "description": "逗号分隔的数值序列。**示意数据必须在合同里写 facts.mode: illustrative**"
+    },
+    "seriesName": {
+      "label": "这条线是什么",
+      "hint": "比如「用 AI 做视频的创作者占比」。单系列不出图例，这个名字承担身份",
+      "type": "text",
+      "required": true,
+      "role": "label",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 700,
+        "shrinkFloorPx": 22
+      },
+      "description": "系列名。chart-rules §3:身份靠直接标签承载,颜色只做次级编码"
+    },
+    "xLabels": {
+      "label": "横轴刻度",
+      "hint": "用逗号隔开，个数要和数据一样多，比如 2022, 2023, 2024, 2025, 2026。对不上就整个不画（不会补空格）",
+      "type": "text",
+      "required": false,
+      "role": "caption",
+      "fontSize": 26,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 880,
+        "shrinkFloorPx": 18
+      },
+      "description": "x 轴刻度。数量与 values 不一致时整个不画(补空串会让人以为那格没数据)"
+    },
+    "unit": {
+      "label": "单位",
+      "hint": "比如 % / 亿元 / 万人。chart-rules 要求单位至少完整出现一次",
+      "type": "text",
+      "required": false,
+      "role": "label",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 200,
+        "shrinkFloorPx": 20
+      },
+      "description": "数值单位,拼在刻度与端点标签后面"
+    },
+    "note": {
+      "label": "底部一句注解",
+      "hint": "图之外你想补的那一句，比如「拐点不在技术，在它变得不用学」。不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "body",
+      "fontSize": 46,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 880,
+        "shrinkFloorPx": 32
+      },
+      "description": "底部注解句,可省"
+    },
+    "source": {
+      "label": "数据来源",
+      "hint": "比如「国家统计局 · 2026」或「示意数据 · illustrative」。演示数字必须标出来",
+      "type": "text",
+      "required": false,
+      "role": "caption",
+      "fontSize": 26,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 880,
+        "shrinkFloorPx": 18
+      },
+      "description": "来源角标,可省但演示数据强烈建议写"
+    },
+    "eyebrow": {
+      "label": "顶部眉题",
+      "hint": "画面最顶上的一行小字。默认不填",
+      "type": "text",
+      "required": false,
+      "role": "label",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 860,
+        "shrinkFloorPx": 22
+      },
+      "description": "顶部眉题,可省。没有兜底文案"
+    }
+  },
+  "variants": {
+    "mark": {
+      "label": "画成什么",
+      "hint": "line 折线（讲随时间怎么变，推荐）；area 面积（强调累积量）；bar 柱（讲几个类别谁大谁小）",
+      "type": "enum",
+      "values": [
+        "line",
+        "area",
+        "bar"
+      ],
+      "default": "line",
+      "description": "chart-rules §1 选形:连续变化用折线,柱图会被读成几个独立类别"
+    },
+    "yScale": {
+      "label": "纵轴起点",
+      "hint": "zero 从零起（默认，最诚实）；tight 收紧到数据范围——只有折线能用，而且画面上会自动画出断轴符号",
+      "type": "enum",
+      "values": [
+        "zero",
+        "tight"
+      ],
+      "default": "zero",
+      "description": "chart-rules §2 硬门槛:柱图无论选什么都被组件短路成 zero;折线选 tight 时强制画断轴符号"
+    }
+  },
+  "anchors": {
+    "start": "深色层次底 + 结论句已立住 + 坐标轴与网格已画好,数据尚未出现",
+    "end": "退场前：{mark} 画到终点并标出末点数值,底部注解与来源浮出,全静止读数；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【趋势图表 preset:trend-chart@v1】口播念到「从 X 涨到 Y」时的固定画面:结论句立住 → 轴先出 → 数据左→右画出 → 末段静止读数",
+  "audit": {
+    "keyframes": [
+      "start",
+      "mid",
+      "end"
+    ]
+  },
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-16",
+      "note": "初版。能力报告把信息类判为核心甜区,而此前八个模板一张图表都没有。图元全部复用已 verified 的 ChartStage(单轴/系列色固定/不用彩虹/文字不穿系列色由它结构性保证),本模板只负责整镜层:结论句当主角、轴先于数据出现、末段静止读数、断轴符号。版面按 chart-rules 的口播档「结论与表现力优先,图表只负责作证,不上审计信息」。"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "slots": {
+      "headline": "四年,从 3% 到 61%",
+      "values": "3, 8, 19, 40, 61",
+      "xLabels": "2022, 2023, 2024, 2025, 2026",
+      "seriesName": "用 AI 做视频的创作者占比",
+      "unit": "%",
+      "note": "拐点不在技术,在它变得不用学。",
+      "source": "示意数据 · illustrative"
+    },
+    "variant": {
+      "mark": "line",
+      "yScale": "zero"
+    }
+  }
+}

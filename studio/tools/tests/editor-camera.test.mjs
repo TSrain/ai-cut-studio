@@ -1,0 +1,7 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {compileShotPlan,sampleCameraZoom} from '../lib/aroll-shot-plan.mjs';
+import {validateDocument,createDocument} from '../lib/editor-store.mjs';
+const plan={version:2,duration:10,levels:{A:1,B:1.12,C:1.18},anchor:{x:.6,y:.1},events:[{at:0,to:'A',transition:'cut',purpose:'hook',cue:'开场',reason:'基础'},{from:2,toTime:4,to:'B',transition:'slow',easing:'linear',purpose:'emphasis',cue:'重点',reason:'强调'},{from:6,toTime:8,to:'A',transition:'slow',easing:'ramped',purpose:'tension-release',cue:'解释',reason:'回归'}]};
+test('camera interpolation holds, reaches targets and returns without seek history',()=>{const s=compileShotPlan(plan);assert.equal(sampleCameraZoom(s,0),1);assert.ok(Math.abs(sampleCameraZoom(s,3)-1.06)<1e-9);assert.equal(sampleCameraZoom(s,5),1.12);assert.equal(sampleCameraZoom(s,9),1);assert.ok(Math.abs(sampleCameraZoom(s,7)-1.06)<1e-9);assert.equal(sampleCameraZoom(s,2),1);});
+test('saved documents reject overlapping camera movement and preserve valid camera plan',()=>{const doc=createDocument({id:'camera-test',name:'Camera',canvas:{width:1920,height:1080,fps:{num:30,den:1},durationFrames:300},source:{path:'media/talk.mp4',startFrame:0,cameraPlan:plan},styleReference:{contractPath:null,styleframePath:null,allowedOverrides:{}},instances:[]});assert.deepEqual(validateDocument(doc).source.cameraPlan,plan);doc.source.cameraPlan.events[2].from=3;assert.throws(()=>validateDocument(doc),/overlap/);});

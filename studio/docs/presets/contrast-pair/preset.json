@@ -1,0 +1,205 @@
+{
+  "version": 2,
+  "id": "contrast-pair",
+  "name": "左右对照",
+  "engine": "remotion",
+  "compositionId": "PresetContrastPair",
+  "componentSource": "templates/remotion-base/src/presets/ContrastPair.tsx",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 2.5,
+    "max": 6,
+    "default": 3.5
+  },
+  "tags": [
+    "type",
+    "layout",
+    "state",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 1,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "start",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "deliberate",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0.07,
+        "action": "左列(退灰侧)先入 0.4s——对照两侧逐个出,绝不同时淡入(taste.md 最高频节奏律)",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.4,
+        "action": "中线自上而下画出 0.4s",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.63,
+        "action": "中缝符号圆盘 knockout 入场 0.33s,缩放无弹跳",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.83,
+        "action": "右列(点亮侧)入场 0.4s + accent 下划线",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "静止读取"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "symbol": {
+      "label": "中缝符号",
+      "type": "enum",
+      "values": [
+        "≠",
+        "→",
+        "VS"
+      ],
+      "default": "≠",
+      "description": "中缝符号:≠ 否定对照 / → 演进 / VS 对抗",
+      "hint": "≠ 是否定对照，→ 是演进，VS 是对抗"
+    }
+  },
+  "slots": {
+    "leftLabel": {
+      "label": "左侧标签",
+      "type": "text",
+      "required": true,
+      "role": "label",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 360,
+        "shrinkFloorPx": 22
+      },
+      "description": "左侧(不值得/旧方式)的标签",
+      "hint": "左边那栏的小标签，通常是被否定的那个"
+    },
+    "leftText": {
+      "label": "左侧主句",
+      "type": "text",
+      "required": true,
+      "role": "h2",
+      "fontSize": 64,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 388,
+        "shrinkFloorPx": 40
+      },
+      "description": "左侧主句,\\n 折行",
+      "hint": "左边的主句。可以按回车折行"
+    },
+    "rightLabel": {
+      "label": "右侧标签",
+      "type": "text",
+      "required": true,
+      "role": "label",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 360,
+        "shrinkFloorPx": 22
+      },
+      "description": "右侧(值得/新方式)的标签",
+      "hint": "右边那栏的小标签，通常是你主张的那个"
+    },
+    "rightText": {
+      "label": "右侧主句",
+      "type": "text",
+      "required": true,
+      "role": "h2",
+      "fontSize": 64,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 388,
+        "shrinkFloorPx": 40
+      },
+      "description": "右侧主句,\\n 折行",
+      "hint": "右边的主句。可以按回车折行"
+    },
+    "eyebrow": {
+      "label": "顶部眉题",
+      "type": "text",
+      "required": false,
+      "role": "caption",
+      "fontSize": 24,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 600,
+        "shrinkFloorPx": 20
+      },
+      "description": "顶部眉题,可省。v2 起没有兜底文案",
+      "hint": "画面最顶上的一行小字。默认不填——解释性的标签观众看一眼就知道，写出来只是占地方"
+    }
+  },
+  "anchors": {
+    "start": "深蓝黑层次底+眉题,左列(退灰)正在入场,中线未画出",
+    "end": "退场前：左灰右亮对照稳定:「{leftText}」{symbol}「{rightText}」,中缝符号圆盘 knockout 在场,静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【左右对照 preset:contrast-pair@v1】{leftLabel}({leftText}){symbol} {rightLabel}({rightText}),灰=不值得/亮=值得",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-06",
+      "note": "初版:固化 7 次手写对照镜的公共骨架(竖版双列律+逐个出节奏律+knockout 圆盘);中线留白 40→80 给圆盘让位"
+    },
+    {
+      "version": 2,
+      "date": "2026-08-15",
+      "note": "眉题去掉兜底文案,不填就不显示(baseline v2:自证性标签一律不再兜底)。"
+    },
+    {
+      "version": 2,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "verifiedAt": "2026-08-06",
+  "sample": {
+    "slots": {
+      "leftLabel": "堆提示词",
+      "leftText": "越写越长\n越改越乱",
+      "rightLabel": "上下文工程",
+      "rightText": "给对信息\n给够信息"
+    },
+    "variant": {
+      "symbol": "≠"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import * as layers from '../../templates/remotion-base/src/editor/immersive-stack.mjs';
+import {defaultMediaProps,mediaGeometry,validateMediaProps} from '../../templates/remotion-base/src/editor/media-layout.mjs';
+const make=()=>({...defaultMediaProps('media-stack'),items:defaultMediaProps('media-stack').items.map((i,n)=>({...i,enterSeconds:[2,0,1][n]}))});
+const front=p=>p.items.map((i,n)=>({id:i.id,z:layers.stackLayer(p,n)})).sort((a,b)=>b.z-a.z).map(i=>i.id);
+test('panel top matches the rendered top layer, even with non-list entry times',()=>{assert.deepEqual(front(make()),['media-1','media-3','media-2']);});
+test('up raises one visible row and rendered layer without changing per-image timing or geometry',()=>{const p=make(),before=mediaGeometry('media-stack',p,1280,720),q=layers.moveStackLayer(p,'media-3',0);assert.equal(q.layerMode,'manual');assert.deepEqual(front(q),['media-3','media-1','media-2']);for(const i of p.items){assert.deepEqual(q.items.find(x=>x.id===i.id),i);const j=q.items.findIndex(x=>x.id===i.id);assert.deepEqual(mediaGeometry('media-stack',q,1280,720)[j],before[p.items.indexOf(i)]);}validateMediaProps('media-stack',q);assert.deepEqual(front(JSON.parse(JSON.stringify(q))),front(q));});
+test('down and drag use displayed row indices; invalid moves are no-ops',()=>{const p=make(),q=layers.moveStackLayer(p,'media-1',2);assert.deepEqual(front(q),['media-3','media-2','media-1']);assert.equal(layers.moveStackLayer(p,'media-1',-1),p);assert.equal(layers.moveStackLayer(p,'missing',0),p);assert.equal(layers.moveStackLayer(p,'media-1',0),p);assert.deepEqual(front({...q,layerMode:'automatic'}),front(p));});
+test('legacy layer order stays intact until explicit manual edit and invalid layer modes fail',()=>{const p={...make(),framing:'contained'};assert.deepEqual(front(p),['media-3','media-2','media-1']);assert.throws(()=>validateMediaProps('media-stack',{...p,layerMode:'bad'}),/层级/);});

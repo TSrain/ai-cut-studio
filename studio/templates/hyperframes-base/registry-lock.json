@@ -1,0 +1,122 @@
+{
+  "manifestUrl": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry/registry.json",
+  "retrievedAt": "2026-08-01T16:50:52.967Z",
+  "registryName": "hyperframes",
+  "manifestItemCount": 146,
+  "approvedCount": 28,
+  "catalogKindMismatch": [],
+  "items": [
+    {
+      "name": "app-showcase",
+      "type": "block"
+    },
+    {
+      "name": "cinematic-zoom",
+      "type": "block"
+    },
+    {
+      "name": "code-diff",
+      "type": "block"
+    },
+    {
+      "name": "code-morph",
+      "type": "block"
+    },
+    {
+      "name": "code-typing",
+      "type": "block"
+    },
+    {
+      "name": "data-chart",
+      "type": "block"
+    },
+    {
+      "name": "domain-warp-dissolve",
+      "type": "block"
+    },
+    {
+      "name": "editorial-flash-overlay",
+      "type": "block"
+    },
+    {
+      "name": "flowchart",
+      "type": "block"
+    },
+    {
+      "name": "flowchart-vertical",
+      "type": "block"
+    },
+    {
+      "name": "freeze-frame-dressing",
+      "type": "block"
+    },
+    {
+      "name": "grain-overlay",
+      "type": "component"
+    },
+    {
+      "name": "grid-pixelate-wipe",
+      "type": "component"
+    },
+    {
+      "name": "liquid-glass-widgets",
+      "type": "block"
+    },
+    {
+      "name": "logo-outro",
+      "type": "block"
+    },
+    {
+      "name": "morph-text",
+      "type": "component"
+    },
+    {
+      "name": "organic-light-leak-overlay",
+      "type": "block"
+    },
+    {
+      "name": "parallax-unzoom",
+      "type": "component"
+    },
+    {
+      "name": "parallax-zoom",
+      "type": "component"
+    },
+    {
+      "name": "shimmer-sweep",
+      "type": "component"
+    },
+    {
+      "name": "texture-mask-text",
+      "type": "component"
+    },
+    {
+      "name": "ui-3d-reveal",
+      "type": "block"
+    },
+    {
+      "name": "vfx-iphone-device",
+      "type": "block"
+    },
+    {
+      "name": "vfx-liquid-background",
+      "type": "block"
+    },
+    {
+      "name": "vfx-portal",
+      "type": "block"
+    },
+    {
+      "name": "vfx-shatter",
+      "type": "block"
+    },
+    {
+      "name": "vfx-text-cursor",
+      "type": "block"
+    },
+    {
+      "name": "vignette",
+      "type": "component"
+    }
+  ]
+}

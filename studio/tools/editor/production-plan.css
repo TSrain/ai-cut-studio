@@ -1,0 +1,517 @@
+.production-plan-panel {
+  padding: 14px 16px;
+  color: var(--text, #ddd);
+  font-size: 12px;
+  text-align: left;
+  line-height: 1.55;
+}
+.production-plan-panel button,
+.production-plan-panel input,
+.production-plan-panel select,
+.production-plan-panel textarea {
+  font: inherit;
+}
+.production-plan-panel button {
+  border: 1px solid #3c4350;
+  border-radius: 5px;
+  background: #272d37;
+  color: #e4e8f1;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+.production-plan-panel button:hover {
+  background: #343c49;
+}
+.production-plan-panel button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.production-plan-panel label {
+  display: block;
+  margin: 9px 0;
+  color: #c3cbd8;
+}
+.production-plan-panel input:not([type="checkbox"]):not([type="file"]),
+.production-plan-panel textarea,
+.production-plan-panel select {
+  box-sizing: border-box;
+  width: 100%;
+  background: #151a22;
+  border: 1px solid #38414e;
+  border-radius: 4px;
+  padding: 7px;
+  color: #e8ecf3;
+  margin-top: 4px;
+}
+.production-plan-panel input[type="checkbox"] {
+  margin-right: 6px;
+}
+.production-plan-panel textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+.production-plan-panel a {
+  color: #b5cffd;
+  overflow-wrap: anywhere;
+}
+.production-plan-panel small {
+  display: block;
+  color: #9aa7ba;
+  overflow-wrap: anywhere;
+}
+.production-plan-panel summary {
+  cursor: pointer;
+  padding: 9px 0;
+  color: #dde6f5;
+  font-weight: 600;
+}
+.production-plan-panel details {
+  border-top: 1px solid #323945;
+  margin: 9px 0;
+}
+.production-plan-panel pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: inherit;
+  font-size: 11px;
+  line-height: 1.7;
+  max-height: 420px;
+  overflow: auto;
+}
+.plan-overview,
+.plan-jobs article > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.plan-overview {
+  border-bottom: 1px solid #434e5e;
+  padding-bottom: 9px;
+}
+.plan-unread {
+  display: inline-block;
+  background: #e9797f;
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  margin-left: 5px;
+  vertical-align: middle;
+  flex: none;
+}
+.plan-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+.plan-note {
+  color: #99a8bd;
+}
+.plan-warning {
+  background: #463925;
+  color: #efce8b;
+  padding: 8px;
+  border-left: 2px solid #e1bd73;
+}
+.plan-view-tabs {
+  display: flex;
+  gap: 5px;
+  margin: 12px 0;
+  flex-wrap: wrap;
+}
+.plan-view-tabs button[aria-pressed="true"] {
+  background: #31445c;
+  border-color: #6c89b0;
+}
+.plan-shot {
+  border-bottom: 1px solid #363f4d;
+}
+.plan-shot.is-selected {
+  border-left: 2px solid #87a8d8;
+  padding-left: 8px;
+}
+.production-plan-panel .plan-shot-heading {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.plan-shot-heading span {
+  font-size: 11px;
+  color: #a8b7ca;
+}
+.plan-narration {
+  color: #b1bccd;
+  border-left: 2px solid #576477;
+  padding-left: 9px;
+}
+.plan-timing {
+  color: #adc9e9;
+}
+.plan-actual strong {
+  color: #e6c07f;
+}
+.plan-keyframes {
+  display: flex;
+  gap: 6px;
+  overflow: auto;
+  margin: 10px 0;
+}
+.plan-keyframes a {
+  min-width: 110px;
+  flex: 1;
+}
+.plan-keyframes img {
+  width: 100%;
+  height: 80px;
+  object-fit: contain;
+  background: #10141b;
+  border-radius: 3px;
+}
+.plan-slots > div,
+.plan-candidates article,
+.plan-result-review article,
+.plan-jobs article,
+.plan-conflicts article {
+  padding: 10px 0;
+  border-bottom: 1px solid #303947;
+}
+.plan-slots b,
+.plan-slots span {
+  display: block;
+}
+.plan-candidates img {
+  max-width: 100%;
+  max-height: 120px;
+  object-fit: contain;
+}
+.plan-candidates .is-ignored {
+  opacity: 0.45;
+}
+.plan-result-review,
+.plan-jobs,
+.plan-conflicts,
+.plan-approval {
+  margin-top: 14px;
+  border-top: 1px solid #4b586b;
+  padding-top: 10px;
+}
+.plan-jobs progress {
+  width: 100%;
+  height: 5px;
+  accent-color: #779bc9;
+}
+.plan-jobs p {
+  margin: 5px 0;
+}
+.plan-source-range {
+  display: flex;
+  gap: 8px;
+}
+.plan-source-range label {
+  width: 50%;
+}
+.production-plan-entry small {
+  color: #a1b3cb;
+}
+.production-plan-track {
+  height: 43px !important;
+  min-height: 43px !important;
+  position: relative;
+  border-bottom: 1px solid #445367;
+  background: #202938 !important;
+}
+.production-plan-track .track-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  background: #252e3c;
+}
+.production-plan-track .track-label button {
+  border: 0;
+  background: transparent;
+  color: #b7c9e2;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 7px;
+}
+.production-plan-block {
+  position: absolute;
+  top: 9px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  box-sizing: border-box;
+  border: 1px solid #5f7695;
+  border-radius: 4px;
+  color: #d6e2f2;
+  background: #32435b;
+  font-size: 11px;
+  cursor: grab;
+  user-select: none;
+  padding: 0 7px;
+  overflow: hidden;
+  touch-action: none;
+}
+.production-plan-block > span:not(.plan-handle) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.production-plan-block.is-selected {
+  border-color: #c1d6f6;
+  background: #425a7a;
+}
+.production-plan-block.needs-review {
+  border-style: dashed;
+}
+.production-plan-block.is-cancelled {
+  opacity: 0.45;
+}
+.production-plan-block.is-drop {
+  outline: 2px solid #bed8ff;
+}
+.plan-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  cursor: ew-resize;
+}
+.plan-handle.left {
+  left: 0;
+}
+.plan-handle.right {
+  right: 0;
+}
+.plan-unaligned {
+  position: absolute;
+  top: 13px;
+  color: #9daec7;
+  pointer-events: none;
+}
+.plan-track-error {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  background: #652a31;
+  z-index: 8;
+}
+.plan-hover-card {
+  position: fixed;
+  z-index: 1700;
+  width: 300px;
+  max-height: min(300px, 60vh);
+  padding: 12px;
+  border: 1px solid #657b99;
+  border-radius: 6px;
+  background: #222d3d;
+  color: #e4edf9;
+  box-shadow: 0 6px 24px #0009;
+  pointer-events: none;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.plan-hover-card b,
+.plan-hover-card span,
+.plan-hover-card small {
+  display: block;
+}
+.plan-hover-card span,
+.plan-hover-card small {
+  font-size: 11px;
+  color: #abc0dd;
+}
+.plan-hover-card p {
+  margin: 8px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.plan-hover-card img {
+  max-width: 100%;
+  max-height: 110px;
+  object-fit: contain;
+  margin: 4px 0;
+}
+.production-plan-panel :focus-visible,
+.production-plan-track :focus-visible {
+  outline: 2px solid #aecfff;
+  outline-offset: 2px;
+}
+.production-plan-export-gaps {
+  background: #383326;
+  border: 1px solid #746448;
+  padding: 12px;
+  margin: 12px 0;
+  color: #e8d2a4;
+  border-radius: 5px;
+  font-size: 12px;
+}
+.production-plan-export-gaps ul {
+  padding-left: 18px;
+  max-height: 160px;
+  overflow: auto;
+}
+.production-plan-export-gaps label {
+  display: block;
+  line-height: 1.6;
+}
+.production-plan-export-gaps small {
+  display: block;
+  margin-top: 6px;
+  color: #b9af97;
+}
+.plan-job-approval,
+.plan-job-selection {
+  margin: 9px 0;
+  padding: 10px;
+  border: 1px solid #4f647f;
+  background: #253245;
+  border-radius: 4px;
+}
+.plan-choice-preview {
+  width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+  display: block;
+  margin: 7px 0;
+}
+/* Selected plan annotations occupy the editor grid, outside the rendered composition. */
+.studio-app .stage.is-plan-preview{position:relative;display:grid;grid-template-columns:minmax(140px,190px) minmax(0,1fr) minmax(140px,190px);gap:16px;padding:96px 16px 42px;align-items:center;}
+.studio-app .stage.is-plan-preview .player-wrap{grid-column:2;grid-row:1;margin:auto;max-width:100%;}
+.plan-annotation-heading{position:absolute;left:16px;right:16px;top:10px;color:#e4e8f1;font-size:13px;line-height:1.5;text-align:left;}
+.plan-annotation-heading>div{display:flex;align-items:center;gap:12px;}
+.plan-annotation-heading>div>span{font-size:11px;color:#aeb7c4;}
+.plan-annotation-heading .dialog-close{margin-left:auto;}
+.plan-annotation-heading>p{margin:6px 28px 0 0;font-size:12px;color:#bec9db;max-height:36px;overflow:auto;white-space:pre-line;}
+.plan-annotation-rail{align-self:stretch;min-width:0;min-height:0;overflow:auto;text-align:left;scrollbar-width:thin;padding:2px 4px;}
+.plan-annotation-rail.left{grid-column:1;grid-row:1;}
+.plan-annotation-rail.right{grid-column:3;grid-row:1;}
+.plan-annotation-group{--plan-accent:#8eaff1;margin-bottom:18px;border-left:2px solid var(--plan-accent);padding-left:12px;}
+.kind-animation{--plan-accent:#bba7ee;}.kind-footage{--plan-accent:#8bc9bd;}.kind-camera{--plan-accent:#8eaff1;}.kind-captions{--plan-accent:#d7caa1;}.kind-sound{--plan-accent:#e0ae8c;}
+.plan-annotation-group h3{margin:0 0 9px;color:var(--plan-accent);font-size:12px;font-weight:600;}
+.plan-annotation-item{margin:0 0 12px;font-size:12px;line-height:1.65;overflow-wrap:anywhere;}
+.plan-annotation-item p{margin:3px 0 5px;color:#e4e8f1;}
+.plan-annotation-item small{display:block;color:#aeb7c4;font-size:11px;}
+.plan-annotation-time{font-variant-numeric:tabular-nums;}
+.plan-item-status{display:inline-block;color:#aeb7c4;font-size:11px;margin-top:4px;}
+.studio-app .stage.is-plan-compact{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(90px,1.1fr) minmax(80px,1fr);gap:12px;}
+.studio-app .stage.is-plan-compact .player-wrap{grid-column:1 / -1;grid-row:1;}
+.studio-app .stage.is-plan-compact .plan-annotation-rail.left{grid-column:1;grid-row:2;}
+.studio-app .stage.is-plan-compact .plan-annotation-rail.right{grid-column:2;grid-row:2;}
+.plan-block-kinds{display:inline;margin-left:8px;font-size:10px;font-weight:400;color:#c3d0e3;opacity:.85;}
+.production-plan-block>span:nth-child(2){overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.plan-focused-panel{padding:12px 14px;}
+.plan-focused-panel .production-plan-panel{padding:0;font-size:11px;}
+.plan-more-controls>summary{font-size:11px;color:#aeb7c4;}
+.production-plan-panel .plan-back-overview{border:0;background:transparent;padding:0;color:#aeb7c4;display:flex;align-items:center;gap:3px;}
+.plan-current-title{margin:14px 0 8px;}.plan-current-title h3{font-size:15px;line-height:1.4;margin:0 0 5px;}.plan-current-title small{font-variant-numeric:tabular-nums;}
+.plan-kind-summary{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 16px;}.plan-kind-summary>span{font-size:11px;color:var(--plan-accent,#aeb7c4);}
+.plan-focused-panel h4{font-size:12px;margin:0 0 9px;color:#e4e8f1;}.plan-feedback-section{padding:0 0 16px;border-bottom:1px solid #363f4d;}
+.production-plan-panel .plan-submit-feedback{width:100%;padding:9px 10px;margin:9px 0;background:#8eaff1;border-color:#8eaff1;color:#172033;font-weight:600;}
+.plan-revision-status{margin-top:10px;border-left:2px solid #8eaff1;padding-left:9px;}.plan-revision-status p{margin:6px 0;}
+.plan-shot-candidates{margin:16px 0;}.plan-shot-candidates h4 span{color:#aeb7c4;font-weight:400;}
+.plan-compact-candidate{padding:11px 0;border-top:1px solid #343c49;}.plan-compact-candidate>a>img{display:block;width:100%;height:110px;object-fit:contain;background:#10141b;border-radius:4px;margin-bottom:8px;}
+.plan-compact-candidate b{display:block;}.plan-compact-candidate p{margin:6px 0;color:#bdc7d8;font-size:11px;}.plan-compact-candidate .plan-actions{font-size:11px;}
+.plan-delete-section{margin:16px 0 6px;}.production-plan-panel .plan-delete-button{border:0;background:transparent;color:#dc9c9c;padding:4px 0;}.production-plan-panel .danger{color:#efb0b0;border-color:#795555;}
+.plan-quick-count{margin-bottom:12px;display:flex;flex-direction:column;gap:4px;}.plan-quick-count strong{font-size:14px;}.plan-quick-count span{font-size:11px;color:#aeb7c4;}
+.production-plan-panel .plan-quick-row{display:flex;flex-direction:column;gap:4px;text-align:left;border:0;border-bottom:1px solid #363f4d;border-radius:0;background:transparent;padding:11px 2px;width:100%;}.plan-quick-row strong{font-size:12px;}.plan-quick-row>span{color:#aeb7c4;font-size:11px;}.production-plan-panel .plan-quick-row:hover{background:#272d37;}
+.plan-deleted-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0;}
+/* Four editor regions remain distinct even inside a narrow desktop panel. */
+@media(max-width:900px){
+ .studio-app .workspace>.inspector{position:static;inset:auto;width:auto;z-index:auto;box-shadow:none;}
+ .studio-app .workspace.workspace{grid-template-columns:44px minmax(120px,150px) minmax(0,1fr) 210px;}
+ .studio-app.hide-inspector .workspace.workspace{grid-template-columns:44px minmax(120px,150px) minmax(0,1fr);}
+ .studio-app .stage.is-plan-preview{padding:96px 10px 42px;gap:10px;}
+ .plan-annotation-heading{left:10px;right:10px;}
+ .plan-annotation-heading>div{gap:6px;flex-wrap:wrap;}
+ .plan-annotation-heading>div>span{font-size:10px;}
+ .plan-annotation-group{padding-left:8px;}
+}
+
+.studio-app .stage.is-plan-side-stack{grid-template-columns:minmax(0,.36fr) minmax(0,.64fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr);}
+.studio-app .stage.is-plan-side-stack .player-wrap{grid-column:1;grid-row:1 / 3;}
+.studio-app .stage.is-plan-side-stack .plan-annotation-rail.left{grid-column:2;grid-row:1;}
+.studio-app .stage.is-plan-side-stack .plan-annotation-rail.right{grid-column:2;grid-row:2;}
+/* Editorial preview: a few quiet cues around the actual frame. */
+.studio-app .stage.is-plan-preview{padding-top:34px;}
+.plan-annotation-close{position:absolute;right:12px;top:8px;z-index:2;}
+.plan-annotation-group.kind-analysis{--plan-accent:#aab4be;}
+.plan-annotation-group.kind-animation{--plan-accent:#b6b0c3;}
+.plan-annotation-group.kind-footage{--plan-accent:#a0b8ae;}
+.plan-annotation-item{font-size:13px;line-height:1.65;}
+.production-plan-block.plan-category-animation{--plan-block-bg:#3d3b46;--plan-block-border:#656170;--plan-block-selected:#4c4857;}
+.production-plan-block.plan-category-footage{--plan-block-bg:#34413e;--plan-block-border:#5c6b65;--plan-block-selected:#42524b;}
+.production-plan-block.plan-category-mixed{--plan-block-bg:#41403a;--plan-block-border:#706c5f;--plan-block-selected:#514e43;}
+.production-plan-block[class*="plan-category-"]{background:var(--plan-block-bg);border-color:var(--plan-block-border);color:#d5d9df;}
+.production-plan-block[class*="plan-category-"].is-selected{background:var(--plan-block-selected);border-color:#a6aeb9;}
+.plan-focused-panel .plan-current-title{margin:12px 0 10px;}
+.production-plan-panel details.plan-feedback-section{margin:8px 0 12px;padding:0;border-bottom:0;}
+.plan-feedback-section>summary{font-size:12px;padding:8px 0;}
+.production-plan-panel .plan-feedback-section textarea{min-height:62px;margin-top:0;}
+.production-plan-panel .plan-feedback-section .plan-submit-feedback{padding:6px 10px;margin:6px 0;width:auto;min-width:72px;}
+.plan-revision-status{font-size:11px;margin:8px 0 12px;padding-left:8px;border-color:#8f9bae;}
+.plan-revision-status.state-success{color:#a8c2b0;border-color:#789b82;}
+.plan-revision-status.state-failed{color:#d4a4a4;border-color:#a77575;}
+.plan-revision-status.state-partial{color:#c7bfa3;border-color:#a29778;}
+.plan-revision-status .plan-actions{margin:4px 0;}
+.plan-candidate-preview{border-top:1px solid #343c49;padding:10px 0;}
+.plan-candidate-caption{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+.plan-candidate-caption b{font-size:12px;line-height:1.5;flex:1;min-width:0;}
+.production-plan-panel .plan-candidate-caption a,.production-plan-panel .plan-candidate-caption button{display:flex;align-items:center;justify-content:center;flex:none;background:transparent;border:0;padding:3px;color:#aeb7c4;}
+.plan-candidate-player{position:relative;background:#10141b;aspect-ratio:16 / 9;border-radius:4px;overflow:hidden;}
+.plan-candidate-player>video,.plan-candidate-player>img{display:block;width:100%;height:100%;object-fit:contain;}
+.production-plan-panel .plan-candidate-empty{width:100%;height:100%;border:0;background:transparent;font-size:11px;color:#aeb7c4;}
+.plan-candidate-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#10141bd9;font-size:11px;}
+.plan-candidate-error{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:5px;font-size:11px;color:#d4a4a4;}
+.plan-candidate-error>span{flex:1;}.plan-candidate-error button{padding:2px 5px;}
+
+.plan-candidate-added{display:block;margin-top:5px;font-size:11px;color:#a8c2b0;}
+
+.plan-shot-ai-videos{margin:16px 0;}.plan-ai-video-card{border-top:1px solid #343c49;padding:12px 0;}.plan-ai-video-card h5{font-size:12px;margin:0 0 7px;}.plan-ai-video-card p{margin:6px 0;color:#bdc7d8;}.plan-ai-video-card .plan-actions{align-items:center;flex-wrap:wrap;gap:8px;}.plan-ai-video-card pre{font:inherit;line-height:1.6;overflow-wrap:anywhere;}.plan-ai-video-references{padding-left:22px;}.plan-ai-video-references li{margin:10px 0;}.plan-ai-video-references small{display:block;margin-top:5px;color:#aeb7c4;}.studio-media-status.is-failed,.studio-media-status.is-stale{background:#744137;}.studio-media-status.is-unmatched,.studio-media-status.is-cancelled,.studio-media-status.is-ignored{background:#475262;}
+
+/* Visual route markers share one order and shape across the plan, canvas and inspector. */
+.plan-visual-badges{display:inline-flex;align-items:center;gap:4px;flex-shrink:0;vertical-align:middle;}
+.plan-visual-badge{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;height:20px;min-width:20px;padding:0 3px;border:1px solid var(--badge-border);border-radius:4px;background:var(--badge-bg);color:var(--badge-fg);font-size:11px;font-weight:650;line-height:1;white-space:nowrap;vertical-align:middle;}
+.plan-visual-badge.kind-animation{--badge-fg:#e3daf3;--badge-bg:#484153;--badge-border:#756582;}
+.plan-visual-badge.kind-footage{--badge-fg:#d5ede3;--badge-bg:#344a42;--badge-border:#617e70;}
+.plan-visual-badge.kind-aiVideo{--badge-fg:#d8e7ff;--badge-bg:#34465f;--badge-border:#607da6;}
+.plan-visual-badges>.toolbar-help-anchor{display:inline-flex;flex-shrink:0;}
+.production-plan-block>.plan-visual-badges{flex-shrink:0;overflow:visible;gap:2px;}
+.plan-visual-badges.is-compact .plan-visual-badge{height:16px;min-width:16px;padding:0 2px;font-size:9px;border-radius:3px;}
+.production-plan-block>.plan-block-title{min-width:0;flex:1;}
+.production-plan-block{padding-left:6px;padding-right:6px;gap:5px;}
+.plan-annotation-group h3,.plan-focused-panel h4,.plan-current-title h3,.plan-quick-row strong{display:flex;align-items:center;gap:7px;}
+.plan-annotation-group h3>.toolbar-help-anchor,.plan-focused-panel h4>.toolbar-help-anchor{display:inline-flex;flex-shrink:0;}
+.plan-annotation-group.kind-aiVideo{--plan-accent:#a8c3ec;}
+.plan-shot-animation{margin:16px 0;}.plan-shot-animation p{color:#bdc7d8;line-height:1.6;margin:7px 0;}.plan-shot-animation .plan-item-status{display:block;}
+
+/* Content-aware plan preview: annotations stay outside the rendered frame. */
+.studio-app .stage.is-plan-preview{padding:36px 16px 62px;gap:16px;min-height:0;}
+.studio-app .stage.is-plan-preview.plan-layout-aside .player-wrap{grid-column:2;grid-row:1;}
+.studio-app .stage.is-plan-preview.plan-layout-stack .player-wrap{grid-column:1 / -1;grid-row:1;}
+.studio-app .stage.is-plan-preview.plan-layout-stack .plan-annotation-rail.left{grid-column:1;grid-row:2;}
+.studio-app .stage.is-plan-preview.plan-layout-stack .plan-annotation-rail.right{grid-column:2;grid-row:2;}
+.plan-annotation-group.kind-narration{--plan-accent:#c3ccd8;}
+.plan-annotation-group{margin-bottom:14px;}
+.plan-annotation-item{margin-bottom:10px;}
+.plan-annotation-item p{white-space:pre-line;}
+.plan-annotation-item small{white-space:pre-line;line-height:1.6;}
+.plan-annotation-rail{overscroll-behavior:contain;}
+.production-plan-panel .plan-delete-button{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:36px;padding:8px 12px;border:1px solid #79545b;border-radius:6px;background:#422d34;color:#f0bdc4;font-size:12px;cursor:pointer;transition:background .12s,border-color .12s;}
+.production-plan-panel .plan-delete-button:hover:not(:disabled){background:#56353e;border-color:#b27b88;}
+.production-plan-panel .plan-delete-button:active:not(:disabled){background:#35252c;}
+.production-plan-panel .plan-delete-button:focus-visible{outline:2px solid #efbbc6;outline-offset:3px;}
+.production-plan-panel .plan-delete-button:disabled{opacity:.45;cursor:not-allowed;}
+.plan-delete-confirm{padding:10px 12px;border:1px solid #79545b;border-radius:6px;background:#35272d;}
+.plan-delete-confirm p{margin:0 0 10px;line-height:1.6;}.plan-delete-confirm .plan-actions{justify-content:flex-end;}
+@media(prefers-reduced-motion:reduce){.production-plan-panel .plan-delete-button{transition:none;}}

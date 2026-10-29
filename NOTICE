@@ -1,0 +1,44 @@
+AI Cut Studio
+Copyright 2026 TSrain and contributors
+
+The original editing and workflow code is licensed under Apache-2.0.
+This distribution is a selected, modified snapshot of the author's private
+editing projects. Private Git history, accounts, portraits and media are excluded.
+Portability, local request checks, cloud-upload consent and public configuration
+defaults differ from the original projects.
+
+Third-party acknowledgements:
+
+video-shotcraft — Copyright 2026 Wei Yihao, Apache-2.0
+https://github.com/Vincentwei1021/video-shotcraft
+Adapted shotcraft scenes, page-camera techniques, recipes and external recipe
+indexes remain subject to the upstream license in licenses/video-shotcraft-Apache-2.0.txt.
+No upstream audio library is redistributed.
+
+HyperFrames — HeyGen, Apache-2.0
+https://github.com/heygen-com/hyperframes
+The optional HTML template and registry references use HyperFrames conventions.
+See licenses/hyperframes-Apache-2.0.txt. Install its CLI separately.
+
+frontend-design — Anthropic, Apache-2.0
+https://github.com/anthropics/claude-plugins-official
+studio/docs/visual-language.md is an adapted Chinese motion-design guide.
+See licenses/frontend-design-Apache-2.0.txt.
+
+Lucide — ISC, with Feather-derived portions under MIT
+The original notice is retained in studio/tools/editor/lucide-LICENSE.txt.
+
+Fonts — separate SIL Open Font License terms
+Setup downloads nine pinned fonts and their original copyright/license notices.
+The manifest is .devin/fonts.lock.json; notices are installed alongside fonts.
+Fonts are not relicensed under Apache-2.0.
+
+Remotion — separate Remotion License, not Apache-2.0 or MIT
+Remotion is installed through npm, not vendored or relicensed here. Its free and
+company-license eligibility must be checked for each user/organization.
+https://www.remotion.dev/license
+
+Other npm dependencies (React, Three.js, icons, Lottie, Zod and build tools) retain
+their own licenses in their installed packages. Brand icons do not confer
+trademark rights. FFmpeg's applicable license depends on the installed build.
+Cloud services and CLI providers have independent terms and costs.

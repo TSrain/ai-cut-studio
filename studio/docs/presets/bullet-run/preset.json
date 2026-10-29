@@ -1,0 +1,184 @@
+{
+  "version": 2,
+  "id": "bullet-run",
+  "name": "列点推进",
+  "engine": "remotion",
+  "compositionId": "PresetBulletRun",
+  "componentSource": "templates/remotion-base/src/presets/BulletRun.tsx",
+  "status": "draft",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 4,
+    "max": 12,
+    "default": 7
+  },
+  "tags": [
+    "type",
+    "layout",
+    "list",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 1,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 0,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "motion": {
+    "character": "calm",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "第 0 帧全部在场:题目 + 所有条目(0.16 不透明度)。整块在 0.9s 内从 0.55 亮到 1 并抬 10px,不是从 0 淡入",
+        "easing": "CALM"
+      },
+      {
+        "phase": "enter",
+        "seconds": "18%–62%",
+        "action": "光逐条走过去:当前条亮起 + 左侧 4px accent 竖条长出;walk 模式下讲过的退回 0.38 亮度。一拍 0.9 秒,元素不位移",
+        "easing": "CALM"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "最后一条点亮后完全静止,约占全片 38%"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "slots": {
+    "items": {
+      "label": "要列的几条",
+      "hint": "一行一条，2–6 条。想给某条加个小注就用 | 隔开：先跑通 | 别管好不好看",
+      "type": "list",
+      "required": true,
+      "role": "h2",
+      "fontSize": 84,
+      "minItems": 2,
+      "maxItems": 6,
+      "fit": {
+        "maxWidthPx": 836,
+        "shrinkFloorPx": 34
+      },
+      "description": "列表条目。每项可用 ` | ` 分成主句与小注。全表统一字号(取所有主句 fit 的最小值),条数多时基准字号自动降档",
+      "splitOn": "|",
+      "noteRatio": 0.46,
+      "noteMaxLines": 1
+    },
+    "title": {
+      "label": "题目",
+      "hint": "这一镜在讲什么，一句话。比如「为什么现在动手」。不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "h1",
+      "fontSize": 96,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 880,
+        "shrinkFloorPx": 56
+      },
+      "description": "标题句,第 0 帧即在场"
+    },
+    "eyebrow": {
+      "label": "顶部眉题",
+      "hint": "画面最顶上的一行小字。不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "label",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 860,
+        "shrinkFloorPx": 22
+      },
+      "description": "顶部眉题,可省"
+    }
+  },
+  "variants": {
+    "flow": {
+      "label": "怎么推进",
+      "hint": "walk 是光逐条走过去、讲过的退回暗处；stack 是亮了就不再灭",
+      "type": "enum",
+      "values": [
+        "walk",
+        "stack"
+      ],
+      "default": "walk",
+      "description": "walk:当前条 accent 高亮,其余降为可读灰;stack:逐条出现且全部保持同等亮度"
+    },
+    "marker": {
+      "label": "前缀标记",
+      "hint": "默认不加标记（最干净）。number 是 01/02/03；check 是对勾；dot 是短横",
+      "type": "enum",
+      "values": [
+        "none",
+        "number",
+        "dot",
+        "check"
+      ],
+      "default": "none",
+      "description": "默认 none —— 一根 accent 竖条已经标出了当前条,再加序号就是同一件事说两遍"
+    }
+  },
+  "anchors": {
+    "start": "深色层次底 + 题目与全部条目已在场但压暗,尚无 accent 竖条",
+    "end": "退场前：最后一条全亮并带 accent 竖条,其余条目退回暗处仍可读,全静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【列点推进 preset:bullet-run@v2】口播说「有 N 个原因/特征/步骤」时的固定画面:全员在场压暗 → 光逐条走过 → 末段静止",
+  "audit": {
+    "keyframes": [
+      "start",
+      "mid",
+      "end"
+    ]
+  },
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-14",
+      "note": "初版。b-roll 里最高频也最容易做成 PPT 的一种。四条反 PPT 措施:骨架先在(空槽位有 0.22 地板不透明度)、逐条错峰入场(序号早文字 3 帧)、walk 模式有「现在讲到哪条」、末段全静止。构图上左对齐列表天生左压(实测左半占墨 72%),用通栏底板 + 右上角计数把重量拉回右侧。"
+    },
+    {
+      "version": 2,
+      "date": "2026-08-15",
+      "note": "按用户「元素太多…要像乔布斯的 ppt,简单直接高级;字体不好看;画框占比太大留白过少;动画过于着急」重做。删掉计数器/补充句 kicker/卡片底板/分隔横线/大号序号,一屏九种元素减到三种;标记只剩一根 4px accent 竖条(marker 默认 none)。字体随 baseline v2 换成霞鹜新晰黑,字重上限 500。动画从\"逐条飞入\"改成\"全员在场、只有光在走\",一拍 0.9 秒、缓动 CALM,末段 38% 完全静止。"
+    },
+    {
+      "version": 2,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "slots": {
+      "title": "为什么现在动手",
+      "items": [
+        "工具已经够用了",
+        "内容比工具稀缺",
+        "早做早有素材库"
+      ]
+    },
+    "variant": {
+      "flow": "walk",
+      "marker": "none"
+    }
+  }
+}

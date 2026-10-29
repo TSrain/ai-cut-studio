@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "id": "title-reveal",
+  "name": "标题入场卡",
+  "engine": "remotion",
+  "compositionId": "PresetTitleReveal",
+  "componentSource": "templates/remotion-base/src/presets/TitleReveal.tsx",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 2.5,
+    "max": 6,
+    "default": 3.8
+  },
+  "tags": [
+    "type",
+    "kinetic",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 1,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "start",
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "confident",
+    "springAccents": 1,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0.23,
+        "action": "[blur] 标题逐词入场:y 90→0 + blur 22→0 + opacity 三通道共用同一个 p、同一条 outCubic;词间 stagger 3.5f,单词入场窗 0.67s。中文无空格按标点/2–4 字切段(accent 命中时独立成段),不逐字",
+        "easing": "outCubic"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.9,
+        "action": "[blur] 副标题错峰跟进(起点=标题末词入场进行到 45% 时,随词数浮动):stagger 2.5f、dy 58——重叠是'一句话',排队读成两拍",
+        "easing": "outCubic"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "[marker] 标题整块从下方 36px 落定 0.73s(22f);副标题 0.6s 起上浮淡入 0.47s",
+        "easing": "outCubic"
+      },
+      {
+        "phase": "enter",
+        "seconds": 1.07,
+        "action": "[marker] 停一拍后,马克笔笔划 0.33s(10f)从左到右扫过 accent 子串:变宽笔形+毛糙边缘,正体中文中轴水平微抖(抖动 ≤±0.2 笔宽);accent 不是 title 子串则整行不划",
+        "easing": "1-(1-t)^2.2"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.23,
+        "action": "[brace] 一对花括号硬切出现(不淡入):紧贴、0.6 倍字号,先建立'这是一对括号'",
+        "easing": "cut"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.5,
+        "action": "[brace] 弹开 0.8s(24f):outBack 过冲约 8%(唯一过冲名额)+ 同步放大 0.6→1,文字 clip 宽度严格绑括号间距(幕布感);accent 存在时只括 accent,pre/post 随弹开被推出;副标题 1.5s 淡入;1.6→2.37s 字距松弛 2→5.5px('呼一口气',全片最后一次运动)",
+        "easing": "outBack + inOutQuad"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "静止读取(时长伸缩全部落在这里;三档 enter 都是绝对秒,2.5s 与 6s 的版本前 2.4s 完全一样)"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "style": {
+      "type": "enum",
+      "values": [
+        "blur",
+        "marker",
+        "brace"
+      ],
+      "default": "blur",
+      "description": "入场手法:blur=逐词虚焦浮出(低能量默认,专业不抢戏)/ marker=落定后马克笔在 accent 下扫一笔(手写感强调)/ brace=花括号弹开拉幕(代码语感,技术产品语境)"
+    }
+  },
+  "slots": {
+    "title": {
+      "label": "标题",
+      "type": "text",
+      "required": true,
+      "role": "hero",
+      "fontSize": 118,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 936,
+        "shrinkFloorPx": 64
+      },
+      "description": "主标题,单行 shrink-to-fit。brace 档要给两只括号留 ~2.6em,可容纳字数比另两档少约 2 个汉字(组件按 shrinkFloor 56 单独收缩)",
+      "hint": "一句话标题,6–10 个字最好。brace 档会更挤,尽量短"
+    },
+    "subtitle": {
+      "label": "副标题",
+      "type": "text",
+      "required": false,
+      "role": "body",
+      "fontSize": 40,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 936,
+        "shrinkFloorPx": 28
+      },
+      "description": "标题下方的一行小字,可省。blur 档它与标题错峰重叠入场;marker/brace 档在标题落定后淡入",
+      "hint": "补一句语境或副题,不填就不显示"
+    },
+    "accent": {
+      "label": "强调词",
+      "type": "text",
+      "required": false,
+      "role": "hero",
+      "measuredIn": "title",
+      "description": "title 里要强调的子串:marker 档在它下面划马克笔,brace 档只括它(pre/post 被推出);blur 档让它独立成一个入场词段。必须逐字出现在 title 中,否则 marker 整行不划、brace 括整行",
+      "hint": "标题里最想让观众记住的两三个字。必须逐字出现在标题里"
+    }
+  },
+  "anchors": {
+    "start": "深蓝层次底+网格点第 0 帧已在(首帧不黑),标题按 {style} 档动效正在入场",
+    "end": "退场前：「{title}」定格于画面中带(y≈880),副标题其下,底部留白+锚点短线,静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【标题入场卡 preset:title-reveal@v1】章节/开场标题「{title}」的入场画面,{style} 档动效(blur 逐词浮出 / marker 记号笔扫过「{accent}」/ brace 括号拉幕),副标题「{subtitle}」错峰跟进",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-20",
+      "note": "初版:video-shotcraft 三个标题动效(blur-slide / marker-underline-title / brace-expand)合并为一卡,横版 480×270 demo 重排为 1080×1920 竖版(参数 ×2.25 换算),同一坐标骨架(title y≈880)。颜色零 hex 全走皮肤;马克笔改正体水平微抖(原 demo 跟斜体上斜);brace 档新增 accent 只括子串的 pre/post 推出编排"
+    },
+    {
+      "version": 1,
+      "date": "2026-08-22",
+      "note": "用户看过 9 个模板的连播验收片(桌面 新模板验收.mp4,每个模板的真实文案样例动效),回「都 verified」——翻 verified,自此走快车道:批量出片时不再出三张 Styleframe、不逐镜全量自查,只做槽位校验 + 预览印张确认 + 输出成功 + 分辨率/时长/编码四项检查"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "slots": {
+      "title": "把品味沉淀成组件",
+      "subtitle": "每个新镜头,都站在上一个的肩膀上",
+      "accent": "沉淀"
+    }
+  },
+  "verifiedAt": "2026-08-22"
+}

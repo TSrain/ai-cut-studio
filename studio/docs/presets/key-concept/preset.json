@@ -1,0 +1,188 @@
+{
+  "version": 2,
+  "id": "key-concept",
+  "name": "关键概念强调卡",
+  "engine": "remotion",
+  "compositionId": "PresetKeyConcept",
+  "componentSource": "templates/remotion-base/src/presets/KeyConcept.tsx",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 2.5,
+    "max": 6,
+    "default": 3.5
+  },
+  "tags": [
+    "type",
+    "kinetic",
+    "layout",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 1,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "start",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "confident",
+    "springAccents": 1,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0.07,
+        "action": "底+色板第 0 帧已在(首帧不淡入);关键词上浮入场 0.4s,唯一弹簧名额=收尾 1.5% 过冲",
+        "easing": "ENTER + spring(damping 16)"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.33,
+        "action": "西文小标左滑淡入 0.33s",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.6,
+        "action": "解释句上浮淡入 0.4s",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.87,
+        "action": "记号笔色带从左到右扫过高亮词 0.47s",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "静止读取(时长伸缩全部落在这里)"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "slots": {
+    "term": {
+      "label": "关键词",
+      "type": "text",
+      "required": true,
+      "role": "hero",
+      "fontSize": 185,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 936,
+        "shrinkFloorPx": 120
+      },
+      "description": "关键概念本词,支持 \\n 手动折行(如「上下文\\n工程」)",
+      "hint": "要强调的概念本身，两三个字最好。可以按回车折行"
+    },
+    "en": {
+      "label": "英文小标",
+      "type": "text",
+      "required": false,
+      "role": "label",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 860,
+        "shrinkFloorPx": 22
+      },
+      "description": "西文小标(概念的英文名),可省",
+      "hint": "概念的英文名，一行小字。不填就不显示"
+    },
+    "sentence": {
+      "label": "一句解释",
+      "type": "text",
+      "required": false,
+      "role": "body",
+      "fontSize": 44,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 936,
+        "shrinkFloorPx": 34
+      },
+      "description": "一句解释,支持 \\n 折行,可省",
+      "hint": "一句话把概念说清楚。可以按回车折行"
+    },
+    "highlight": {
+      "label": "要划重点的词",
+      "type": "text",
+      "required": false,
+      "role": "body",
+      "fontSize": 44,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 936,
+        "shrinkFloorPx": 34
+      },
+      "description": "sentence 里要上记号笔色带的子串;必须逐字出现在 sentence 中,否则不高亮",
+      "hint": "上面那句解释里要划重点的词，会加一条记号笔色带。必须逐字出现在解释里"
+    },
+    "eyebrow": {
+      "label": "顶部眉题",
+      "hint": "画面最顶上的一行小字。默认不填——「关键概念 · KEY CONCEPT」这类词是在向观众解释这一镜是什么,而他看一眼就知道",
+      "type": "text",
+      "required": false,
+      "role": "label",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 860,
+        "shrinkFloorPx": 22
+      },
+      "description": "顶部眉题,可省。v2 起没有兜底文案"
+    }
+  },
+  "anchors": {
+    "start": "深蓝黑层次底+深蓝色板已在场,「{term}」正在上浮入场",
+    "end": "退场前：「{term}」反白大字压深蓝色板,解释句中「{highlight}」带记号笔色带,静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【关键概念卡 preset:key-concept@v1】口播点到「{term}」时的固定强调画面:色板承托反白大字+西文小标+一句解释(高亮「{highlight}」)",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-06",
+      "note": "初版:用户点名的第一模板。深蓝色板反白字方向由用户定(否掉琥珀橙「教科书封皮」),弹簧名额 1"
+    },
+    {
+      "version": 2,
+      "date": "2026-08-15",
+      "note": "眉题从硬编码「关键概念 · KEY CONCEPT」改成可省槽位,默认不显示;强调色板从 640 高收到 460(转 8° 后原来视觉上接近半屏,画框比内容还大),关键词/英文行/说明句跟着重排,底部留白加大。用户 2026-08-15:「元素太多…画框占比太大留白过少」。"
+    },
+    {
+      "version": 2,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "verifiedAt": "2026-08-06",
+  "sample": {
+    "slots": {
+      "term": "上下文\n工程",
+      "en": "CONTEXT ENGINEERING",
+      "sentence": "给模型的不是一句提示词,\n而是一整套工作记忆。",
+      "highlight": "工作记忆"
+    }
+  }
+}

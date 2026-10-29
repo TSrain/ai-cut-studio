@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdtempSync,mkdirSync,writeFileSync,rmSync} from 'node:fs';
+import {join} from 'node:path';
+import {tmpdir} from 'node:os';
+import {createReviewPreviewService} from '../lib/editor-review-media.mjs';
+import {renderDocumentKey} from '../editor/render-document.mjs';
+import {resolveReviewAnchor} from '../editor/review-anchor.mjs';
+import {reviewMediaIdentity} from '../lib/editor-review-identity.mjs';
+import {reviewProcess} from '../lib/editor-review-process.mjs';
+const doc=()=>({id:'test',revision:1,canvas:{width:640,height:360,fps:{num:30,den:1},durationFrames:90},instances:[],source:{path:'test.mp4',publicPath:'test.mp4',clips:[{id:'clip',startFrame:0,durationFrames:90,sourceInFrame:60}]}});
+test('render projection ignores workflow progress but keeps visible changes',()=>{const a=doc(),b=structuredClone(a);b.revision++;b.roughcut={progress:0.5};b.productionPlan={status:'working'};b.reviewAppliedIds=['x'];assert.equal(renderDocumentKey(a),renderDocumentKey(b));b.canvas.width++;assert.notEqual(renderDocumentKey(a),renderDocumentKey(b));});
+test('anchors follow retained source content, not old timeline time',()=>{const a=doc(),anchor={projectId:'test',sourcePath:'test.mp4',sourceFrame:75,frame:15,clipId:'clip'};a.source.clips[0].startFrame=20;assert.equal(resolveReviewAnchor(a,anchor),35);a.source.clips[0].sourceInFrame=80;assert.equal(resolveReviewAnchor(a,anchor),null);});
+test('preview identity includes media content and cancels obsolete tasks',async()=>{const root=mkdtempSync(join(tmpdir(),'preview-'));try{
+ const template=join(root,'templates/remotion-base');mkdirSync(join(template,'src'),{recursive:true});mkdirSync(join(template,'public'));writeFileSync(join(template,'package.json'),'{}');writeFileSync(join(template,'public/test.mp4'),'original');
+ let current=doc(),release;const calls=[];const service=createReviewPreviewService({root,load:()=>current,render:args=>{calls.push(args);return new Promise(r=>release=()=>{writeFileSync(join(args.directory,'preview.mp4'),'test');r();});}});
+ const first=await service.request(current);await new Promise(r=>setImmediate(r));const identity=reviewMediaIdentity(root,current);writeFileSync(join(template,'public/test.mp4'),'replacement');assert.notEqual(reviewMediaIdentity(root,current),identity);
+ const second=await service.request(current);assert.notEqual(first.key,second.key);assert.equal(calls[0].signal.aborted,true);release();await new Promise(r=>setImmediate(r));assert.equal(service.get('test',first.key).status,'cancelled');release();await service.whenIdle();assert.equal(service.get('test',second.key).status,'ready');assert.equal((await service.request({...current,revision:3,roughcut:{progress:1}})).key,second.key);assert.throws(()=>service.get('other',second.key));
+ }finally{rmSync(root,{recursive:true,force:true});}});
+test('background process timeout and explicit cancellation terminate execution',async()=>{await assert.rejects(reviewProcess(process.execPath,['-e','setTimeout(()=>{},10000)'],{timeout:30}),/超时/);const c=new AbortController();const pending=reviewProcess(process.execPath,['-e','setTimeout(()=>{},10000)'],{signal:c.signal});c.abort();await assert.rejects(pending,/取消/);});

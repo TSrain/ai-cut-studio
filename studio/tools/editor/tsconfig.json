@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": false,
+    "noEmit": true,
+    "lib": [
+      "DOM",
+      "ES2022"
+    ],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": "../..",
+    "paths": {
+      "react": [
+        "templates/remotion-base/node_modules/@types/react"
+      ],
+      "react/*": [
+        "templates/remotion-base/node_modules/@types/react/*"
+      ],
+      "react-dom/*": [
+        "templates/remotion-base/node_modules/react-dom/*"
+      ],
+      "@remotion/player": [
+        "templates/remotion-base/node_modules/@remotion/player"
+      ],
+      "remotion": [
+        "templates/remotion-base/node_modules/remotion"
+      ],
+      "react-dom": [
+        "templates/remotion-base/node_modules/react-dom"
+      ]
+    }
+  },
+  "include": [
+    "*.tsx",
+    "*.mjs"
+  ]
+}

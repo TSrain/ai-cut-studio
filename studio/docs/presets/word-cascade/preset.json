@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "id": "word-cascade",
+  "name": "逐词飞入动字",
+  "engine": "remotion",
+  "compositionId": "PresetWordCascade",
+  "componentSource": "templates/remotion-base/src/presets/WordCascade.tsx",
+  "status": "draft",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920",
+    "1920x1080"
+  ],
+  "duration": {
+    "min": 2.5,
+    "max": 14,
+    "default": 6
+  },
+  "tags": [
+    "kinetic",
+    "type",
+    "preset"
+  ],
+  "output": {
+    "alphaWhen": {
+      "variantKey": "bg",
+      "value": "transparent"
+    },
+    "note": "bg=transparent 时是双通道字幕层;aurora/scene 是独立成片段"
+  },
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 0,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 2,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "minInk": 2,
+    "keyframes": [
+      "start",
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "lively",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "cascade:句子逐词飞入——每词从最终位置斜上方带运动模糊(10px→0)入场,stagger 6f < 行程 8f(相与相重叠),基线先偏 ±6px 再对齐;整行随新词加入向左缓移(可见部分始终光学居中)",
+        "easing": "ENTER,禁弹簧(落定要斩钉截铁,蓝图 kinetic-word-cascade)"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "整行静止 ≥ 入场总时长的 70%(按字数加权分配剩余时长);句间 8f 淡出换句,新句锚点上下交替,不原地刷新"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.4,
+        "action": "qa 模式:空白胶囊先滑入(悬念装置)→ 问题逐词填进 → 填完 +8f 胶囊上移让位(CALM 14f)→ 答案在下方散点位置虚→实显影(blur 12→0 + 上浮 18px),每条隔 22f",
+        "easing": "ENTER / CALM"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "mode": {
+      "label": "模式",
+      "hint": "cascade 逐句飞入(默认);qa 第一行进白胶囊当问题,其余行是散点答案",
+      "type": "enum",
+      "values": [
+        "cascade",
+        "qa"
+      ],
+      "default": "cascade",
+      "description": "cascade=句子依次组装换场;qa=问题胶囊+答案散点显影(引用观众提问→给要点)"
+    },
+    "bg": {
+      "label": "底",
+      "hint": "aurora 浅色渐变光斑底(默认),scene 皮肤场景底,transparent 透明出 alpha 层",
+      "type": "enum",
+      "values": [
+        "aurora",
+        "scene",
+        "transparent"
+      ],
+      "default": "aurora",
+      "description": "aurora 是 Lindsey 原片的光感(色相跟 skin.accentHue);transparent 时文字带软影,可叠实拍"
+    }
+  },
+  "slots": {
+    "lines": {
+      "label": "句子(一行一句)",
+      "type": "list",
+      "required": true,
+      "role": "hero",
+      "fontSize": 60,
+      "maxItems": 5,
+      "fit": {
+        "maxWidthPx": 907,
+        "shrinkFloorPx": 30
+      },
+      "description": "cascade:每行一句,依次飞入换场;qa:第一行是问题(进胶囊),其余行是答案。**用空格控制词的分组**(飞入以词为单位),没分组的长中文自动按 2 字切块。单句 ≤8 个词,超长先缩字号,缩到 30px 硬失败",
+      "hint": "一行一句;句内用空格分词,飞入就按你分的词来"
+    }
+  },
+  "anchors": {
+    "start": "浅色渐变光斑底(或皮肤底/透明),画面空,第一个词正带着运动模糊从斜上方飞向落点",
+    "end": "退场前：最后一句「安静地停在画面中部」,全部词锐利落定,底上光斑仍在缓慢漂移；末段约 0.35s 平滑溶出，最后实际帧退净。",
+    "_comment": "anchors 支持 {slot}/{variant} 插值"
+  },
+  "objectiveTemplate": "【逐词飞入动字 preset:word-cascade@v1】把「别人的声音/悬念提问」抬出口播的动字插片:{lines}逐词带运动模糊飞入组装,{mode?模式={mode}}",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-31",
+      "note": "初版:照蓝图 docs/blueprints/kinetic-word-cascade.md 实现(高高lindsey VZ8qrng2nIo,参考帧 lindsey-kinetic-midflight/lindsey-qa-scatter)。四条命门全落地:模糊落定前归零/stagger<行程/无弹簧/行漂移由词的到达驱动。含 qa 散点变体,横竖两档"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "variant": {
+      "mode": "cascade",
+      "bg": "aurora"
+    },
+    "slots": {
+      "lines": [
+        "你是怎么 坚持下来的?",
+        "其实 根本 不靠 坚持"
+      ]
+    }
+  }
+}

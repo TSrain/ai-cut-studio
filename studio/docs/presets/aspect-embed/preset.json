@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "id": "aspect-embed",
+  "name": "尺寸镶嵌",
+  "engine": "remotion",
+  "compositionId": "PresetAspectEmbed",
+  "componentSource": "templates/remotion-base/src/presets/AspectEmbed.tsx",
+  "status": "draft",
+  "baselineVersion": 2,
+  "canvas": [
+    "1920x1080",
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 3,
+    "max": 20,
+    "default": 5
+  },
+  "tags": [
+    "media",
+    "layout",
+    "type",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 0,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 1,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "minInk": 4,
+    "keyframes": [
+      "start",
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "deliberate",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "皮肤底第 0 帧已在(首帧不黑);视频卡片上浮 40px 落定 0.5s,带圆角/细描边/大落影——四周留出的底就是「这是被展示的素材」的语义",
+        "easing": "CALM"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.3,
+        "action": "文字侧入场:眉题小条先到,标题按 textFx 档位进(rise 逐行上浮 / cascade 逐词飞入 / typewriter 匀速打字机)",
+        "easing": "CALM / ENTER / linear"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "文字静止,视频继续播(比镜头短的素材自动循环);容器绝对不动"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "ratio": {
+      "label": "嵌入画幅",
+      "hint": "auto 从素材尺寸推(默认);也可强制 9:16 / 1:1 / 4:5 / 16:9",
+      "type": "enum",
+      "values": [
+        "auto",
+        "9:16",
+        "1:1",
+        "4:5",
+        "16:9"
+      ],
+      "default": "auto",
+      "description": "视频卡片的宽高比;素材与之不符时 objectFit:cover 裁切"
+    },
+    "side": {
+      "label": "卡片在哪侧",
+      "hint": "横画布有效:left 卡左文右(默认),right 卡右文左;竖画布恒为上下",
+      "type": "enum",
+      "values": [
+        "left",
+        "right"
+      ],
+      "default": "left",
+      "description": "横画布的左右布局开关"
+    },
+    "textFx": {
+      "label": "文字入场",
+      "hint": "rise 逐行上浮(默认),cascade 逐词飞入,typewriter 打字机",
+      "type": "enum",
+      "values": [
+        "rise",
+        "cascade",
+        "typewriter"
+      ],
+      "default": "rise",
+      "description": "标题的入场动画档位"
+    },
+    "sound": {
+      "label": "素材声音",
+      "hint": "off 静音(默认,声音在剪映里配);keep 保留素材原声",
+      "type": "enum",
+      "values": [
+        "off",
+        "keep"
+      ],
+      "default": "off",
+      "description": "嵌入视频的音轨开关"
+    }
+  },
+  "slots": {
+    "clip": {
+      "label": "视频素材",
+      "type": "video",
+      "required": true,
+      "assetDir": "footage",
+      "description": "build/public/footage/ 下的本地视频文件名(确定性条款:素材必须先落地)。控制台装载素材时自动探测尺寸时长填进 srcW/srcH/srcDur",
+      "hint": "选一段素材或点「传新视频」;竖屏录屏、手机实拍都行"
+    },
+    "srcW": {
+      "label": "素材宽",
+      "type": "number",
+      "required": false,
+      "derivedFrom": "clip",
+      "description": "素材真实像素宽,由装载时 ffprobe 自动填;ratio=auto 用它推嵌入画幅"
+    },
+    "srcH": {
+      "label": "素材高",
+      "type": "number",
+      "required": false,
+      "derivedFrom": "clip",
+      "description": "素材真实像素高,自动填"
+    },
+    "srcDur": {
+      "label": "素材时长(秒)",
+      "type": "number",
+      "required": false,
+      "derivedFrom": "clip",
+      "description": "素材时长,自动填;比镜头时长短时组件用它做无缝循环,不填且素材偏短会渲到末尾定格"
+    },
+    "title": {
+      "label": "标题",
+      "type": "text",
+      "required": true,
+      "role": "hero",
+      "fontSize": 72,
+      "maxLines": 3,
+      "wrap": true,
+      "fit": {
+        "maxWidthPx": 820,
+        "shrinkFloorPx": 34
+      },
+      "description": "视频旁边的大标题,按回车折行(≤3 行);逐行估宽取最小字号统一整块",
+      "hint": "一句话说清这段素材在证明什么;回车折行"
+    },
+    "sub": {
+      "label": "眉题",
+      "type": "text",
+      "required": false,
+      "role": "caption",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 700,
+        "shrinkFloorPx": 22
+      },
+      "description": "标题上方带强调色小条的一行小字,可省",
+      "hint": "分类/语境标签,不填就不显示"
+    }
+  },
+  "anchors": {
+    "start": "皮肤场景底已在,视频卡片({ratio})正上浮落定,文字侧空",
+    "end": "退场前：视频在卡片内持续播放,{sub?眉题「{sub}」+}标题「{title}」锐利在场,整组静止；末段约 0.35s 平滑溶出，最后实际帧退净。",
+    "_comment": "anchors 支持 {slot}/{variant} 插值"
+  },
+  "objectiveTemplate": "【尺寸镶嵌 preset:aspect-embed@v1】异画幅素材进片:{ratio} 视频卡片配「{title}」,横竖画布都能嵌,textFx={textFx}",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-31",
+      "note": "初版:高高lindsey 拉片时用户点名的能力(16:9 里嵌 9:16 配文字,各种画幅互嵌)。首用 video 槽位类型(assetDir=footage,srcW/srcH/srcDur derivedFrom 自动探测);嵌入画幅参数化,文字入场三档,竖画布整组垂直居中防空屏"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "variant": {
+      "ratio": "auto",
+      "side": "left",
+      "textFx": "rise",
+      "sound": "off"
+    },
+    "slots": {
+      "clip": "demo-vertical.mp4",
+      "srcW": 540,
+      "srcH": 960,
+      "srcDur": 4,
+      "title": "竖屏素材\n也能进横片",
+      "sub": "各种画幅,镶着用"
+    }
+  }
+}

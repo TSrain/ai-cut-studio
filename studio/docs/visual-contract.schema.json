@@ -1,0 +1,393 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-motion-studio.local/schemas/visual-contract.schema.json",
+  "title": "VisualContract",
+  "description": "Shared read-only input for every shot worker. Mirrors tools/lib/visual-contract.mjs — required fields and enums here match the validator exactly.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "project",
+    "mode",
+    "canvas",
+    "density",
+    "focus",
+    "typography",
+    "assets",
+    "facts",
+    "shots"
+  ],
+  "allOf": [{"if": {"required": ["designIntentVersion"]}, "then": {"properties": {"shots": {"items": {"required": ["designIntent", "presetCandidates", "selectedPreset"]}}}}}, {"if": {"properties": {"shots": {"contains": {"required": ["designIntent"]}}}, "required": ["shots"]}, "then": {"required": ["designIntentVersion"]}}],
+  "properties": {
+    "designIntentVersion": {"type": "integer", "const": 1, "description": "Authored upstream design intent protocol; absent for legacy contracts."},
+    "version": {
+      "const": 1,
+      "description": "Contract schema version. Must equal 1."
+    },
+    "project": {
+      "$ref": "#/$defs/nonBlankString",
+      "description": "Project slug used in logs and CLI output."
+    },
+    "mode": {
+      "enum": ["visual-first"],
+      "description": "Only the visual-first pipeline is supported."
+    },
+    "profile": {
+      "enum": ["visual-max", "editorial-luxe", "brand-energy", "data-cinematic"],
+      "description": "Optional style profile (docs/styles/*.md). Consumed by frame-audit/lint-shot/check-density thresholds."
+    },
+    "sourceVideo": {
+      "$ref": "#/$defs/nonBlankString",
+      "description": "Optional source video path. Source identity and displayed aspect ratio are verified by the upstream broll_canvas checker."
+    },
+    "sourceCanvas": {
+      "type": "object",
+      "description": "Optional original probe metadata, preserved independently of the output canvas; validated against the video by broll_canvas."
+    },
+    "canvas": {
+      "type": "object",
+      "required": ["width", "height", "fps", "durationSeconds"],
+      "properties": {
+        "width": {"$ref": "#/$defs/evenInteger"},
+        "height": {"$ref": "#/$defs/evenInteger"},
+        "fps": {"type": "integer", "minimum": 1},
+        "durationSeconds": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "density": {
+      "type": "object",
+      "required": ["target", "occupancyMin", "occupancyMax", "layerCount"],
+      "properties": {
+        "target": {"type": "number", "minimum": 1, "maximum": 10},
+        "occupancyMin": {"$ref": "#/$defs/unitInterval"},
+        "occupancyMax": {"$ref": "#/$defs/unitInterval"},
+        "layerCount": {"type": "integer", "minimum": 1}
+      },
+      "description": "occupancyMin must not exceed occupancyMax; that cross-field rule is enforced by the validator only."
+    },
+    "focus": {
+      "type": "object",
+      "required": ["primary", "secondary"],
+      "properties": {
+        "primary": {"$ref": "#/$defs/nonBlankString"},
+        "secondary": {
+          "type": "array",
+          "maxItems": 2,
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "palette": {
+      "type": "object",
+      "properties": {
+        "mode": {"type": "string"},
+        "dominant": {"type": "string"},
+        "support": {"type": "array", "items": {"type": "string"}},
+        "accent": {"type": "array", "items": {"type": "string"}},
+        "surfaces": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "typography": {
+      "type": "object",
+      "required": ["kit", "displayRole", "bodyRole", "dataRole"],
+      "properties": {
+        "kit": {
+          "enum": ["impact", "editorial", "human", "modern", "tech-data", "minimal"]
+        },
+        "displayRole": {"$ref": "#/$defs/nonBlankString"},
+        "bodyRole": {"$ref": "#/$defs/nonBlankString"},
+        "dataRole": {"$ref": "#/$defs/nonBlankString"}
+      }
+    },
+    "material": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "background": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "motion": {
+      "type": "object",
+      "properties": {
+        "character": {"type": "string"},
+        "springAccents": {"type": "integer", "minimum": 0},
+        "ambientMotion": {"type": "boolean"}
+      }
+    },
+    "transition": {
+      "type": "object",
+      "properties": {
+        "language": {"type": "string"}
+      }
+    },
+    "assets": {
+      "type": "object",
+      "required": [
+        "allowBrandLogos",
+        "allowScreenshots",
+        "allowUnknownNetworkImages",
+        "cacheSelectedLocally"
+      ],
+      "properties": {
+        "allowBrandLogos": {"const": true},
+        "allowScreenshots": {"const": true},
+        "allowUnknownNetworkImages": {"const": true},
+        "cacheSelectedLocally": {"const": true}
+      }
+    },
+    "facts": {
+      "type": "object",
+      "required": ["mode"],
+      "properties": {
+        "mode": {"enum": ["exact", "illustrative"]}
+      }
+    },
+    "shots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/shot"}
+    }
+  },
+  "$defs": {
+    "designIntent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "goal",
+        "concept",
+        "focus",
+        "presenterRelation",
+        "states",
+        "beats",
+        "templateOptions",
+        "customOption",
+        "recommendation",
+        "acceptance",
+        "risks"
+      ],
+      "properties": {
+        "goal": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "concept": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "focus": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "presenterRelation": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "states": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "change",
+            "end"
+          ],
+          "properties": {
+            "start": {
+              "$ref": "#/$defs/nonBlankString"
+            },
+            "change": {
+              "$ref": "#/$defs/nonBlankString"
+            },
+            "end": {
+              "$ref": "#/$defs/nonBlankString"
+            }
+          }
+        },
+        "beats": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "anchor",
+              "action"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/nonBlankString"
+              },
+              "anchor": {
+                "$ref": "#/$defs/nonBlankString"
+              },
+              "action": {
+                "$ref": "#/$defs/nonBlankString"
+              }
+            }
+          }
+        },
+        "templateOptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "presetId",
+              "fit",
+              "gaps"
+            ],
+            "properties": {
+              "presetId": {
+                "$ref": "#/$defs/nonBlankString"
+              },
+              "fit": {
+                "$ref": "#/$defs/nonBlankString"
+              },
+              "gaps": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/nonBlankString"
+                }
+              }
+            }
+          }
+        },
+        "customOption": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "approach",
+            "benefit",
+            "cost"
+          ],
+          "properties": {
+            "approach": {
+              "$ref": "#/$defs/nonBlankString"
+            },
+            "benefit": {
+              "$ref": "#/$defs/nonBlankString"
+            },
+            "cost": {
+              "$ref": "#/$defs/nonBlankString"
+            }
+          }
+        },
+        "recommendation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "route",
+            "reason"
+          ],
+          "properties": {
+            "route": {
+              "enum": [
+                "preset",
+                "component-custom",
+                "custom"
+              ]
+            },
+            "reason": {
+              "$ref": "#/$defs/nonBlankString"
+            }
+          }
+        },
+        "acceptance": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonBlankString"
+          },
+          "minItems": 1
+        },
+        "risks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonBlankString"
+          }
+        }
+      }
+    },
+    "nonBlankString": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "evenInteger": {
+      "type": "integer",
+      "multipleOf": 2
+    },
+    "unitInterval": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "shot": {
+      "type": "object",
+      "required": [
+        "id",
+        "durationSeconds",
+        "engine",
+        "objective",
+        "startAnchor",
+        "endAnchor"
+      ],
+      "properties": {
+        "designIntent": {"$ref": "#/$defs/designIntent"},
+        "id": {"$ref": "#/$defs/nonBlankString"},
+        "durationSeconds": {"type": "number", "exclusiveMinimum": 0},
+        "engine": {"enum": ["remotion", "hyperframes", "hybrid"]},
+        "objective": {"$ref": "#/$defs/nonBlankString"},
+        "startAnchor": {"$ref": "#/$defs/nonBlankString"},
+        "endAnchor": {"$ref": "#/$defs/nonBlankString"},
+        "tags": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/nonBlankString"},
+          "description": "Knowledge-routing / component-shortlist tags for this shot."
+        },
+        "preset": {
+          "type": "object",
+          "required": ["id", "version"],
+          "properties": {
+            "id": {"$ref": "#/$defs/nonBlankString"},
+            "version": {"type": "integer", "minimum": 1}
+          },
+          "description": "Preset reference. tools/expand-presets.mjs expands it into objective/anchors/engine/tags before validate-contract."
+        },
+        "presetProps": {
+          "type": "object",
+          "description": "Slot values and variant for the preset. Slot-level semantics are validated by the expander (tools/lib/preset.mjs), not here."
+        },
+        "presetAlternatives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "version", "presetProps"],
+            "properties": {
+              "id": {"$ref": "#/$defs/nonBlankString"},
+              "version": {"type": "integer", "minimum": 1},
+              "presetProps": {"type": "object"}
+            }
+          },
+          "description": "Equally-good preset candidates, each with its own real copy. tools/expand-presets.mjs writes shots/<id>/alt-<presetId>.props.json so tools/preset-preview.mjs can render one preview per candidate; the user picks one and the field is cleared (validate-contract --preset-resolved enforces that before rendering)."
+        },
+        "presetCandidates": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/nonBlankString"},
+          "description": "Preset ids actually compared against this shot after reading docs/presets/MENU.md. Empty array means nothing came close. Required for b-roll (validate-contract --require-preset-matching)."
+        },
+        "selectedPreset": {
+          "type": ["string", "null"],
+          "description": "Matched preset id (must equal preset.id), or null when the shot falls back to the custom three-styleframe flow."
+        },
+        "matchReason": {
+          "$ref": "#/$defs/nonBlankString",
+          "description": "Why this shot's requirement fits the selected preset's slots. Required when selectedPreset is set."
+        },
+        "unmatchedReason": {
+          "$ref": "#/$defs/nonBlankString",
+          "description": "Which noun / visual requirement no preset slot could hold. Required when selectedPreset is null."
+        },
+        "engineReason": {
+          "$ref": "#/$defs/nonBlankString",
+          "description": "Why this shot leaves the default engine (Remotion). Required for hyperframes/hybrid under --require-preset-matching; route.json must carry the matching override."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "id": "chapter-navigation",
+  "name": "章节导航卡",
+  "engine": "remotion",
+  "compositionId": "PresetChapterNavigation",
+  "componentSource": "templates/remotion-base/src/editor/ChapterNavigation.tsx",
+  "status": "draft",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920",
+    "1920x1080"
+  ],
+  "duration": {
+    "min": 2,
+    "max": 30,
+    "default": 6
+  },
+  "tags": [
+    "overlay",
+    "type",
+    "navigation",
+    "preset"
+  ],
+  "output": {
+    "alphaWhen": {
+      "variantKey": "bg",
+      "value": "transparent"
+    },
+    "note": "默认透明底=双通道 overlay:导出走 ProRes4444→HEVC alpha 链,产物是叠在用户实拍上的 .mov;bg=scene 时是普通不透明成片段"
+  },
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 0,
+    "captions": 1,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 1,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "minInk": 2,
+    "keyframes": [
+      "start",
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "calm",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0.12,
+        "action": "局部半透明导航卡淡入并上移24px；章节按0.1秒间隔浮现",
+        "easing": "smoothstep"
+      },
+      {
+        "phase": "change",
+        "seconds": "activateAt",
+        "action": "总览淡变当前标题，当前章节高亮",
+        "easing": "smoothstep .44s"
+      },
+      {
+        "phase": "exit",
+        "seconds": "durationSeconds - .35",
+        "action": "导航卡淡出并上移8px",
+        "easing": "smoothstep"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "align": {
+      "label": "靠哪边",
+      "hint": "left 左侧竖排(默认),right 右侧",
+      "type": "enum",
+      "values": [
+        "left",
+        "right"
+      ],
+      "default": "left",
+      "description": "标签列贴画面哪一侧。反正是 alpha 层,用户在剪映里还能整体挪,这里选个大致方向躲开人脸即可"
+    },
+    "bg": {
+      "label": "底",
+      "hint": "transparent 透明底出 alpha 层(默认),scene 皮肤场景底出成片段",
+      "type": "enum",
+      "values": [
+        "transparent",
+        "scene"
+      ],
+      "default": "transparent",
+      "description": "transparent=双通道 overlay,叠在用户实拍上;scene=带皮肤背景的独立插片"
+    }
+  },
+  "slots": {
+    "title": {
+      "label": "总览标题",
+      "type": "text",
+      "required": false,
+      "description": "入场显示的总览；省略时按章节数量生成。",
+      "fontSize": 94,
+      "fit": {
+        "maxWidthPx": 480,
+        "shrinkFloorPx": 30
+      },
+      "role": "h1"
+    },
+    "items": {
+      "label": "章节列表",
+      "type": "list",
+      "required": true,
+      "maxItems": 8,
+      "description": "固定位置的章节名称，每行一条，1–8条。",
+      "fontSize": 44,
+      "fit": {
+        "maxWidthPx": 450,
+        "shrinkFloorPx": 24
+      },
+      "role": "body"
+    },
+    "activeIndex": {
+      "label": "当前章节索引（从0开始）",
+      "type": "number",
+      "required": true,
+      "description": "0代表第一章；必须小于章节数量。"
+    },
+    "activateAt": {
+      "label": "高亮开始秒数",
+      "type": "number",
+      "required": true,
+      "description": "相对本实例起点，标题与当前行在此刻开始切换。"
+    }
+  },
+  "anchors": {
+    "start": "透明画布，导航卡即将淡入",
+    "end": "退场前：当前章节高亮后整卡淡出；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【章节导航卡 preset:chapter-navigation@v1】固定列表「{items}」，总览标题「{title}」淡变当前章节，局部透明面板叠加实拍。",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-09-07",
+      "note": "从 projects/2026-09-05-broll-SC-0030-D-navigation/build/src/Navigation.tsx 与 nav-state.ts 提炼。保留现代字体与原局部透明卡效果；新增横竖画幅、自定义章节与当前章节、细项样式。"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "variant": {
+      "align": "left",
+      "bg": "transparent"
+    },
+    "slots": {
+      "title": "4 类任务",
+      "items": [
+        "信息监控",
+        "学习研究",
+        "生产",
+        "挑毛病"
+      ],
+      "activeIndex": 0,
+      "activateAt": 1.4
+    }
+  },
+  "description": "从 SC-0030 D 实片提炼：固定灰显章节列表，总览标题淡变为当前章节，当前行高亮。"
+}

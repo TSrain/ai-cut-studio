@@ -1,0 +1,21 @@
+import {moveCaptionSelection} from './caption-selection.mjs';
+import {TrackHeader} from './TrackHeader';
+import {clipDensity} from './timeline-view.mjs';
+import {trackDrag,snapDelta,trackBoundaries} from './track-drag';
+import React,{useEffect,useRef} from 'react';
+import './captions.css';
+export function CaptionTrack({doc,getDocument,onTrackMenu,px,labelWidth,selected,selection=[],onSelect,onSeek,onPointerSeek,onPreview,onCommit,snap=true,onSnap,onDoubleClick,onContextMenu}:any){
+ const cancel=useRef<null|(()=>void)>(null);useEffect(()=>()=>cancel.current?.(),[]);
+ const cues=doc.captions?.cues??[],ids=selection.length?selection:selected?[selected]:[];if(!cues.length)return null;
+ const begin=(e:React.PointerEvent,cue:any,kind:string)=>{
+  if(e.button!==0)return;e.preventDefault();e.stopPropagation();cancel.current?.();(e.currentTarget as HTMLElement).closest<HTMLElement>('.timeline')?.focus();if(e.metaKey||e.ctrlKey||e.shiftKey){onSelect(cue.id,{toggle:e.metaKey||e.ctrlKey,range:e.shiftKey});return;}const moving=kind==='move'&&ids.includes(cue.id)?ids:[cue.id];onSelect(cue.id,{preserve:kind==='move'});if(kind==='move'&&onPointerSeek)onPointerSeek(e.clientX);else onSeek(cue.startFrame);
+  const base=structuredClone(getDocument?.()??doc);cue=base.captions.cues.find((c:any)=>c.id===cue.id)??cue;
+  const start=e.clientX,ordered=[...base.captions.cues].sort((a,b)=>a.startFrame-b.startFrame),index=ordered.findIndex(c=>c.id===cue.id),left=ordered[index-1]?.endFrame??0,right=ordered[index+1]?.startFrame??doc.canvas.durationFrames;let latest=base,moved=false;
+  const boundaries=[...trackBoundaries(doc),...cues.filter((c:any)=>!moving.includes(c.id)).flatMap((c:any)=>[c.startFrame,c.endFrame])];
+  cancel.current=trackDrag(e,px,(raw)=>{moved=true;const snapped=snap?snapDelta(raw,kind==='left'?[cue.startFrame]:kind==='right'?[cue.endFrame]:base.captions.cues.filter((c:any)=>moving.includes(c.id)).flatMap((c:any)=>[c.startFrame,c.endFrame]),boundaries,px):{delta:raw,guide:null};const delta=snapped.delta;let a=cue.startFrame,b=cue.endFrame;
+   if(kind==='left')a=Math.max(left,Math.min(b-1,a+delta));else if(kind==='right')b=Math.min(right,Math.max(a+1,b+delta));else {const offset=Math.max(left-a,Math.min(right-b,delta));a+=offset;b+=offset;}
+   onSnap?.(snapped.guide);if(kind==='move'){latest=moveCaptionSelection(base,moving,delta);onPreview(latest);return;}latest={...base,captions:{...base.captions,cues:base.captions.cues.map((c:any)=>c.id===cue.id?{...c,startFrame:a,endFrame:b}:c)}};onPreview(latest);
+  },()=>{onSnap?.(null);cancel.current=null;if(!moved)onSelect(cue.id);if(JSON.stringify(latest)!==JSON.stringify(base))onCommit(base,latest);},()=>{onSnap?.(null);cancel.current=null;onPreview(base);});
+ };
+ return <div className={'track caption-track '+(doc.captions.enabled?'':'is-hidden')} data-track-id="__captions" aria-label="字幕轨"><TrackHeader name="字幕" onMenu={onTrackMenu}/>{cues.map((cue:any,i:number)=><div key={cue.id} role="button" tabIndex={0} aria-label={`字幕 ${i+1} ${cue.text}`} aria-pressed={ids.includes(cue.id)} data-caption-id={cue.id} data-density={clipDensity((cue.endFrame-cue.startFrame)*px)} onContextMenu={e=>onContextMenu?.(e,cue)} className={'caption-block '+(ids.includes(cue.id)?'is-selected':'')} style={{left:labelWidth+cue.startFrame*px,width:Math.max(1,(cue.endFrame-cue.startFrame)*px)}} title={`${cue.text} · ${(cue.startFrame/(doc.canvas.fps.num/doc.canvas.fps.den)).toFixed(2)}–${(cue.endFrame/(doc.canvas.fps.num/doc.canvas.fps.den)).toFixed(2)} 秒 · 双击放大`} onDoubleClick={()=>onDoubleClick?.(cue)} onPointerDown={e=>begin(e,cue,'move')} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();onSelect(cue.id,{toggle:e.metaKey||e.ctrlKey,range:e.shiftKey});onSeek(cue.startFrame);}}}>{clipDensity((cue.endFrame-cue.startFrame)*px)!=='compact'&&<span role="separator" aria-label={`字幕${i+1}开始`} className="caption-edge left" onPointerDown={e=>begin(e,cue,'left')}/>}<span className="caption-block-text">{cue.text}</span>{clipDensity((cue.endFrame-cue.startFrame)*px)!=='compact'&&<span role="separator" aria-label={`字幕${i+1}结束`} className="caption-edge right" onPointerDown={e=>begin(e,cue,'right')}/>}</div>)}</div>;
+}

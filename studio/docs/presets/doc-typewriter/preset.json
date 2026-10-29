@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "id": "doc-typewriter",
+  "name": "文档自书写",
+  "engine": "remotion",
+  "compositionId": "PresetDocTypewriter",
+  "componentSource": "templates/remotion-base/src/presets/DocTypewriter.tsx",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 3.5,
+    "max": 8,
+    "default": 5
+  },
+  "tags": [
+    "type",
+    "ui",
+    "layout",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 1,
+    "shader3d": 0,
+    "kineticType": 1,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "start",
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "steady",
+    "springAccents": 1,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "纸质文档卡第 0 帧已在(首帧不黑),相机贴近 docTitle 特写 zoom 1.25,开始一条 bezier 拉到整卡(66f 结束)",
+        "easing": "bezier(0.33,0,0.15,1)"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.2,
+        "action": "kicker 等宽小字顶部戳入(scale 1.35→1 盖章,8f);同帧首对内容块开始被写出",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.2,
+        "action": "内容块两两一组写出:纸色遮罩右锚左→右擦开 8f,强调色 caret 骑在书写前沿、写完 2f 熄灭;组间 step 3.5f,行数多时自动压缩到最小 2f(伸缩余量落末段静止);@成员名擦出后 4f 强调色底纹从左长出 8f",
+        "easing": "bezier(0.4,0,0.6,1) / 底纹 bezier(0.3,0,0.2,1)"
+      },
+      {
+        "phase": "enter",
+        "seconds": 1.73,
+        "action": "history=show:4 条骨架历史条目从上方逐条落进卡下横向历史带(竖版没有侧栏,原左栏条目重排为卡下一条带),每条间隔 5f、9f 落地,唯一过冲名额=落地 1.15 过冲 + 空中投影随高度衰减",
+        "easing": "bezier(0.2,1.15,0.3,1)"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "整卡定格静止读取(时长伸缩全部落在这里)"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "history": {
+      "type": "enum",
+      "values": [
+        "show",
+        "none"
+      ],
+      "default": "show",
+      "description": "show=卡下方历史带 4 条骨架条目逐条落入(表意「之前还有几期」);none=只有文档卡,降档不影响书写词汇"
+    }
+  },
+  "slots": {
+    "docTitle": {
+      "label": "文档标题",
+      "type": "text",
+      "required": true,
+      "role": "quote",
+      "fontSize": 58,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 760,
+        "shrinkFloorPx": 34
+      },
+      "description": "文档首行大标题,衬线感;相机开场特写的焦点",
+      "hint": "文档的名字,如「2026-W34 · 产品周报」。一行,别太长"
+    },
+    "meta": {
+      "label": "元信息行",
+      "type": "text",
+      "required": false,
+      "role": "body",
+      "fontSize": 26,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 760,
+        "shrinkFloorPx": 18
+      },
+      "description": "标题下的弱字元信息(日期/来源/人数),可省",
+      "hint": "标题下面那行小灰字,如「8 月 20 日 · 自动汇总 · 12 位成员」。不填就不显示"
+    },
+    "lines": {
+      "label": "文档内容行",
+      "type": "list",
+      "required": true,
+      "role": "body",
+      "fontSize": 29,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 760,
+        "shrinkFloorPx": 20
+      },
+      "minItems": 3,
+      "maxItems": 10,
+      "description": "逐行内容,行语法:`## ` 前缀=小标题;`- ` 前缀=列点;`@` 开头=成员名小标(擦出后补强调色底纹);其余=正文段。每行单行不折行,超宽自动缩字",
+      "hint": "一行一条,3–10 行。行首写「## 」是小标题,「- 」是列点,「@」开头是成员名(会带强调色底纹),其他就是正文。每行别超过一行的量"
+    },
+    "kicker": {
+      "label": "顶部戳记",
+      "type": "text",
+      "required": false,
+      "role": "caption",
+      "fontSize": 26,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 800,
+        "shrinkFloorPx": 16
+      },
+      "description": "屏幕顶部的等宽大写小字,盖章式戳入,可省",
+      "hint": "画面最顶上的一行等宽西文小字,如「WEEKLY BRIEF」。不填就不显示"
+    }
+  },
+  "anchors": {
+    "start": "暗底上纸质文档卡已在场,相机贴近「{docTitle}」标题特写,首对内容块正被纸色遮罩擦写出来,强调色光标骑在书写前沿",
+    "end": "退场前：相机已拉到整卡:全文写完、@成员名带强调色底纹,历史带 4 条骨架条目落定于卡下方(history=none 时只有文档卡),静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【文档自书写 preset:doc-typewriter@v1】把「{docTitle}」做成一张正在被写出来的纸质文档卡:内容块两两一组被擦写、强调色 caret 骑行、@成员底纹、相机由标题特写拉到整卡;history={history} 时卡下历史带条目逐条落入,补「持续产出」的时间纵深",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-20",
+      "note": "初版:复刻 shotcraft/DocumentTypewriterReveal(横版逐帧验证版)为竖版 preset。竖版重排:原左右侧栏没有空间,历史条目改为卡下方横向历史带的 4 张骨架小卡(折角纸+灰度条,不伪造往期标题/日期);书写/caret/底纹/相机拉出词汇逐项保留,行数多时 stagger 自动压缩"
+    },
+    {
+      "version": 1,
+      "date": "2026-08-22",
+      "note": "用户看过 9 个模板的连播验收片(桌面 新模板验收.mp4,每个模板的真实文案样例动效),回「都 verified」——翻 verified,自此走快车道:批量出片时不再出三张 Styleframe、不逐镜全量自查,只做槽位校验 + 预览印张确认 + 输出成功 + 分辨率/时长/编码四项检查"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "slots": {
+      "docTitle": "2026-W34 · 产品周报",
+      "meta": "8 月 20 日 · 自动汇总 · 12 位成员",
+      "lines": [
+        "## 本周摘要",
+        "发布节奏恢复正常,两条主线按期合入。",
+        "@陈默",
+        "- 渲染队列重构,峰值内存降 38%",
+        "@林晚",
+        "- 模板预览墙上线,滚动即播零等待"
+      ],
+      "kicker": "WEEKLY BRIEF"
+    }
+  },
+  "verifiedAt": "2026-08-22"
+}

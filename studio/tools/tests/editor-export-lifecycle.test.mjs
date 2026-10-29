@@ -1,0 +1,46 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,realpathSync,copyFileSync,rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join,resolve} from 'node:path';
+import {execFileSync} from 'node:child_process';
+import {startEditorExport,getEditorJob,retryEditorExport} from '../lib/editor-export.mjs';
+async function until(fn){const end=Date.now()+15000;while(Date.now()<end){const v=await fn();if(v)return v;await new Promise(r=>setTimeout(r,30));}throw Error('condition timed out');}
+test('export lifecycle exposes live progress, queues cleanly, and clears failed attempt on retry',async t=>{
+ const root=realpathSync(mkdtempSync(join(tmpdir(),'editor-lifecycle-')));
+ mkdirSync(join(root,'tools'));copyFileSync(resolve('tools/render-queue.mjs'),join(root,'tools/render-queue.mjs'));
+ const fixture=join(root,'fixture.mp4');
+ execFileSync('ffmpeg',['-v','error','-f','lavfi','-i','color=c=blue:s=320x180:r=30','-frames:v','3','-c:v','libx264','-pix_fmt','yuv420p',fixture]);
+ writeFileSync(join(root,'tools/editor-export-worker.mjs'),`
+ import {readFileSync,writeFileSync,existsSync,copyFileSync} from 'node:fs';
+ import {join} from 'node:path';
+ const root=${JSON.stringify(root)}; const [directory,id]=process.argv.slice(2);
+ const item=JSON.parse(readFileSync(join(directory,'manifest.json'))).items.find(i=>i.id===id);
+ console.log('EXPORT_PROGRESS '+JSON.stringify({stage:'rendering',completed:1,total:3,timestamp:Date.now()}));
+ while(!existsSync(join(root,'release')))await new Promise(r=>setTimeout(r,20));
+ if(existsSync(join(root,'fail')))process.exit(1);
+ copyFileSync(join(root,'fixture.mp4'),item.path);
+ console.log('EXPORT_PROGRESS '+JSON.stringify({stage:'verifying',timestamp:Date.now()}));
+ `);
+ const doc={id:'lifecycle',revision:0,canvas:{width:320,height:180,fps:{num:30,den:1},durationFrames:3},instances:[{id:'one',assetId:'number-beat',assetVersion:1,startFrame:0,durationFrames:3,props:{slots:{value:42,label:'测试'},variant:{bg:'scene'}}}]};
+ let last;
+ t.after(async()=>{writeFileSync(join(root,'release'),'1');if(last)await until(async()=>{const j=await getEditorJob(last.id);return j.status!=='running';}).catch(()=>{});rmSync(root,{recursive:true,force:true});});
+ writeFileSync(join(root,'fail'),'1');
+ const first=startEditorExport(doc,'instances',{root,artifactRoot:join(root,'artifacts')});last=first;
+ const live=await until(async()=>{const j=await getEditorJob(first.id);return j.items[0].telemetry?.completed===1&&j;});
+ assert.equal(live.items[0].status,'rendering');assert.equal(live.items[0].telemetry.progress,1/3);
+ const second=startEditorExport({...doc,id:'queued'},'instances',{root,artifactRoot:join(root,'artifacts')});last=second;
+ const queued=await getEditorJob(second.id);assert.equal(queued.items[0].telemetry.stage,'queued');
+ writeFileSync(join(root,'release'),'1');
+ await until(async()=>(await getEditorJob(second.id)).status==='failed');
+ assert.equal((await getEditorJob(first.id)).status,'failed');
+ rmSync(join(root,'fail'));rmSync(join(root,'release'));
+ last=retryEditorExport(first.id,{root});
+ assert.equal(last.items[0].telemetry,undefined);assert.equal(last.items[0].error,undefined);
+ await until(async()=>(await getEditorJob(first.id)).items[0].telemetry?.completed===1);
+ writeFileSync(join(root,'release'),'1');
+ const complete=await until(async()=>{const j=await getEditorJob(first.id);return j.status==='complete'&&j;});
+ assert.ok(complete.items[0].deliveryPath.startsWith(join(root,'artifacts')+'/'));assert.ok(readFileSync(complete.items[0].deliveryPath).equals(readFileSync(fixture)));
+ assert.equal(complete.items[0].verified.width,320);assert.equal(complete.items[0].telemetry.stage,'complete');
+ assert.equal(JSON.parse(readFileSync(join(first.directory,'manifest.json'))).status,'complete');
+});

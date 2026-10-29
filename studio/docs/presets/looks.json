@@ -1,0 +1,43 @@
+{
+  "note": "装饰预设(look)= 一套打包好的观感搭配:皮肤底子 + 强调色相 + 底色色相 + 字体。控制台「做片子」的下拉里按名字选,不用逐个拖滑杆。",
+  "howItWorks": "look 只是 tune 的一组预填值,不引入任何新机制——选完照样能继续拖滑杆微调。所以加一个新 look 就是在下面数组里加一条 + 渲一张缩略图(node tools/build-look-thumbs.mjs)。",
+  "thumbDir": "docs/catalog/thumbnails/looks",
+  "looks": [
+    {
+      "id": "abyss-tech",
+      "name": "深海科技蓝",
+      "blurb": "当前基线。深蓝黑渐变底 + 网格点 + 干净现代无衬线。讲技术、讲系统、讲方法论的默认选择",
+      "tune": {"skin": "abyss", "accentHue": 252, "neutralHue": 232, "font": "skin"}
+    },
+    {
+      "id": "violet-night",
+      "name": "黑底雾紫",
+      "blurb": "同一个底子换紫调 + 得意黑。比基线更有情绪、更像内容号,讲趋势和观点时用",
+      "tune": {"skin": "abyss", "accentHue": 292, "neutralHue": 268, "font": "smiley"}
+    },
+    {
+      "id": "ember-amber",
+      "name": "暖炭琥珀",
+      "blurb": "暖炭底 + 琥珀橙 + 得意黑。最有冲击力的一套,讲钱、讲数字、讲反差时用;信息密时会吵",
+      "tune": {"skin": "ember", "accentHue": 42, "neutralHue": 30, "font": "smiley"}
+    },
+    {
+      "id": "steel-cyan",
+      "name": "冷钢青",
+      "blurb": "冷炭底 + 钢青 + Archivo。最「工程」的一套,讲数据、讲流程、讲对比时用",
+      "tune": {"skin": "slate", "accentHue": 195, "neutralHue": 212, "font": "archivo"}
+    },
+    {
+      "id": "paper-vermilion",
+      "name": "纸上杂志",
+      "blurb": "唯一的亮场。纸白底 + 朱砂 + 宋体。讲人文、讲历史、讲引述时用;深色画面看多了换它换口味",
+      "tune": {"skin": "paper", "accentHue": 25, "neutralHue": 32, "font": "noto-serif"}
+    },
+    {
+      "id": "ink-green",
+      "name": "墨绿手书",
+      "blurb": "墨绿底 + 霞鹜文楷。唯一带手写气质的一套,讲个人体会、讲慢下来的东西时用",
+      "tune": {"skin": "abyss", "accentHue": 155, "neutralHue": 168, "font": "wenkai"}
+    }
+  ]
+}

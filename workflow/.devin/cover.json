@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "portrait_directory": "",
+  "portrait_extensions": [".jpeg", ".jpg", ".png", ".heic"],
+  "default_groups": 3,
+  "min_short_side": 1080,
+  "preferred_title_length": 10,
+  "max_title_length": 15
+}

@@ -1,0 +1,56 @@
+{
+  "InterVariable.ttf": {
+    "url": "https://raw.githubusercontent.com/google/fonts/5297014cc3f0048aa4bbef1e6a246833f4ccc93c/ofl/inter/Inter%5Bopsz,wght%5D.ttf",
+    "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/5297014cc3f0048aa4bbef1e6a246833f4ccc93c/ofl/inter/OFL.txt",
+    "licenseSha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57"
+  },
+  "Archivo-VF.ttf": {
+    "url": "https://raw.githubusercontent.com/google/fonts/5297014cc3f0048aa4bbef1e6a246833f4ccc93c/ofl/archivo/Archivo%5Bwdth,wght%5D.ttf",
+    "sha256": "0e094a7d3c7c4c25cf1310c4b30014f1dae9332220b1c2c88f4fa996f0b05053",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/5297014cc3f0048aa4bbef1e6a246833f4ccc93c/ofl/archivo/OFL.txt",
+    "licenseSha256": "108b4e57c9c796d3d38d0428ca7ee39de47ad93187302718d9b2d8864b9b716b"
+  },
+  "JetBrainsMono-VF.ttf": {
+    "url": "https://raw.githubusercontent.com/google/fonts/5297014cc3f0048aa4bbef1e6a246833f4ccc93c/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf",
+    "sha256": "48715a42ec242c21e9f02692891e147d022299a52e48d5e413e1a942193ffeda",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/5297014cc3f0048aa4bbef1e6a246833f4ccc93c/ofl/jetbrainsmono/OFL.txt",
+    "licenseSha256": "b2fe5e8987594e9ffd1d2ca52a2f5d73eb8335243893c5d6254b5ad69269591d"
+  },
+  "InstrumentSerif-Regular.ttf": {
+    "url": "https://raw.githubusercontent.com/google/fonts/5297014cc3f0048aa4bbef1e6a246833f4ccc93c/ofl/instrumentserif/InstrumentSerif-Regular.ttf",
+    "sha256": "498efd461f6ddfcb7a111bf9a565709d2085d48201d501ead960d93e84ffbb88",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/5297014cc3f0048aa4bbef1e6a246833f4ccc93c/ofl/instrumentserif/OFL.txt",
+    "licenseSha256": "129ed7618959716959f2941fdd5b49e0ad6e6c1d78726761786a00253d865521"
+  },
+  "NotoSansSC-VF.ttf": {
+    "url": "https://raw.githubusercontent.com/google/fonts/5297014cc3f0048aa4bbef1e6a246833f4ccc93c/ofl/notosanssc/NotoSansSC%5Bwght%5D.ttf",
+    "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/5297014cc3f0048aa4bbef1e6a246833f4ccc93c/ofl/notosanssc/OFL.txt",
+    "licenseSha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+  },
+  "NotoSerifSC-Bold.otf": {
+    "url": "https://raw.githubusercontent.com/notofonts/noto-cjk/9b0f1436e455d902de067a2501422e5dc71ad16b/Serif/OTF/SimplifiedChinese/NotoSerifCJKsc-Bold.otf",
+    "sha256": "8af07d4b6c2e82bcc72a30e066eaf295f11b9424f4aad2eaa9fe0e9c3b38fc73",
+    "licenseUrl": "https://raw.githubusercontent.com/notofonts/noto-cjk/9b0f1436e455d902de067a2501422e5dc71ad16b/Serif/LICENSE",
+    "licenseSha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+  },
+  "SmileySans-Oblique.ttf": {
+    "url": "https://github.com/atelier-anchor/smiley-sans/releases/download/v2.0.1/smiley-sans-v2.0.1.zip",
+    "sha256": "b447d7e781f08bc95c4c9f23ba71ed2b8ebb639aa7184485c71c4ca5afcd25c4",
+    "licenseUrl": "https://raw.githubusercontent.com/atelier-anchor/smiley-sans/v2.0.1/LICENSE",
+    "licenseSha256": "9401f4050f1b66c26b6ccdc8b0e14a3c1cc37aac122eda84386f25854a9bec72"
+  },
+  "LXGWWenKai-Regular.ttf": {
+    "url": "https://github.com/lxgw/LxgwWenKai/releases/download/v1.522/LXGWWenKai-Regular.ttf",
+    "sha256": "39ad71264b588165b469e35e6afb162a378dacd1f95348160240ba9038ac3009",
+    "licenseUrl": "https://raw.githubusercontent.com/lxgw/LxgwWenKai/v1.522/OFL.txt",
+    "licenseSha256": "c38b1994a5e48ac30ac7d1da7d0409fd8fd8127dfe28a13d6e787d5b1ef34a5e"
+  },
+  "LXGWNeoXiHei.ttf": {
+    "url": "https://github.com/lxgw/LxgwNeoXiHei/releases/download/v1.305/LXGWNeoXiHei.ttf",
+    "sha256": "893cfbec604768f03785ab4f369508de68c274273359a5cadee17e2852975d5c",
+    "licenseUrl": "https://raw.githubusercontent.com/lxgw/LxgwNeoXiHei/v1.305/LICENSE.md",
+    "licenseSha256": "bce9800ab47cd0961c2a536d5ecfb983442d58eec1db5ff88a5f1a8d1c682367"
+  }
+}

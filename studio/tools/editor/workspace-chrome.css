@@ -1,0 +1,9 @@
+/* Editing controls stay close to the timeline; quiet document metadata stays in the header. */
+.studio-app > header input[aria-label="项目名称"] {font-weight:400;color:#949ba7;}
+.studio-app > header input[aria-label="项目名称"]:focus {color:var(--text);}
+.timeline-summary {font-size:11px;color:var(--muted);white-space:nowrap;margin-left:8px;font-weight:400;}
+.source-settings-entry {display:flex;align-items:center;justify-content:center;gap:8px;width:100%;}
+
+/* Stop horizontal overscroll from navigating away, while keeping timeline scrolling native.
+   Both roots cover Chromium versions that propagate the viewport policy from body or html. */
+html, body {overscroll-behavior-x:none;}

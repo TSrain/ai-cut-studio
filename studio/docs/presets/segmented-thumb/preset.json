@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "id": "segmented-thumb",
+  "name": "分段开关特写",
+  "engine": "remotion",
+  "compositionId": "PresetSegmentedThumb",
+  "componentSource": "templates/remotion-base/src/presets/SegmentedThumb.tsx",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 2.5,
+    "max": 5,
+    "default": 3.7
+  },
+  "tags": [
+    "ui",
+    "interaction",
+    "cursor",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 1,
+    "shader3d": 0,
+    "kineticType": 0,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "start",
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "precise",
+    "springAccents": 1,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "底+Backdrop 第 0 帧已在(首帧不黑);分段控件自下 180px 浮入 0.6s,阴影随落位收小",
+        "easing": "CALM"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.67,
+        "action": "描边箭头光标从目标侧画外滑入 0.8s,停在目标段上",
+        "easing": "Easing.out(cubic)"
+      },
+      {
+        "phase": "enter",
+        "seconds": 1.6,
+        "action": "按下:光标 scale 1→0.86→1(3f 下 4f 回)+ 控件轻微 press 0.985 + 强调色涟漪 12f 从点击点扩散",
+        "easing": "linear press / Easing.out(quad) ripple"
+      },
+      {
+        "phase": "enter",
+        "seconds": 1.73,
+        "action": "滑块弹簧滑向目标段(唯一弹簧名额,过冲限幅 10px);同一根弹簧驱动标签主次交换(颜色 crossfade+尺寸)与目标段强调点弹出、起始段强调点 6f 塌缩回流",
+        "easing": "spring(damping 13, stiffness 210, mass 0.7)"
+      },
+      {
+        "phase": "enter",
+        "seconds": 2,
+        "action": "caption 底部上浮淡入 0.4s",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "新态静置(recipe:落位后 hold ≥30f;默认 3.7s 下 hold ≈1.3s)"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "land": {
+      "type": "enum",
+      "values": [
+        "left",
+        "right"
+      ],
+      "default": "right",
+      "description": "滑块最终落在哪一段。right=从左段滑到右段(默认),left=镜像"
+    }
+  },
+  "slots": {
+    "leftLabel": {
+      "label": "左段文字",
+      "type": "text",
+      "required": true,
+      "role": "h1",
+      "fontSize": 60,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 340,
+        "shrinkFloorPx": 32
+      },
+      "description": "左段标签,二选一里的一项。2–4 个中文字最稳",
+      "hint": "开关左边那个词,越短越有力"
+    },
+    "rightLabel": {
+      "label": "右段文字",
+      "type": "text",
+      "required": true,
+      "role": "h1",
+      "fontSize": 60,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 340,
+        "shrinkFloorPx": 32
+      },
+      "description": "右段标签,二选一里的另一项。2–4 个中文字最稳",
+      "hint": "开关右边那个词,越短越有力"
+    },
+    "caption": {
+      "label": "底部一句注脚",
+      "type": "text",
+      "required": false,
+      "role": "body",
+      "fontSize": 44,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 900,
+        "shrinkFloorPx": 30
+      },
+      "description": "滑块落位后底部淡入的一句话,可省",
+      "hint": "给这次切换配一句话。不填就只有控件特写"
+    }
+  },
+  "anchors": {
+    "start": "层次底已在,分段控件「{leftLabel}|{rightLabel}」自下浮入,滑块停在起始段,光标未入场",
+    "end": "退场前：滑块停在目标段(land={land}),目标段标签升为主(反差色+强调点),原段降灰,caption「{caption}」在底部,静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【分段开关特写 preset:segmented-thumb@v1】口播讲「二选一/模式切换」时的固定画面:「{leftLabel}」vs「{rightLabel}」的胶囊控件特写,光标按下后滑块弹到目标段,标签主次交换",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-21",
+      "note": "初版:从 shotcraft/SegmentedThumbHero 移植(perplexity-promo 2.3–5s 复刻)。横版 1080×220 控件重排为竖版 880×184 居中特写;demo 的 8f ease-out 滑块改为唯一弹簧名额(damping 13/stiffness 210,过冲限幅 10px);demo 的功能图标改为强调色点(奖励感),标签字重交换按 minimal 皮肤 weightCap 500 的合成粗体禁令改为颜色 crossfade+尺寸交换;颜色全部令牌化(滑块=P.ink,暗皮肤下为亮面)"
+    },
+    {
+      "version": 1,
+      "date": "2026-08-22",
+      "note": "用户看过 9 个模板的连播验收片(桌面 新模板验收.mp4,每个模板的真实文案样例动效),回「都 verified」——翻 verified,自此走快车道:批量出片时不再出三张 Styleframe、不逐镜全量自查,只做槽位校验 + 预览印张确认 + 输出成功 + 分辨率/时长/编码四项检查"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。分段开关最短时长预留说明文字停留与回收时间。"
+    }
+  ],
+  "sample": {
+    "variant": {
+      "land": "right"
+    },
+    "slots": {
+      "leftLabel": "手搓",
+      "rightLabel": "模板",
+      "caption": "同一个镜头,两种成本。"
+    }
+  },
+  "verifiedAt": "2026-08-22"
+}

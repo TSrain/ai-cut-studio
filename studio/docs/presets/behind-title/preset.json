@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "id": "behind-title",
+  "name": "人物身后大字",
+  "description": "本机自动抠像，巨型粗体文字在人物身后快速出入；可调字体、大小与位置。",
+  "engine": "remotion",
+  "compositionId": "PresetBehindTitle",
+  "componentSource": "templates/remotion-base/src/presets/BehindTitle.tsx",
+  "status": "draft",
+  "canvas": [
+    "1920x1080",
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 0.1,
+    "max": 60,
+    "default": 3
+  },
+  "tags": [
+    "type",
+    "emphasis",
+    "presenter"
+  ],
+  "slots": {
+    "title": {
+      "label": "强调文字",
+      "type": "text",
+      "required": true
+    },
+    "fontFamily": {
+      "label": "字体名称",
+      "type": "text"
+    },
+    "fontSizeRatio": {
+      "label": "字号占短边比例",
+      "type": "number",
+      "min": 0.04,
+      "max": 0.65
+    },
+    "positionX": {
+      "label": "水平位置（0–1）",
+      "type": "number",
+      "min": -0.5,
+      "max": 1.5
+    },
+    "positionY": {
+      "label": "垂直位置（0–1）",
+      "type": "number",
+      "min": -0.5,
+      "max": 1.5
+    },
+    "color": {
+      "label": "文字颜色",
+      "type": "text"
+    },
+    "enterFx": {
+      "label": "入场效果",
+      "type": "enum",
+      "values": [
+        "zoom",
+        "slide-up",
+        "slide-down",
+        "slide-left",
+        "slide-right",
+        "fade"
+      ],
+      "default": "zoom",
+      "labels": {
+        "zoom": "缩放冲入（默认）",
+        "slide-up": "自下向上滑入",
+        "slide-down": "自上向下滑入",
+        "slide-left": "自右向左滑入",
+        "slide-right": "自左向右滑入",
+        "fade": "淡入"
+      }
+    },
+    "exitFx": {
+      "label": "退场效果",
+      "type": "enum",
+      "values": [
+        "zoom",
+        "slide-up",
+        "slide-down",
+        "slide-left",
+        "slide-right",
+        "fade"
+      ],
+      "default": "zoom",
+      "labels": {
+        "zoom": "缩小淡出（默认）",
+        "slide-up": "向上滑走",
+        "slide-down": "向下滑走",
+        "slide-left": "向左滑走",
+        "slide-right": "向右滑走",
+        "fade": "淡出"
+      }
+    },
+    "enterSeconds": {
+      "label": "快速入场（秒）",
+      "type": "number",
+      "min": 0.03,
+      "max": 1
+    },
+    "exitSeconds": {
+      "label": "快速退场（秒）",
+      "type": "number",
+      "min": 0.03,
+      "max": 1
+    }
+  },
+  "variants": {
+    "bg": {
+      "label": "背景",
+      "type": "enum",
+      "values": [
+        "transparent"
+      ],
+      "default": "transparent"
+    }
+  },
+  "output": {
+    "alphaWhen": {
+      "variantKey": "bg",
+      "value": "transparent"
+    }
+  },
+  "sample": {
+    "slots": {
+      "title": "M5 Max",
+      "fontFamily": "Archivo, \"Noto Sans SC\", sans-serif",
+      "fontSizeRatio": 0.21,
+      "positionX": 0.5,
+      "positionY": 0.2,
+      "color": "#ffffff",
+      "enterSeconds": 0.18,
+      "exitSeconds": 0.15,
+      "enterFx": "zoom",
+      "exitFx": "zoom"
+    }
+  },
+  "anchors": {
+    "start": "文字快速放大进入人物身后",
+    "end": "文字收缩淡出，人物和底片保持连续"
+  }
+}

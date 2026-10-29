@@ -1,0 +1,10 @@
+export type TextRange = {start: number; end: number};
+export type RecedeEffect = 'none' | 'fade' | 'rise' | 'fall' | 'zoom';
+export type RecedeSlots = {line: string; hero?: string; emphasisRanges?: TextRange[]; fontSize?: number; emphasisRatio?: number; enterFx?: RecedeEffect; exitFx?: RecedeEffect; enterSeconds?: number; exitSeconds?: number};
+export function normalizeRanges(text: string, ranges?: TextRange[]): TextRange[];
+export function recedeRanges(slots: RecedeSlots): TextRange[];
+export function rangeRuns(text: string, ranges: TextRange[]): {text: string; em: boolean}[];
+export function markRecedeRange(slots: RecedeSlots, start: number, end: number, enlarged: boolean): TextRange[];
+export function updateRecedeText(slots: RecedeSlots, line: string): RecedeSlots;
+export const RECEDE_EFFECTS: RecedeEffect[];
+export function recedeMotion(frame: number, fps: number, durationSeconds: number, slots?: Partial<RecedeSlots>): {opacity: number; enter: number; y: number; scale: number; enterFrames: number; exitFrames: number};

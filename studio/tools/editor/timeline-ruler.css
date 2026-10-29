@@ -1,0 +1,4 @@
+.adaptive-ruler .adaptive-tick{position:absolute;top:0;height:100%;width:1px;pointer-events:none}
+.adaptive-ruler .adaptive-tick::after{content:'';position:absolute;bottom:0;left:0;height:5px;border-left:1px solid #414955}
+.adaptive-ruler .adaptive-tick.major::after{height:10px;border-color:#697588}
+.adaptive-ruler .ruler-time-label{position:absolute;left:5px;top:3px;font-size:10px;font-variant-numeric:tabular-nums;white-space:nowrap;color:#a3adbc}

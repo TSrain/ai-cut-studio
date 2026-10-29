@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>HyperFrames Registry Gallery — blocks</title>
+    <!-- 本地 GSAP,不走 CDN:渲染期网络请求 = 不确定性 -->
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Smiley Sans";
+        src: url("assets/fonts/SmileySans-Oblique.ttf") format("truetype");
+        font-weight: 400;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Archivo";
+        src: url("assets/fonts/Archivo-VF.ttf") format("truetype");
+        font-weight: 100 900;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Noto Sans SC";
+        src: url("assets/fonts/NotoSansSC-VF.ttf") format("truetype");
+        font-weight: 100 900;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/fonts/JetBrainsMono-VF.ttf") format("truetype");
+        font-weight: 100 800;
+        font-display: block;
+      }
+      /* sRGB only — 见文件头第 2 条 */
+      :root {
+        --ink-0: #040b17;
+        --ink-1: #0c1929;
+        --paper-0: #f2f5fb;
+        --accent: #ffaa2e;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #040b17;
+      }
+      #stage {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        background: #040b17;
+        overflow: hidden;
+      }
+      .hf-label {
+        position: absolute;
+        left: 32px;
+        bottom: 28px;
+        z-index: 9000;
+        padding: 12px 22px;
+        background: #040b17;
+        border-left: 6px solid #ffaa2e;
+        color: #f2f5fb;
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 600;
+        font-size: 30px;
+        letter-spacing: 0.02em;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+      .hf-label b { color: #ffaa2e; font-weight: 700; }
+
+    </style>
+  </head>
+  <body>
+    <div
+      id="stage"
+      data-composition-id="registry-gallery"
+      data-root="true"
+      data-start="0"
+      data-duration="97.5"
+      data-width="1920"
+      data-height="1080"
+    >
+      <!-- app-showcase -->
+      <div
+        class="clip"
+        data-composition-id="app-showcase"
+        data-composition-src="compositions/app-showcase.html"
+        data-start="0"
+        data-duration="5.5"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+        style="position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; overflow: hidden;"
+      ></div>
+      <div
+        class="clip hf-label"
+        data-start="0"
+        data-duration="5.5"
+        data-track-index="2"
+      ><b>app-showcase</b> · 1920×1080 · 5.5s</div>
+      <!-- code-diff -->
+      <div
+        class="clip"
+        data-composition-id="code-diff"
+        data-composition-src="compositions/code-diff.html"
+        data-start="5.5"
+        data-duration="6"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+        style="position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; overflow: hidden;"
+      ></div>
+      <div
+        class="clip hf-label"
+        data-start="5.5"
+        data-duration="6"
+        data-track-index="2"
+      ><b>code-diff</b> · 1920×1080 · 6s</div>
+      <!-- code-morph -->
+      <div
+        class="clip"
+        data-composition-id="code-morph"
+        data-composition-src="compositions/code-morph.html"
+        data-start="11.5"
+        data-duration="7"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+        style="position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; overflow: hidden;"
+      ></div>
+      <div
+        class="clip hf-label"
+        data-start="11.5"
+        data-duration="7"
+        data-track-index="2"
+      ><b>code-morph</b> · 1920×1080 · 7s</div>
+      <!-- code-typing -->
+      <div
+        class="clip"
+        data-composition-id="code-typing"
+        data-composition-src="compositions/code-typing.html"
+        data-start="18.5"
+        data-duration="5"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+        style="position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; overflow: hidden;"
+      ></div>
+      <div
+        class="clip hf-label"
+        data-start="18.5"
+        data-duration="5"
+        data-track-index="2"
+      ><b>code-typing</b> · 1920×1080 · 5s</div>
+      <!-- data-chart -->
+      <div
+        class="clip"
+        data-composition-id="data-chart"
+        data-composition-src="compositions/data-chart.html"
+        data-start="23.5"
+        data-duration="15"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+        style="position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; overflow: hidden;"
+      ></div>
+      <div
+        class="clip hf-label"
+        data-start="23.5"
+        data-duration="15"
+        data-track-index="2"
+      ><b>data-chart</b> · 1920×1080 · 15s</div>
+      <!-- editorial-flash-overlay -->
+      <div
+        class="clip"
+        data-composition-id="editorial-flash-overlay"
+        data-composition-src="compositions/editorial-flash-overlay.html"
+        data-start="38.5"
+        data-duration="4"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+        style="position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; overflow: hidden;"
+      ></div>
+      <div
+        class="clip hf-label"
+        data-start="38.5"
+        data-duration="4"
+        data-track-index="2"
+      ><b>editorial-flash-overlay</b> · 1920×1080 · 4s</div>
+      <!-- freeze-frame-dressing -->
+      <div
+        class="clip"
+        data-composition-id="freeze-frame-dressing"
+        data-composition-src="compositions/freeze-frame-dressing.html"
+        data-start="42.5"
+        data-duration="4"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+        style="position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; overflow: hidden;"
+      ></div>
+      <div
+        class="clip hf-label"
+        data-start="42.5"
+        data-duration="4"
+        data-track-index="2"
+      ><b>freeze-frame-dressing</b> · 1920×1080 · 4s</div>
+      <!-- liquid-glass-widgets -->
+      <div
+        class="clip"
+        data-composition-id="liquid-glass-widgets"
+        data-composition-src="compositions/liquid-glass-widgets.html"
+        data-start="46.5"
+        data-duration="8"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+        style="position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; overflow: hidden;"
+      ></div>
+      <div
+        class="clip hf-label"
+        data-start="46.5"
+        data-duration="8"
+        data-track-index="2"
+      ><b>liquid-glass-widgets</b> · 1920×1080 · 8s</div>
+      <!-- logo-outro -->
+      <div
+        class="clip"
+        data-composition-id="logo-outro"
+        data-composition-src="compositions/logo-outro.html"
+        data-start="54.5"
+        data-duration="6"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+        style="position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; overflow: hidden;"
+      ></div>
+      <div
+        class="clip hf-label"
+        data-start="54.5"
+        data-duration="6"
+        data-track-index="2"
+      ><b>logo-outro</b> · 1920×1080 · 6s</div>
+      <!-- organic-light-leak-overlay -->
+      <div
+        class="clip"
+        data-composition-id="organic-light-leak-overlay"
+        data-composition-src="compositions/organic-light-leak-overlay.html"
+        data-start="60.5"
+        data-duration="4"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+        style="position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; overflow: hidden;"
+      ></div>
+      <div
+        class="clip hf-label"
+        data-start="60.5"
+        data-duration="4"
+        data-track-index="2"
+      ><b>organic-light-leak-overlay</b> · 1920×1080 · 4s</div>
+      <!-- ui-3d-reveal -->
+      <div
+        class="clip"
+        data-composition-id="ui-3d-reveal"
+        data-composition-src="compositions/ui-3d-reveal.html"
+        data-start="64.5"
+        data-duration="13"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+        style="position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; overflow: hidden;"
+      ></div>
+      <div
+        class="clip hf-label"
+        data-start="64.5"
+        data-duration="13"
+        data-track-index="2"
+      ><b>ui-3d-reveal</b> · 1920×1080 · 13s</div>
+      <!-- vfx-shatter -->
+      <div
+        class="clip"
+        data-composition-id="glass-shatter"
+        data-composition-src="compositions/vfx-shatter.html"
+        data-start="77.5"
+        data-duration="12"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+        style="position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; overflow: hidden;"
+      ></div>
+      <div
+        class="clip hf-label"
+        data-start="77.5"
+        data-duration="12"
+        data-track-index="2"
+      ><b>vfx-shatter</b> · 1920×1080 · 12s</div>
+      <!-- vfx-text-cursor -->
+      <div
+        class="clip"
+        data-composition-id="vfx-text-cursor"
+        data-composition-src="compositions/vfx-text-cursor.html"
+        data-start="89.5"
+        data-duration="8"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+        style="position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; overflow: hidden;"
+      ></div>
+      <div
+        class="clip hf-label"
+        data-start="89.5"
+        data-duration="8"
+        data-track-index="2"
+      ><b>vfx-text-cursor</b> · 1920×1080 · 8s</div>
+    </div>
+    <script>
+      // 宿主自己没有内容动画:sub-composition 的时间线由运行时独立 seek,
+      // 宿主只需要声明一条覆盖全长的 paused 时间线(sub-compositions.md)。
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({paused: true});
+      tl.set(document.getElementById("stage"), {}, 97.5);
+      window.__timelines["registry-gallery"] = tl;
+    </script>
+  </body>
+</html>

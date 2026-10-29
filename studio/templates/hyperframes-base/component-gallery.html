@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>HyperFrames Registry Gallery — components</title>
+    <!-- 本地 GSAP,不走 CDN:渲染期网络请求 = 不确定性 -->
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Smiley Sans";
+        src: url("assets/fonts/SmileySans-Oblique.ttf") format("truetype");
+        font-weight: 400;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Archivo";
+        src: url("assets/fonts/Archivo-VF.ttf") format("truetype");
+        font-weight: 100 900;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Noto Sans SC";
+        src: url("assets/fonts/NotoSansSC-VF.ttf") format("truetype");
+        font-weight: 100 900;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/fonts/JetBrainsMono-VF.ttf") format("truetype");
+        font-weight: 100 800;
+        font-display: block;
+      }
+      /* sRGB only — 见文件头第 2 条 */
+      :root {
+        --ink-0: #040b17;
+        --ink-1: #0c1929;
+        --paper-0: #f2f5fb;
+        --accent: #ffaa2e;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #040b17;
+      }
+      #stage {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        background: #040b17;
+        overflow: hidden;
+      }
+      .hf-label {
+        position: absolute;
+        left: 32px;
+        bottom: 28px;
+        z-index: 9000;
+        padding: 12px 22px;
+        background: #040b17;
+        border-left: 6px solid #ffaa2e;
+        color: #f2f5fb;
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 600;
+        font-size: 30px;
+        letter-spacing: 0.02em;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+      .hf-label b { color: #ffaa2e; font-weight: 700; }
+
+      .demo-panel { position: absolute; inset: 0; overflow: hidden; }
+      .demo-fill { position: absolute; inset: 0; }
+      .demo-warm { background: linear-gradient(135deg, #ffaa2e 0%, #c46d00 55%, #40260a 100%); }
+      .demo-cool { background: linear-gradient(135deg, #2f6fb8 0%, #123055 60%, #040b17 100%); }
+      .demo-bright { background: linear-gradient(135deg, #f2f5fb 0%, #c3cbd6 100%); }
+      .demo-ink { background: linear-gradient(135deg, #1c2c41 0%, #040b17 100%); }
+      .demo-center {
+        position: absolute; inset: 0;
+        display: flex; align-items: center; justify-content: center;
+        /* 必须高于 vignette 片段的 z-index:90(它整块铺满 panel)。
+           不抬层的话 check 的 layout 审计判 text_occluded = error,即使 vignette
+           中心其实是透明的 —— 审计只比较元素盒子与层级,不采像素。 */
+        z-index: 95;
+      }
+      .demo-title {
+        position: absolute; left: 96px; top: 96px;
+        font-family: "Archivo", "Noto Sans SC", sans-serif;
+        font-weight: 800; font-size: 132px; letter-spacing: -0.02em;
+        color: #f2f5fb;
+      }
+      .demo-title.demo-dark { color: #040b17; }
+      .demo-center .demo-title { position: static; }
+      .demo-grid {
+        display: grid; grid-template-columns: repeat(3, 300px);
+        grid-template-rows: repeat(3, 200px); gap: 28px;
+      }
+      .demo-card {
+        display: flex; align-items: center; justify-content: center;
+        background: #f2f5fb; color: #040b17; border: 8px solid #ffaa2e;
+        border-radius: 18px;
+        font-family: "Archivo", sans-serif; font-weight: 800; font-size: 84px;
+      }
+      #mb-box {
+        position: absolute; left: 810px; top: 440px;
+        width: 300px; height: 200px; border-radius: 24px;
+        background: #ffaa2e;
+      }
+
+/* ===== grain-overlay ===== */
+
+  @keyframes hf-grain-noise {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    10% {
+      transform: translate(-5%, -5%);
+    }
+    20% {
+      transform: translate(-10%, 5%);
+    }
+    30% {
+      transform: translate(5%, -10%);
+    }
+    40% {
+      transform: translate(-5%, 15%);
+    }
+    50% {
+      transform: translate(-10%, 5%);
+    }
+    60% {
+      transform: translate(15%, 0);
+    }
+    70% {
+      transform: translate(0, 10%);
+    }
+    80% {
+      transform: translate(-15%, 0);
+    }
+    90% {
+      transform: translate(10%, 5%);
+    }
+  }
+
+  #grain-overlay .grain-texture {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.15;
+    animation: hf-grain-noise 0.5s steps(1) infinite;
+  }
+
+/* ===== vignette ===== */
+
+  #hf-vignette {
+    background: radial-gradient(
+      var(--vignette-shape, ellipse) at center,
+      transparent var(--vignette-size, 45%),
+      var(--vignette-color, rgba(0, 0, 0, 0.7)) var(--vignette-edge, 100%)
+    );
+  }
+
+/* ===== grid-pixelate-wipe ===== */
+
+  #grid-pixelate-overlay {
+    --grid-color: black;
+  }
+
+  #grid-pixelate-overlay .grid-cell {
+    background: var(--grid-color);
+    transform: scale(0);
+    transform-origin: center center;
+  }
+
+/* ===== shimmer-sweep ===== */
+
+  .shimmer-sweep-target {
+    position: relative;
+    display: inline-block;
+  }
+
+  .shimmer-sweep-target .shimmer-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(
+      var(--shimmer-angle, 120deg),
+      transparent 0%,
+      transparent calc(var(--shimmer-pos, -20%) - var(--shimmer-width, 20%) / 2),
+      var(--shimmer-color, rgba(255, 255, 255, 0.6)) var(--shimmer-pos, -20%),
+      transparent calc(var(--shimmer-pos, -20%) + var(--shimmer-width, 20%) / 2),
+      transparent 100%
+    );
+    mix-blend-mode: overlay;
+  }
+
+/* ===== parallax-zoom ===== */
+
+  .parallax-zoom-grid {
+    --pz-progress: 0;
+    --pz-focus-scale: 6;
+    --pz-sibling-push: 900px;
+    --pz-sibling-fade: 1;
+    position: relative;
+  }
+
+  .parallax-zoom-card {
+    transform-origin: center center;
+    will-change: transform, opacity;
+    transform: translate3d(
+        calc(var(--pz-dx, 0px) * var(--pz-progress)),
+        calc(var(--pz-dy, 0px) * var(--pz-progress)),
+        0
+      )
+      scale(calc(1 - var(--pz-progress) * 0.4));
+    opacity: calc(1 - var(--pz-progress) * var(--pz-sibling-fade));
+  }
+
+  .parallax-zoom-card[data-pz-focus="true"] {
+    z-index: 10;
+    transform: translate3d(0, 0, 0)
+      scale(calc(1 + var(--pz-progress) * (var(--pz-focus-scale) - 1)));
+    opacity: 1;
+  }
+
+/* ===== parallax-unzoom ===== */
+
+  .parallax-unzoom-grid {
+    --pu-progress: 0;
+    --pu-focus-scale: 6;
+    --pu-sibling-push: 900px;
+    --pu-sibling-fade: 1;
+    position: relative;
+  }
+
+  .parallax-unzoom-card {
+    transform-origin: center center;
+    will-change: transform, opacity;
+    transform: translate3d(
+        calc(var(--pu-dx, 0px) * (1 - var(--pu-progress))),
+        calc(var(--pu-dy, 0px) * (1 - var(--pu-progress))),
+        0
+      )
+      scale(calc(0.7 + 0.3 * var(--pu-progress)));
+    opacity: calc(var(--pu-progress) * var(--pu-sibling-fade));
+  }
+
+  .parallax-unzoom-card[data-pu-focus="true"] {
+    z-index: 10;
+    transform: translate3d(0, 0, 0)
+      scale(calc(var(--pu-focus-scale) - (var(--pu-focus-scale) - 1) * var(--pu-progress)));
+    opacity: 1;
+  }
+
+/* ===== texture-mask-text ===== */
+
+  .hf-texture-text {
+    color: #fff;
+    -webkit-mask-size: var(--mask-size, cover);
+    mask-size: var(--mask-size, cover);
+    -webkit-mask-position: var(--mask-position, center);
+    mask-position: var(--mask-position, center);
+    -webkit-mask-mode: luminance;
+    mask-mode: luminance;
+    filter: contrast(var(--mask-contrast, 1));
+  }
+
+  .hf-texture-lava {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/lava.png");
+    mask-image: url("/assets/texture-mask-text/masks/lava.png");
+  }
+  .hf-texture-rock {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/rock.png");
+    mask-image: url("/assets/texture-mask-text/masks/rock.png");
+  }
+  .hf-texture-concrete {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/concrete.png");
+    mask-image: url("/assets/texture-mask-text/masks/concrete.png");
+  }
+  .hf-texture-brick {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/brick.png");
+    mask-image: url("/assets/texture-mask-text/masks/brick.png");
+  }
+  .hf-texture-wood {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/wood.png");
+    mask-image: url("/assets/texture-mask-text/masks/wood.png");
+  }
+  .hf-texture-onyx {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/onyx.png");
+    mask-image: url("/assets/texture-mask-text/masks/onyx.png");
+  }
+  .hf-texture-carpet {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/carpet.png");
+    mask-image: url("/assets/texture-mask-text/masks/carpet.png");
+  }
+  .hf-texture-metal {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/metal.png");
+    mask-image: url("/assets/texture-mask-text/masks/metal.png");
+  }
+  .hf-texture-snow {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/snow.png");
+    mask-image: url("/assets/texture-mask-text/masks/snow.png");
+  }
+  .hf-texture-bricks-104 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/bricks-104.png");
+    mask-image: url("/assets/texture-mask-text/masks/bricks-104.png");
+  }
+  .hf-texture-ground-103 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/ground-103.png");
+    mask-image: url("/assets/texture-mask-text/masks/ground-103.png");
+  }
+  .hf-texture-grass-005 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/grass-005.png");
+    mask-image: url("/assets/texture-mask-text/masks/grass-005.png");
+  }
+  .hf-texture-rock-063 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/rock-063.png");
+    mask-image: url("/assets/texture-mask-text/masks/rock-063.png");
+  }
+  .hf-texture-wood-094 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/wood-094.png");
+    mask-image: url("/assets/texture-mask-text/masks/wood-094.png");
+  }
+  .hf-texture-road-012-a {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/road-012-a.png");
+    mask-image: url("/assets/texture-mask-text/masks/road-012-a.png");
+  }
+  .hf-texture-wood-092 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/wood-092.png");
+    mask-image: url("/assets/texture-mask-text/masks/wood-092.png");
+  }
+  .hf-texture-metal-049-a {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/metal-049-a.png");
+    mask-image: url("/assets/texture-mask-text/masks/metal-049-a.png");
+  }
+  .hf-texture-wood-floor-051 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/wood-floor-051.png");
+    mask-image: url("/assets/texture-mask-text/masks/wood-floor-051.png");
+  }
+  .hf-texture-paving-stones-150 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/paving-stones-150.png");
+    mask-image: url("/assets/texture-mask-text/masks/paving-stones-150.png");
+  }
+  .hf-texture-road-008-a {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/road-008-a.png");
+    mask-image: url("/assets/texture-mask-text/masks/road-008-a.png");
+  }
+  .hf-texture-road-007 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/road-007.png");
+    mask-image: url("/assets/texture-mask-text/masks/road-007.png");
+  }
+  .hf-texture-metal-055-a {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/metal-055-a.png");
+    mask-image: url("/assets/texture-mask-text/masks/metal-055-a.png");
+  }
+  .hf-texture-concrete-034 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/concrete-034.png");
+    mask-image: url("/assets/texture-mask-text/masks/concrete-034.png");
+  }
+  .hf-texture-grass-001 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/grass-001.png");
+    mask-image: url("/assets/texture-mask-text/masks/grass-001.png");
+  }
+  .hf-texture-wood-051 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/wood-051.png");
+    mask-image: url("/assets/texture-mask-text/masks/wood-051.png");
+  }
+  .hf-texture-asphalt-031 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/asphalt-031.png");
+    mask-image: url("/assets/texture-mask-text/masks/asphalt-031.png");
+  }
+  .hf-texture-wood-floor-064 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/wood-floor-064.png");
+    mask-image: url("/assets/texture-mask-text/masks/wood-floor-064.png");
+  }
+  .hf-texture-concrete-047-a {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/concrete-047-a.png");
+    mask-image: url("/assets/texture-mask-text/masks/concrete-047-a.png");
+  }
+  .hf-texture-metal-046-b {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/metal-046-b.png");
+    mask-image: url("/assets/texture-mask-text/masks/metal-046-b.png");
+  }
+  .hf-texture-grass-004 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/grass-004.png");
+    mask-image: url("/assets/texture-mask-text/masks/grass-004.png");
+  }
+  .hf-texture-marble-012 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/marble-012.png");
+    mask-image: url("/assets/texture-mask-text/masks/marble-012.png");
+  }
+  .hf-texture-ground-037 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/ground-037.png");
+    mask-image: url("/assets/texture-mask-text/masks/ground-037.png");
+  }
+  .hf-texture-tiles-138 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/tiles-138.png");
+    mask-image: url("/assets/texture-mask-text/masks/tiles-138.png");
+  }
+  .hf-texture-wood-066 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/wood-066.png");
+    mask-image: url("/assets/texture-mask-text/masks/wood-066.png");
+  }
+  .hf-texture-concrete-046 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/concrete-046.png");
+    mask-image: url("/assets/texture-mask-text/masks/concrete-046.png");
+  }
+  .hf-texture-wood-049 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/wood-049.png");
+    mask-image: url("/assets/texture-mask-text/masks/wood-049.png");
+  }
+  .hf-texture-road-013-a {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/road-013-a.png");
+    mask-image: url("/assets/texture-mask-text/masks/road-013-a.png");
+  }
+  .hf-texture-plaster-001 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/plaster-001.png");
+    mask-image: url("/assets/texture-mask-text/masks/plaster-001.png");
+  }
+  .hf-texture-snow-015 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/snow-015.png");
+    mask-image: url("/assets/texture-mask-text/masks/snow-015.png");
+  }
+  .hf-texture-road-012-b {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/road-012-b.png");
+    mask-image: url("/assets/texture-mask-text/masks/road-012-b.png");
+  }
+  .hf-texture-concrete-042-a {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/concrete-042-a.png");
+    mask-image: url("/assets/texture-mask-text/masks/concrete-042-a.png");
+  }
+  .hf-texture-bricks-102 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/bricks-102.png");
+    mask-image: url("/assets/texture-mask-text/masks/bricks-102.png");
+  }
+  .hf-texture-rock-058 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/rock-058.png");
+    mask-image: url("/assets/texture-mask-text/masks/rock-058.png");
+  }
+  .hf-texture-wood-floor-070 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/wood-floor-070.png");
+    mask-image: url("/assets/texture-mask-text/masks/wood-floor-070.png");
+  }
+  .hf-texture-bricks-101 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/bricks-101.png");
+    mask-image: url("/assets/texture-mask-text/masks/bricks-101.png");
+  }
+  .hf-texture-travertine-009 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/travertine-009.png");
+    mask-image: url("/assets/texture-mask-text/masks/travertine-009.png");
+  }
+  .hf-texture-ground-054 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/ground-054.png");
+    mask-image: url("/assets/texture-mask-text/masks/ground-054.png");
+  }
+  .hf-texture-wood-058 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/wood-058.png");
+    mask-image: url("/assets/texture-mask-text/masks/wood-058.png");
+  }
+  .hf-texture-ground-104 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/ground-104.png");
+    mask-image: url("/assets/texture-mask-text/masks/ground-104.png");
+  }
+  .hf-texture-painted-plaster-017 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/painted-plaster-017.png");
+    mask-image: url("/assets/texture-mask-text/masks/painted-plaster-017.png");
+  }
+  .hf-texture-paving-stones-138 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/paving-stones-138.png");
+    mask-image: url("/assets/texture-mask-text/masks/paving-stones-138.png");
+  }
+  .hf-texture-ground-068 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/ground-068.png");
+    mask-image: url("/assets/texture-mask-text/masks/ground-068.png");
+  }
+  .hf-texture-bricks-075-a {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/bricks-075-a.png");
+    mask-image: url("/assets/texture-mask-text/masks/bricks-075-a.png");
+  }
+  .hf-texture-ground-080 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/ground-080.png");
+    mask-image: url("/assets/texture-mask-text/masks/ground-080.png");
+  }
+  .hf-texture-road-009-c {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/road-009-c.png");
+    mask-image: url("/assets/texture-mask-text/masks/road-009-c.png");
+  }
+  .hf-texture-bark-014 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/bark-014.png");
+    mask-image: url("/assets/texture-mask-text/masks/bark-014.png");
+  }
+  .hf-texture-marble-016 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/marble-016.png");
+    mask-image: url("/assets/texture-mask-text/masks/marble-016.png");
+  }
+  .hf-texture-fabric-083 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/fabric-083.png");
+    mask-image: url("/assets/texture-mask-text/masks/fabric-083.png");
+  }
+  .hf-texture-metal-061-b {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/metal-061-b.png");
+    mask-image: url("/assets/texture-mask-text/masks/metal-061-b.png");
+  }
+  .hf-texture-metal-048-a {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/metal-048-a.png");
+    mask-image: url("/assets/texture-mask-text/masks/metal-048-a.png");
+  }
+  .hf-texture-metal-032 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/metal-032.png");
+    mask-image: url("/assets/texture-mask-text/masks/metal-032.png");
+  }
+  .hf-texture-metal-041-a {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/metal-041-a.png");
+    mask-image: url("/assets/texture-mask-text/masks/metal-041-a.png");
+  }
+  .hf-texture-metal-038 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/metal-038.png");
+    mask-image: url("/assets/texture-mask-text/masks/metal-038.png");
+  }
+  .hf-texture-diamond-plate-009 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/diamond-plate-009.png");
+    mask-image: url("/assets/texture-mask-text/masks/diamond-plate-009.png");
+  }
+  .hf-texture-leather-037 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/leather-037.png");
+    mask-image: url("/assets/texture-mask-text/masks/leather-037.png");
+  }
+  .hf-texture-fabric-080 {
+    -webkit-mask-image: url("/assets/texture-mask-text/masks/fabric-080.png");
+    mask-image: url("/assets/texture-mask-text/masks/fabric-080.png");
+  }
+
+    </style>
+  </head>
+  <body>
+    <div
+      id="stage"
+      data-composition-id="component-gallery"
+      data-root="true"
+      data-start="0"
+      data-duration="42"
+      data-width="1920"
+      data-height="1080"
+    >
+      <!-- grain-overlay -->
+      <div
+        class="clip demo-panel"
+        data-start="0"
+        data-duration="6"
+        data-track-index="1"
+      >
+        <div class="demo-fill demo-warm"></div>
+        <div class="demo-title">GRAIN</div>
+        <div
+        id="grain-overlay"
+        style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 100;
+        "
+        >
+        <div class="grain-texture"></div>
+        </div>
+      </div>
+      <div
+        class="clip hf-label"
+        data-start="0"
+        data-duration="6"
+        data-track-index="2"
+      ><b>grain-overlay</b> · component snippet</div>
+      <!-- vignette -->
+      <div
+        class="clip demo-panel"
+        data-start="6"
+        data-duration="6"
+        data-track-index="1"
+      >
+        <div class="demo-fill demo-bright"></div>
+        <div class="demo-center"><span class="demo-title demo-dark">VIGNETTE</span></div>
+        <div
+        id="hf-vignette"
+        style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 90;
+        "
+        ></div>
+      </div>
+      <div
+        class="clip hf-label"
+        data-start="6"
+        data-duration="6"
+        data-track-index="2"
+      ><b>vignette</b> · component snippet</div>
+      <!-- grid-pixelate-wipe -->
+      <div
+        class="clip demo-panel"
+        data-start="12"
+        data-duration="6"
+        data-track-index="1"
+      >
+        <div class="demo-fill demo-cool"></div>
+        <div class="demo-title">PIXELATE WIPE</div>
+        <div
+        id="grid-pixelate-overlay"
+        style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 999;
+        display: grid;
+        "
+        ></div>
+      </div>
+      <div
+        class="clip hf-label"
+        data-start="12"
+        data-duration="6"
+        data-track-index="2"
+      ><b>grid-pixelate-wipe</b> · component snippet</div>
+      <!-- shimmer-sweep -->
+      <div
+        class="clip demo-panel"
+        data-start="18"
+        data-duration="6"
+        data-track-index="1"
+      >
+        <div class="demo-fill demo-ink"></div>
+        <div class="demo-center"><span class="demo-title shimmer-sweep-target">SHIMMER</span></div>
+
+      </div>
+      <div
+        class="clip hf-label"
+        data-start="18"
+        data-duration="6"
+        data-track-index="2"
+      ><b>shimmer-sweep</b> · component snippet</div>
+      <!-- parallax-zoom -->
+      <div
+        class="clip demo-panel"
+        data-start="24"
+        data-duration="6"
+        data-track-index="1"
+      >
+        <div class="demo-fill demo-ink"></div>
+        <div class="demo-center">
+          <div class="parallax-zoom-grid demo-grid">
+            <div class="parallax-zoom-card demo-card" data-pz-row="0" data-pz-col="0">1</div>
+            <div class="parallax-zoom-card demo-card" data-pz-row="0" data-pz-col="1">2</div>
+            <div class="parallax-zoom-card demo-card" data-pz-row="0" data-pz-col="2">3</div>
+            <div class="parallax-zoom-card demo-card" data-pz-row="1" data-pz-col="0">4</div>
+            <div class="parallax-zoom-card demo-card" data-pz-row="1" data-pz-col="1" data-pz-focus="true">5</div>
+            <div class="parallax-zoom-card demo-card" data-pz-row="1" data-pz-col="2">6</div>
+            <div class="parallax-zoom-card demo-card" data-pz-row="2" data-pz-col="0">7</div>
+            <div class="parallax-zoom-card demo-card" data-pz-row="2" data-pz-col="1">8</div>
+            <div class="parallax-zoom-card demo-card" data-pz-row="2" data-pz-col="2">9</div>
+          </div>
+        </div>
+
+      </div>
+      <div
+        class="clip hf-label"
+        data-start="24"
+        data-duration="6"
+        data-track-index="2"
+      ><b>parallax-zoom</b> · component snippet</div>
+      <!-- parallax-unzoom -->
+      <div
+        class="clip demo-panel"
+        data-start="30"
+        data-duration="6"
+        data-track-index="1"
+      >
+        <div class="demo-fill demo-ink"></div>
+        <div class="demo-center">
+          <div class="parallax-unzoom-grid demo-grid">
+            <div class="parallax-unzoom-card demo-card" data-pu-row="0" data-pu-col="0">1</div>
+            <div class="parallax-unzoom-card demo-card" data-pu-row="0" data-pu-col="1">2</div>
+            <div class="parallax-unzoom-card demo-card" data-pu-row="0" data-pu-col="2">3</div>
+            <div class="parallax-unzoom-card demo-card" data-pu-row="1" data-pu-col="0">4</div>
+            <div class="parallax-unzoom-card demo-card" data-pu-row="1" data-pu-col="1" data-pu-focus="true">5</div>
+            <div class="parallax-unzoom-card demo-card" data-pu-row="1" data-pu-col="2">6</div>
+            <div class="parallax-unzoom-card demo-card" data-pu-row="2" data-pu-col="0">7</div>
+            <div class="parallax-unzoom-card demo-card" data-pu-row="2" data-pu-col="1">8</div>
+            <div class="parallax-unzoom-card demo-card" data-pu-row="2" data-pu-col="2">9</div>
+          </div>
+        </div>
+
+      </div>
+      <div
+        class="clip hf-label"
+        data-start="30"
+        data-duration="6"
+        data-track-index="2"
+      ><b>parallax-unzoom</b> · component snippet</div>
+      <!-- texture-mask-text -->
+      <div
+        class="clip demo-panel"
+        data-start="36"
+        data-duration="6"
+        data-track-index="1"
+      >
+        <div class="demo-fill demo-warm"></div>
+        <div class="demo-center">
+          <div class="demo-title hf-texture-text hf-texture-concrete-034">TEXTURE</div>
+        </div>
+
+      </div>
+      <div
+        class="clip hf-label"
+        data-start="36"
+        data-duration="6"
+        data-track-index="2"
+      ><b>texture-mask-text</b> · component snippet</div>
+    </div>
+    <script>
+/* ===== grid-pixelate-wipe ===== */
+
+  (function () {
+    const COLS = 16;
+    const ROWS = 9;
+    const overlay = document.getElementById("grid-pixelate-overlay");
+    if (!overlay) return;
+
+    overlay.style.gridTemplateColumns = `repeat(${COLS}, 1fr)`;
+    overlay.style.gridTemplateRows = `repeat(${ROWS}, 1fr)`;
+
+    for (let i = 0; i < COLS * ROWS; i++) {
+      const cell = document.createElement("div");
+      cell.className = "grid-cell";
+      overlay.appendChild(cell);
+    }
+  })();
+
+/* ===== shimmer-sweep ===== */
+
+  (function () {
+    // Auto-inject .shimmer-mask into every .shimmer-sweep-target
+    document.querySelectorAll(".shimmer-sweep-target").forEach((el) => {
+      if (!el.querySelector(".shimmer-mask")) {
+        const mask = document.createElement("div");
+        mask.className = "shimmer-mask";
+        el.appendChild(mask);
+      }
+    });
+  })();
+
+/* ===== parallax-zoom ===== */
+
+  (function () {
+    const grids = document.querySelectorAll(".parallax-zoom-grid");
+
+    grids.forEach((grid) => {
+      const cards = Array.from(grid.querySelectorAll(".parallax-zoom-card"));
+      if (cards.length === 0) return;
+
+      let focal = cards.find((c) => c.dataset.pzFocus === "true");
+      if (!focal) {
+        focal = cards[Math.floor(cards.length / 2)];
+        focal.dataset.pzFocus = "true";
+      }
+
+      const focusRow = Number(focal.dataset.pzRow ?? 0);
+      const focusCol = Number(focal.dataset.pzCol ?? 0);
+      const push = parseFloat(getComputedStyle(grid).getPropertyValue("--pz-sibling-push")) || 900;
+
+      cards.forEach((card) => {
+        if (card === focal) return;
+        const row = Number(card.dataset.pzRow ?? 0);
+        const col = Number(card.dataset.pzCol ?? 0);
+        const dCol = col - focusCol;
+        const dRow = row - focusRow;
+        const mag = Math.hypot(dCol, dRow) || 1;
+        const nx = (dCol / mag) * push * mag;
+        const ny = (dRow / mag) * push * mag;
+        card.style.setProperty("--pz-dx", `${nx}px`);
+        card.style.setProperty("--pz-dy", `${ny}px`);
+      });
+    });
+  })();
+
+/* ===== parallax-unzoom ===== */
+
+  (function () {
+    const grids = document.querySelectorAll(".parallax-unzoom-grid");
+
+    grids.forEach((grid) => {
+      const cards = Array.from(grid.querySelectorAll(".parallax-unzoom-card"));
+      if (cards.length === 0) return;
+
+      let focal = cards.find((c) => c.dataset.puFocus === "true");
+      if (!focal) {
+        focal = cards[Math.floor(cards.length / 2)];
+        focal.dataset.puFocus = "true";
+      }
+
+      const focusRow = Number(focal.dataset.puRow ?? 0);
+      const focusCol = Number(focal.dataset.puCol ?? 0);
+      const push = parseFloat(getComputedStyle(grid).getPropertyValue("--pu-sibling-push")) || 900;
+
+      cards.forEach((card) => {
+        if (card === focal) return;
+        const row = Number(card.dataset.puRow ?? 0);
+        const col = Number(card.dataset.puCol ?? 0);
+        const dCol = col - focusCol;
+        const dRow = row - focusRow;
+        const mag = Math.hypot(dCol, dRow) || 1;
+        const nx = (dCol / mag) * push * mag;
+        const ny = (dRow / mag) * push * mag;
+        card.style.setProperty("--pu-dx", `${nx}px`);
+        card.style.setProperty("--pu-dy", `${ny}px`);
+      });
+    });
+  })();
+
+    </script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({paused: true});
+      tl.fromTo("#hf-vignette", {"--vignette-color": "rgba(0,0,0,0)"}, {"--vignette-color": "rgba(0,0,0,0.85)", duration: 2, ease: "power2.out"}, 6);
+      tl.fromTo("#grid-pixelate-overlay .grid-cell", {scale: 0}, {scale: 1, duration: 2.4, stagger: {amount: 2.2, from: "edges"}, ease: "power2.inOut"}, 12.6);
+      tl.fromTo(".shimmer-sweep-target", {"--shimmer-pos": "-20%"}, {"--shimmer-pos": "120%", duration: 4, ease: "none"}, 18.5);
+      tl.fromTo(".parallax-zoom-grid", {"--pz-progress": 0}, {"--pz-progress": 1, duration: 4, ease: "power2.inOut"}, 25);
+      tl.fromTo(".parallax-unzoom-grid", {"--pu-progress": 0}, {"--pu-progress": 1, duration: 4, ease: "power2.inOut"}, 31);
+      // 把时间线补到 data-duration,否则 seek 到末尾时回调收不到(见 motion-blur 注释)
+      tl.set(document.getElementById("stage"), {}, 42);
+
+      window.__timelines["component-gallery"] = tl;
+    </script>
+  </body>
+</html>

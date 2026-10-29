@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "id": "pill-stack",
+  "name": "胶囊标签堆叠层",
+  "engine": "remotion",
+  "compositionId": "PresetPillStack",
+  "componentSource": "templates/remotion-base/src/presets/PillStack.tsx",
+  "status": "draft",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920",
+    "1920x1080"
+  ],
+  "duration": {
+    "min": 2,
+    "max": 12,
+    "default": 4.5
+  },
+  "tags": [
+    "overlay",
+    "type",
+    "caption",
+    "preset"
+  ],
+  "output": {
+    "alphaWhen": {
+      "variantKey": "bg",
+      "value": "transparent"
+    },
+    "note": "默认透明底=双通道 overlay:导出走 ProRes4444→HEVC alpha 链,产物是叠在用户实拍上的 .mov;bg=scene 时是普通不透明成片段"
+  },
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 0,
+    "captions": 1,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 1,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "minInk": 2,
+    "keyframes": [
+      "start",
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "calm",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "title(若有)先淡入 0.3s",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.4,
+        "action": "胶囊逐条浮现:透明度 0.25s 先到 + 位移 16px 0.3s 稳落 + scale 0.97→1;默认每 BEAT(0.9s)一条,条目写了「| 秒数」就按写的时间出",
+        "easing": "ENTER + CALM(不弹跳:标签是旁白的注脚,不是主角)"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "全部出完后静置到结束;胶囊不动、不呼吸——它服务口播,自己不抢戏"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "align": {
+      "label": "靠哪边",
+      "hint": "left 左侧竖排(默认),right 右侧",
+      "type": "enum",
+      "values": [
+        "left",
+        "right"
+      ],
+      "default": "left",
+      "description": "标签列贴画面哪一侧。反正是 alpha 层,用户在剪映里还能整体挪,这里选个大致方向躲开人脸即可"
+    },
+    "bg": {
+      "label": "底",
+      "hint": "transparent 透明底出 alpha 层(默认),scene 皮肤场景底出成片段",
+      "type": "enum",
+      "values": [
+        "transparent",
+        "scene"
+      ],
+      "default": "transparent",
+      "description": "transparent=双通道 overlay,叠在用户实拍上;scene=带皮肤背景的独立插片"
+    }
+  },
+  "slots": {
+    "items": {
+      "label": "标签(一行一条)",
+      "type": "list",
+      "required": true,
+      "role": "label",
+      "fontSize": 44,
+      "maxItems": 5,
+      "splitOn": "|",
+      "noteRatio": 0.46,
+      "noteMaxLines": 1,
+      "fit": {
+        "maxWidthPx": 420,
+        "shrinkFloorPx": 26
+      },
+      "description": "每条一个白胶囊。可写「标签文字 | 出现秒数」精确卡口播的点(如「简单可持续 | 1.2」);不写秒数就从 0.4s 起每 0.9s 接力一条。竖线后的秒数不上画面",
+      "hint": "3–5 条最好;想卡口播节奏就在竖线后写秒数"
+    },
+    "title": {
+      "label": "小标题",
+      "type": "text",
+      "required": false,
+      "role": "caption",
+      "fontSize": 30,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 480,
+        "shrinkFloorPx": 22
+      },
+      "description": "标签列上方的一行小字(白色带投影),可省",
+      "hint": "给这组标签起个名,不填就不显示"
+    }
+  },
+  "anchors": {
+    "start": "透明画面(或皮肤场景底),{title?小标题「{title}」先淡入}",
+    "end": "退场前：白胶囊标签{items}全部在场,左(或右)侧竖排,带落影浮在实拍画面之上；末段约 0.35s 平滑溶出，最后实际帧退净。",
+    "_comment": "anchors 支持 {slot}/{variant} 插值"
+  },
+  "objectiveTemplate": "【胶囊标签堆叠层 preset:pill-stack@v1】口播列举要点时的 overlay 层:白胶囊「{items}」按口播节奏逐条浮现,双通道 .mov 叠在实拍上,位置用户在剪映里自调",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-31",
+      "note": "初版:高高lindsey VZ8qrng2nIo 拉片衍生(参考帧 docs/reference/text-overlay/lindsey-pill-stack.jpg)。本项目第一个双通道 overlay preset:默认透明底,导出走 ProRes4444→HEVC alpha 链;白胶囊+深强调色字(不走皮肤暗面板——要叠在未知实拍上);首用 canvas prop 横竖两档"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "variant": {
+      "align": "left",
+      "bg": "transparent"
+    },
+    "slots": {
+      "title": "好习惯的三个标准",
+      "items": [
+        "简单可持续",
+        "随时捡得起来",
+        "不靠意志力"
+      ]
+    }
+  }
+}

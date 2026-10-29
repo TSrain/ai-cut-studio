@@ -1,0 +1,5414 @@
+{
+  "PresetBehindTitle": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 0.1,
+        "maximum": 60
+      },
+      "canvas": {
+        "type": "string",
+        "enum": [
+          "1080x1920",
+          "1920x1080"
+        ]
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          },
+          "fontFamily": {
+            "default": "Archivo, \"Noto Sans SC\", sans-serif",
+            "type": "string"
+          },
+          "fontSizeRatio": {
+            "default": 0.21,
+            "type": "number",
+            "minimum": 0.04,
+            "maximum": 0.65
+          },
+          "positionX": {
+            "default": 0.5,
+            "type": "number",
+            "minimum": -0.5,
+            "maximum": 1.5
+          },
+          "positionY": {
+            "default": 0.2,
+            "type": "number",
+            "minimum": -0.5,
+            "maximum": 1.5
+          },
+          "color": {
+            "default": "#ffffff",
+            "type": "string"
+          },
+          "enterFx": {
+            "default": "zoom",
+            "type": "string",
+            "enum": [
+              "zoom",
+              "slide-up",
+              "slide-down",
+              "slide-left",
+              "slide-right",
+              "fade"
+            ]
+          },
+          "exitFx": {
+            "default": "zoom",
+            "type": "string",
+            "enum": [
+              "zoom",
+              "slide-up",
+              "slide-down",
+              "slide-left",
+              "slide-right",
+              "fade"
+            ]
+          },
+          "enterSeconds": {
+            "default": 0.18,
+            "type": "number",
+            "minimum": 0.03,
+            "maximum": 1
+          },
+          "exitSeconds": {
+            "default": 0.15,
+            "type": "number",
+            "minimum": 0.03,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "title",
+          "fontFamily",
+          "fontSizeRatio",
+          "positionX",
+          "positionY",
+          "color",
+          "enterFx",
+          "exitFx",
+          "enterSeconds",
+          "exitSeconds"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "x": {
+            "default": 0,
+            "type": "number",
+            "minimum": -300,
+            "maximum": 300
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "x",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetChapterNavigation": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 2,
+        "maximum": 30
+      },
+      "canvas": {
+        "type": "string",
+        "enum": [
+          "1080x1920",
+          "1920x1080"
+        ]
+      },
+      "preview": {
+        "type": "boolean"
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "align": {
+            "type": "string",
+            "enum": [
+              "left",
+              "right"
+            ]
+          },
+          "bg": {
+            "type": "string",
+            "enum": [
+              "transparent",
+              "scene"
+            ]
+          }
+        },
+        "required": [
+          "align",
+          "bg"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "items": {
+            "minItems": 1,
+            "maxItems": 8,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "activeIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 7
+          },
+          "activateAt": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 30
+          }
+        },
+        "required": [
+          "items",
+          "activeIndex",
+          "activateAt"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 3
+          },
+          "x": {
+            "type": "number"
+          },
+          "y": {
+            "type": "number"
+          },
+          "skin": {
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetRecede": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 2,
+        "maximum": 5
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4
+          }
+        },
+        "required": [
+          "level"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "line": {
+            "type": "string"
+          },
+          "hero": {
+            "type": "string"
+          },
+          "emphasisRanges": {
+            "maxItems": 1000,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "start",
+                "end"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "fontSize": {
+            "type": "number",
+            "minimum": 8,
+            "maximum": 400
+          },
+          "emphasisRatio": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 3
+          },
+          "enterFx": {
+            "type": "string",
+            "enum": [
+              "none",
+              "fade",
+              "rise",
+              "fall",
+              "zoom"
+            ]
+          },
+          "exitFx": {
+            "type": "string",
+            "enum": [
+              "none",
+              "fade",
+              "rise",
+              "fall",
+              "zoom"
+            ]
+          },
+          "enterSeconds": {
+            "type": "number",
+            "minimum": 0.05,
+            "maximum": 2
+          },
+          "exitSeconds": {
+            "type": "number",
+            "minimum": 0.05,
+            "maximum": 2
+          }
+        },
+        "required": [
+          "line"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetKeyConcept": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 2.5,
+        "maximum": 6
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "term": {
+            "type": "string"
+          },
+          "en": {
+            "type": "string"
+          },
+          "sentence": {
+            "type": "string"
+          },
+          "highlight": {
+            "type": "string"
+          },
+          "eyebrow": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "term"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "x": {
+            "default": 0,
+            "type": "number",
+            "minimum": -300,
+            "maximum": 300
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "x",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetQuoteCard": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 3,
+        "maximum": 6
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "tone": {
+            "type": "string",
+            "enum": [
+              "warm",
+              "cool"
+            ]
+          }
+        },
+        "required": [
+          "tone"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "quote": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "noteTag": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "quote"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetContrastPair": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 2.5,
+        "maximum": 6
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "enum": [
+              "≠",
+              "→",
+              "VS"
+            ]
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "leftLabel": {
+            "type": "string"
+          },
+          "leftText": {
+            "type": "string"
+          },
+          "rightLabel": {
+            "type": "string"
+          },
+          "rightText": {
+            "type": "string"
+          },
+          "eyebrow": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "leftLabel",
+          "leftText",
+          "rightLabel",
+          "rightText"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetNumberBeat": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 2.5,
+        "maximum": 5
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "celebrate": {
+            "default": "none",
+            "type": "string",
+            "enum": [
+              "none",
+              "confetti"
+            ]
+          }
+        },
+        "required": [
+          "celebrate"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "prefix": {
+            "type": "string"
+          },
+          "suffix": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "eyebrow": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "value",
+          "label"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "x": {
+            "default": 0,
+            "type": "number",
+            "minimum": -300,
+            "maximum": 300
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "x",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetCardSwarm": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 3,
+        "maximum": 8
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "default": "dedup",
+            "type": "string",
+            "enum": [
+              "dedup",
+              "filter"
+            ]
+          },
+          "cols": {
+            "default": 5,
+            "anyOf": [
+              {
+                "type": "number",
+                "const": 4
+              },
+              {
+                "type": "number",
+                "const": 5
+              },
+              {
+                "type": "number",
+                "const": 6
+              }
+            ]
+          }
+        },
+        "required": [
+          "mode",
+          "cols"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "minimum": 8,
+            "maximum": 48
+          },
+          "keep": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 12
+          },
+          "eyebrow": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          },
+          "keepLabel": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "total",
+          "keep"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetScreenPush": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 2.5,
+        "maximum": 10
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "move": {
+            "default": "push",
+            "type": "string",
+            "enum": [
+              "push",
+              "pull",
+              "pan",
+              "static",
+              "graze"
+            ]
+          },
+          "mark": {
+            "default": "underline",
+            "type": "string",
+            "enum": [
+              "none",
+              "underline",
+              "marker",
+              "circle",
+              "box"
+            ]
+          },
+          "ink": {
+            "default": "auto",
+            "type": "string",
+            "enum": [
+              "auto",
+              "red",
+              "yellow",
+              "accent"
+            ]
+          }
+        },
+        "required": [
+          "move",
+          "mark",
+          "ink"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string"
+          },
+          "imgW": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "imgH": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "focusX": {
+            "default": 0.5,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "focusY": {
+            "default": 0.5,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "focus2X": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "focus2Y": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "focus3X": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "focus3Y": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "markX": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "markY": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "markW": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "markH": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "eyebrow": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          },
+          "credit": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "image",
+          "imgW",
+          "imgH",
+          "focusX",
+          "focusY"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetBulletRun": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 3,
+        "maximum": 10
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "flow": {
+            "default": "walk",
+            "type": "string",
+            "enum": [
+              "walk",
+              "stack"
+            ]
+          },
+          "marker": {
+            "default": "none",
+            "type": "string",
+            "enum": [
+              "none",
+              "number",
+              "dot",
+              "check"
+            ]
+          }
+        },
+        "required": [
+          "flow",
+          "marker"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "minItems": 2,
+            "maxItems": 6,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "title": {
+            "type": "string"
+          },
+          "eyebrow": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetStepFlow": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 5,
+        "maximum": 16
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "emphasis": {
+            "default": "focus",
+            "type": "string",
+            "enum": [
+              "focus",
+              "even"
+            ]
+          },
+          "marker": {
+            "default": "number",
+            "type": "string",
+            "enum": [
+              "number",
+              "dot"
+            ]
+          }
+        },
+        "required": [
+          "emphasis",
+          "marker"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "steps": {
+            "minItems": 2,
+            "maxItems": 6,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "title": {
+            "type": "string"
+          },
+          "eyebrow": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "steps"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetTrendChart": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 4,
+        "maximum": 14
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "mark": {
+            "default": "line",
+            "type": "string",
+            "enum": [
+              "line",
+              "area",
+              "bar"
+            ]
+          },
+          "yScale": {
+            "default": "zero",
+            "type": "string",
+            "enum": [
+              "zero",
+              "tight"
+            ]
+          }
+        },
+        "required": [
+          "mark",
+          "yScale"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "headline": {
+            "type": "string"
+          },
+          "values": {
+            "type": "string"
+          },
+          "seriesName": {
+            "type": "string"
+          },
+          "xLabels": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "eyebrow": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "headline",
+          "values",
+          "seriesName"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetTitleReveal": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 2.5,
+        "maximum": 6
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "style": {
+            "default": "blur",
+            "type": "string",
+            "enum": [
+              "blur",
+              "marker",
+              "brace"
+            ]
+          }
+        },
+        "required": [
+          "style"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "accent": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetBrandOpen": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 2.5,
+        "maximum": 5
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "style": {
+            "default": "letterspace",
+            "type": "string",
+            "enum": [
+              "letterspace",
+              "ink"
+            ]
+          }
+        },
+        "required": [
+          "style"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "wordmark": {
+            "type": "string"
+          },
+          "tagline": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "wordmark"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetFlyingWords": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 4,
+        "maximum": 8
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "words": {
+            "minItems": 6,
+            "maxItems": 24,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "finale": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "words"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetCardShowcase": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 4,
+        "maximum": 8
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "default": "carousel",
+            "type": "string",
+            "enum": [
+              "fan",
+              "carousel"
+            ]
+          }
+        },
+        "required": [
+          "mode"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "cards": {
+            "minItems": 4,
+            "maxItems": 8,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "caption": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "cards"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetCubeNav": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 4,
+        "maximum": 8
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "faces": {
+            "minItems": 3,
+            "maxItems": 6,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "caption": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "faces"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetDocTypewriter": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 3.5,
+        "maximum": 8
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "history": {
+            "default": "show",
+            "type": "string",
+            "enum": [
+              "show",
+              "none"
+            ]
+          }
+        },
+        "required": [
+          "history"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "docTitle": {
+            "type": "string"
+          },
+          "meta": {
+            "type": "string"
+          },
+          "lines": {
+            "minItems": 3,
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "kicker": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "docTitle",
+          "lines"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetGlassPill": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 1.5,
+        "maximum": 4
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "icon": {
+            "default": "mic",
+            "type": "string",
+            "enum": [
+              "mic",
+              "search",
+              "sparkle"
+            ]
+          }
+        },
+        "required": [
+          "icon"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetPhoneRipple": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 4,
+        "maximum": 8
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "chips": {
+            "minItems": 2,
+            "maxItems": 5,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "screenshot": {
+            "type": "string"
+          },
+          "imgW": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "imgH": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "caption": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "chips"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetSegmentedThumb": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 2.5,
+        "maximum": 5
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "land": {
+            "default": "right",
+            "type": "string",
+            "enum": [
+              "left",
+              "right"
+            ]
+          }
+        },
+        "required": [
+          "land"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "leftLabel": {
+            "type": "string"
+          },
+          "rightLabel": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "leftLabel",
+          "rightLabel"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetSpaceSteps": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 5,
+        "maximum": 10
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "spin": {
+            "default": "on",
+            "type": "string",
+            "enum": [
+              "on",
+              "off"
+            ]
+          }
+        },
+        "required": [
+          "spin"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "steps": {
+            "minItems": 3,
+            "maxItems": 4,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "overview": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "steps"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetTimelineTravel": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 4,
+        "maximum": 8
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "stops": {
+            "minItems": 3,
+            "maxItems": 5,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "title": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "stops"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetTextMask": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 3.5,
+        "maximum": 6
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "takeover": {
+            "default": "full",
+            "type": "string",
+            "enum": [
+              "full",
+              "hold"
+            ]
+          }
+        },
+        "required": [
+          "takeover"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "imgW": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "imgH": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "caption": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetPillStack": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 2,
+        "maximum": 12
+      },
+      "canvas": {
+        "type": "string",
+        "enum": [
+          "1080x1920",
+          "1920x1080"
+        ]
+      },
+      "preview": {
+        "type": "boolean"
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "align": {
+            "default": "left",
+            "type": "string",
+            "enum": [
+              "left",
+              "right"
+            ]
+          },
+          "bg": {
+            "default": "transparent",
+            "type": "string",
+            "enum": [
+              "transparent",
+              "scene"
+            ]
+          }
+        },
+        "required": [
+          "align",
+          "bg"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "x": {
+            "default": 0,
+            "type": "number",
+            "minimum": -300,
+            "maximum": 300
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "x",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetWordCascade": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 2.5,
+        "maximum": 14
+      },
+      "canvas": {
+        "type": "string",
+        "enum": [
+          "1080x1920",
+          "1920x1080"
+        ]
+      },
+      "preview": {
+        "type": "boolean"
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "default": "cascade",
+            "type": "string",
+            "enum": [
+              "cascade",
+              "qa"
+            ]
+          },
+          "bg": {
+            "default": "aurora",
+            "type": "string",
+            "enum": [
+              "aurora",
+              "scene",
+              "transparent"
+            ]
+          }
+        },
+        "required": [
+          "mode",
+          "bg"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "lines": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "lines"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "x": {
+            "default": 0,
+            "type": "number",
+            "minimum": -300,
+            "maximum": 300
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "x",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetAspectEmbed": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 3,
+        "maximum": 20
+      },
+      "canvas": {
+        "type": "string",
+        "enum": [
+          "1080x1920",
+          "1920x1080"
+        ]
+      },
+      "preview": {
+        "type": "boolean"
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "ratio": {
+            "default": "auto",
+            "type": "string",
+            "enum": [
+              "auto",
+              "9:16",
+              "1:1",
+              "4:5",
+              "16:9"
+            ]
+          },
+          "side": {
+            "default": "left",
+            "type": "string",
+            "enum": [
+              "left",
+              "right"
+            ]
+          },
+          "textFx": {
+            "default": "rise",
+            "type": "string",
+            "enum": [
+              "rise",
+              "cascade",
+              "typewriter"
+            ]
+          },
+          "sound": {
+            "default": "off",
+            "type": "string",
+            "enum": [
+              "off",
+              "keep"
+            ]
+          }
+        },
+        "required": [
+          "ratio",
+          "side",
+          "textFx",
+          "sound"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "clip": {
+            "type": "string"
+          },
+          "srcW": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "srcH": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "srcDur": {
+            "type": "number",
+            "minimum": 0.1
+          },
+          "title": {
+            "type": "string"
+          },
+          "sub": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "clip",
+          "title"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "x": {
+            "default": 0,
+            "type": "number",
+            "minimum": -300,
+            "maximum": 300
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "x",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  },
+  "PresetMediaStage": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "durationSeconds": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 3600
+      },
+      "canvas": {
+        "type": "string",
+        "enum": [
+          "1080x1920",
+          "1920x1080"
+        ]
+      },
+      "variant": {
+        "type": "object",
+        "properties": {
+          "titleFace": {
+            "default": "smiley",
+            "type": "string",
+            "enum": [
+              "smiley",
+              "serif",
+              "bold"
+            ]
+          },
+          "titleFx": {
+            "default": "stagger",
+            "type": "string",
+            "enum": [
+              "stagger",
+              "reveal",
+              "tracking"
+            ]
+          },
+          "fit": {
+            "default": "contain",
+            "type": "string",
+            "enum": [
+              "contain",
+              "cover"
+            ]
+          },
+          "ratio": {
+            "default": "auto",
+            "type": "string",
+            "enum": [
+              "auto",
+              "16:9",
+              "9:16",
+              "1:1"
+            ]
+          },
+          "videoEnd": {
+            "default": "freeze",
+            "type": "string",
+            "enum": [
+              "freeze",
+              "loop"
+            ]
+          },
+          "sound": {
+            "default": "off",
+            "type": "string",
+            "enum": [
+              "off",
+              "keep"
+            ]
+          }
+        },
+        "required": [
+          "titleFace",
+          "titleFx",
+          "fit",
+          "ratio",
+          "videoEnd",
+          "sound"
+        ],
+        "additionalProperties": false
+      },
+      "slots": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 36
+          },
+          "image": {
+            "type": "string"
+          },
+          "clip": {
+            "type": "string"
+          },
+          "imgW": {
+            "type": "number",
+            "minimum": 1
+          },
+          "imgH": {
+            "type": "number",
+            "minimum": 1
+          },
+          "srcW": {
+            "type": "number",
+            "minimum": 1
+          },
+          "srcH": {
+            "type": "number",
+            "minimum": 1
+          },
+          "srcDur": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "startSeconds": {
+            "default": 0,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 3600
+          },
+          "mediaScale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.4,
+            "maximum": 1.2
+          },
+          "radius": {
+            "default": 18,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 80
+          }
+        },
+        "required": [
+          "title",
+          "startSeconds",
+          "mediaScale",
+          "radius"
+        ],
+        "additionalProperties": false
+      },
+      "tune": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "default": "skin",
+            "type": "string",
+            "enum": [
+              "skin",
+              "smiley",
+              "archivo",
+              "serif",
+              "wenkai",
+              "noto-serif"
+            ]
+          },
+          "scale": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.6,
+            "maximum": 1.5
+          },
+          "x": {
+            "default": 0,
+            "type": "number",
+            "minimum": -300,
+            "maximum": 300
+          },
+          "y": {
+            "default": 0,
+            "type": "number",
+            "minimum": -400,
+            "maximum": 400
+          },
+          "skin": {
+            "default": "abyss",
+            "type": "string",
+            "enum": [
+              "abyss",
+              "ember",
+              "slate",
+              "paper"
+            ]
+          },
+          "accentHue": {
+            "default": 252,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "neutralHue": {
+            "default": 232,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          }
+        },
+        "required": [
+          "font",
+          "scale",
+          "x",
+          "y",
+          "skin",
+          "accentHue",
+          "neutralHue"
+        ],
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "corner": {
+            "default": "br",
+            "type": "string",
+            "enum": [
+              "tl",
+              "tr",
+              "bl",
+              "br"
+            ]
+          },
+          "size": {
+            "default": 132,
+            "type": "number",
+            "minimum": 48,
+            "maximum": 420
+          },
+          "opacity": {
+            "default": 0.92,
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "corner",
+          "size",
+          "opacity"
+        ],
+        "additionalProperties": false
+      },
+      "sfx": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "atFrame": {
+            "default": 2,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 300
+          },
+          "volume": {
+            "default": 0.7,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "file",
+          "atFrame",
+          "volume"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "durationSeconds",
+      "slots"
+    ],
+    "additionalProperties": false
+  }
+}

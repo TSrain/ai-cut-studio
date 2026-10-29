@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "project": "contract-smoke",
+  "mode": "visual-first",
+  "canvas": {"width": 1080, "height": 1920, "fps": 30, "durationSeconds": 8},
+  "density": {"target": 8, "occupancyMin": 0.6, "occupancyMax": 0.85, "layerCount": 3},
+  "focus": {"primary": "hero title", "secondary": ["product frame"]},
+  "palette": {
+    "mode": "dark",
+    "dominant": "#15181f",
+    "support": ["#273044"],
+    "accent": ["#63f3c6"],
+    "surfaces": ["#1c2230", "#252e40"]
+  },
+  "typography": {"kit": "impact", "displayRole": "display", "bodyRole": "body", "dataRole": "data"},
+  "material": ["glass", "grain"],
+  "background": ["grid", "ambient-glow"],
+  "motion": {"character": "decisive", "springAccents": 2, "ambientMotion": true},
+  "transition": {"language": "shared-axis"},
+  "assets": {
+    "allowBrandLogos": true,
+    "allowScreenshots": true,
+    "allowUnknownNetworkImages": true,
+    "cacheSelectedLocally": true
+  },
+  "facts": {"mode": "illustrative"},
+  "shots": [{
+    "id": "shot-001",
+    "durationSeconds": 8,
+    "engine": "hybrid",
+    "objective": "Reveal product automation",
+    "startAnchor": "accent line enters from lower-left",
+    "endAnchor": "product frame holds at center"
+  }]
+}

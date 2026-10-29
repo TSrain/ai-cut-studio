@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "id": "quote-card",
+  "name": "引用卡",
+  "engine": "remotion",
+  "compositionId": "PresetQuoteCard",
+  "componentSource": "templates/remotion-base/src/presets/QuoteCardShot.tsx",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 3,
+    "max": 6,
+    "default": 4
+  },
+  "tags": [
+    "type",
+    "panel",
+    "layout",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 1,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "start",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "restrained",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0.5,
+        "action": "卡片上浮 28px + 淡入(首帧卡已 30% 在场,无黑帧)",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.33,
+        "action": "引文逐行 stagger 0.12s 上屏(原句逐字一致,不改写不翻译)",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "enter",
+        "seconds": 1.0,
+        "action": "作者小字条左滑入(层级明确弱于原句)",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "静止读取"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "tone": {
+      "label": "色温",
+      "type": "enum",
+      "values": [
+        "warm",
+        "cool"
+      ],
+      "default": "warm",
+      "description": "色温档:cool 用于信任/官方背书语境,只换色温不换几何",
+      "hint": "warm 偏暖、cool 偏冷。讲信任/官方背书用 cool"
+    }
+  },
+  "slots": {
+    "quote": {
+      "label": "引用原文",
+      "type": "text",
+      "required": true,
+      "role": "body",
+      "fontSize": 41,
+      "maxLines": 5,
+      "fit": {
+        "maxWidthPx": 840,
+        "shrinkFloorPx": 41
+      },
+      "description": "原句逐字上屏,用 \\n 自行断行;不缩字,装不下就减行",
+      "hint": "要上屏的原话。可以按回车折行"
+    },
+    "source": {
+      "label": "出处",
+      "type": "text",
+      "required": false,
+      "role": "caption",
+      "fontSize": 24,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 640,
+        "shrinkFloorPx": 24
+      },
+      "description": "来源行:人名 · 出处 · 年份",
+      "hint": "谁说的、出自哪儿、哪一年"
+    },
+    "note": {
+      "label": "你的批注",
+      "type": "text",
+      "required": false,
+      "role": "label",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 700,
+        "shrinkFloorPx": 32
+      },
+      "description": "作者换算/推断小字条",
+      "hint": "你对这句话的一句批注。不填就不显示"
+    },
+    "noteTag": {
+      "label": "批注标签",
+      "type": "text",
+      "required": false,
+      "role": "caption",
+      "fontSize": 24,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 200,
+        "shrinkFloorPx": 24
+      },
+      "description": "小字条的胶囊标签,默认「作者换算」",
+      "hint": "批注前面的小标签，比如「作者引述」"
+    }
+  },
+  "anchors": {
+    "start": "深蓝黑层次底,引用卡(微旋 -1.6°)正在上浮入场",
+    "end": "退场前：引用卡满帧稳定:来源行+原句「{quote}」+作者小字条,静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【引用卡 preset:quote-card@v1】原句逐字上屏({tone} 色温):{quote}",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-06",
+      "note": "初版:固化自 SC-0025 镜 1/2/12 的 QuoteCard 系统(几何/圆角/描边/大引号水印冻结,cool 只换色温)"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "verifiedAt": "2026-08-06",
+  "sample": {
+    "slots": {
+      "quote": "Most people overestimate what they\ncan do in one year and underestimate\nwhat they can do in ten years.",
+      "source": "Bill Gates · The Road Ahead · 1996",
+      "note": "十年维度的复利,一年看不出来"
+    },
+    "variant": {
+      "tone": "warm"
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "id": "card-showcase",
+  "name": "卡片列阵",
+  "engine": "remotion",
+  "compositionId": "PresetCardShowcase",
+  "componentSource": "templates/remotion-base/src/presets/CardShowcase.tsx",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 4,
+    "max": 8,
+    "default": 6
+  },
+  "tags": [
+    "layout",
+    "depth",
+    "ui",
+    "montage",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 1,
+    "shader3d": 1,
+    "kineticType": 0,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "deliberate",
+    "springAccents": 1,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "carousel:底+地面反光盘第 0 帧已在(首帧不淡入);卡片按 0.04s/张 stagger 缩放浮现(单张 0.5s)。fan:0.05s 起卡片从画框下方 deal 弹入",
+        "easing": "ENTER / spring(bounce 0.3)"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.13,
+        "action": "fan:每张 deal 间隔 0.13s(≈4 帧,配方卡「一串」手感:≥8f 读作点名,≤2f 读作一团),单张飞行 0.55s;落成一摞带确定性微乱(下层卡露角,才读得出是一摞)",
+        "easing": "spring(bounce 0.3) —— 本镜唯一弹簧名额"
+      },
+      {
+        "phase": "hold",
+        "seconds": 3.6,
+        "action": "carousel:圆环自转**恰好 360°**(0→3.6s),末帧回到排布起点、0 号卡正对镜头;背面卡按方位角 cos 压暗",
+        "easing": "MOVE(缓起缓收)"
+      },
+      {
+        "phase": "hold",
+        "seconds": 1.7,
+        "action": "fan:整摞展开成 3D 扇形(1.7→2.6s),卡绕「手腕」(transform-origin 50% 130%)转开。起点必须晚于末张 deal 落定(8 张时 1.51s),否则「还在飞就开始转」",
+        "easing": "MOVE"
+      },
+      {
+        "phase": "hold",
+        "seconds": 2.4,
+        "action": "caption 底部淡入上浮 0.5s(fan 2.4s / carousel 3.0s)",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "定格静止读取(carousel 3.6s 起 / fan 2.6s 起;时长伸缩全部落在这里)"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "mode": {
+      "label": "排布方式",
+      "hint": "carousel 圆轨转一圈（默认，每张卡都会正对镜头一次，适合逐个介绍）；fan 弹入堆叠再展开成扇形（一摞的量感，中心卡是主角）",
+      "type": "enum",
+      "values": [
+        "fan",
+        "carousel"
+      ],
+      "default": "carousel",
+      "description": "carousel:每张卡轮流正对镜头,观众能逐个读完 —— 卡多、标题长时选它。fan:一摞牌展开,量感优先,翼侧卡只露一条(标题超过 3 字会被邻卡压住尾字),4–5 张时每张标题才完整可读"
+    }
+  },
+  "slots": {
+    "cards": {
+      "label": "卡片",
+      "hint": "一行一张卡。可用「标题 | 小注」分成两段。carousel 档每张都会转到正面；fan 档只有中间那张完整露出",
+      "type": "list",
+      "required": true,
+      "minItems": 4,
+      "maxItems": 8,
+      "splitOn": " | ",
+      "noteRatio": 0.45,
+      "noteMaxLines": 2,
+      "role": "h2",
+      "fontSize": 42,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 198,
+        "shrinkFloorPx": 24
+      },
+      "description": "卡面内容,每条 `标题 | 小注`。卡序号自动编号(01、02…);卡色按卡序落在 accentHue±16°/张 的邻近色相环上,永远读作一家人。carousel 标题 42px,fan 压到 36px(翼侧只露一条)"
+    },
+    "caption": {
+      "label": "结论句",
+      "hint": "画面底部那句话，说清这些卡合起来是什么意思。可以按回车折行，不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "h2",
+      "fontSize": 56,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 936,
+        "shrinkFloorPx": 36
+      },
+      "description": "底部结论句(top 1560),可省。与卡阵版位互不侵入;tune 的 x/y/scale 只挪卡阵,caption 有自己的版位"
+    }
+  },
+  "anchors": {
+    "start": "深色底+地面反光盘已在场,卡片正在浮现/从下方弹入",
+    "end": "退场前：carousel:圆环转满一圈回到起点,首卡正对镜头;fan:整摞展开成扇形定格,中心卡压顶。底部「{caption}」静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【卡片列阵 preset:card-showcase@v1】把一组并列项拍成有体积的卡阵({mode}):{cards} → 收束到「{caption}」",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-21",
+      "note": "初版:从 video-shotcraft 的 card-stack(fan 档)与 carousel-3d(carousel 档)合并移植 —— 两者都是「一组卡片入场」,合成一个 preset 两档。横版 demo 几何 ×2.25 后按竖版画框收拢(轨道横向半径 ≤440)。防镜像按配方卡点名处理:每卡正反两层同向贴图 + backface-visibility hidden,卡只绕 Y 公转永不绕 X/Z,任何一帧不出现镜像字。卡色改由 accentHue 派生邻近色相环,去掉 demo 的紫红 hex。fan 档展开横移由定值 88px 改为按卡数+旋转甩幅反推的自适应值(定值下 4 字标题被邻卡压掉尾字,加宽后又被画框切 —— 旋转绕腕的横向甩幅必须算进预算)"
+    },
+    {
+      "version": 1,
+      "date": "2026-08-22",
+      "note": "用户看过 9 个模板的连播验收片(桌面 新模板验收.mp4,每个模板的真实文案样例动效),回「都 verified」——翻 verified,自此走快车道:批量出片时不再出三张 Styleframe、不逐镜全量自查,只做槽位校验 + 预览印张确认 + 输出成功 + 分辨率/时长/编码四项检查"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "variant": {
+      "mode": "carousel"
+    },
+    "slots": {
+      "cards": [
+        "关键概念",
+        "数字节拍",
+        "对比卡",
+        "引用卡",
+        "趋势图",
+        "列点推进",
+        "流程推进"
+      ],
+      "caption": "一句话一个画面,\n七种画面都有模板。"
+    }
+  },
+  "verifiedAt": "2026-08-22"
+}

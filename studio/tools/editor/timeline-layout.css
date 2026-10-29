@@ -1,0 +1,75 @@
+/* Timeline density changes only the editor view; clip timing remains exact. */
+.studio-app .timeline.timeline-p0{max-height:none;border-top:1px solid #3b4350;position:relative}
+.studio-app .timeline-p0 .timeline-resize{position:absolute;left:0;right:0;top:-5px;height:10px;z-index:30;cursor:ns-resize;display:flex;justify-content:center;align-items:center;background:transparent}
+.timeline-resize>span{height:3px;width:42px;border-radius:4px;background:#758499;opacity:.65;pointer-events:none}
+.timeline-resize:hover>span,.timeline-resize:focus-visible>span{background:#b8d2ff;opacity:1}
+.studio-app .timeline-p0 .timeline-toolbar{height:40px;min-height:40px;padding:4px 12px;gap:5px;overflow-y:hidden}
+.studio-app .timeline-p0 .timeline-toolbar .icon-button{width:30px;height:30px;padding:6px;display:inline-flex;align-items:center;justify-content:center}
+.studio-app .timeline-p0 .timeline-summary{font-size:11px;color:#aebdd1}
+.studio-app .timeline-p0 .timeline-label-head{display:flex;justify-content:space-between;align-items:center;padding-right:12px}
+.studio-app .timeline-p0 .timeline-label-head button{display:flex;align-items:center;justify-content:center;width:24px;height:24px;padding:3px;border:0;background:transparent}
+.studio-app .timeline-p0 .track-label button{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.studio-app .timeline-p0 .track.is-empty-track{height:26px}
+.studio-app .timeline-p0 .track.is-empty-track .track-label{color:#8998ad}
+.studio-app .timeline-p0 .timeline-add-track{height:12px;padding:0;min-height:12px}
+.studio-app .timeline-p0 .clip[data-density=compact]{padding:0;border-radius:3px}
+.studio-app .timeline-p0 [data-density=compact] .clip-name,.studio-app .timeline-p0 [data-density=compact] small,.studio-app .timeline-p0 [data-density=compact] .caption-block-text{display:none}
+.studio-app .timeline-p0 [data-density=label] small{display:none}
+.studio-app .timeline-p0 .caption-block[data-density=compact]{padding:0;border-radius:3px}
+.studio-app .timeline-p0 .clip .handle{width:7px}
+.studio-app .timeline-p0 .clip .handle::after{content:'';position:absolute;top:25%;bottom:25%;left:3px;border-left:1px solid currentColor;opacity:0}
+.studio-app .timeline-p0 .clip:hover .handle::after,.studio-app .timeline-p0 .clip.selected .handle::after{opacity:.6}
+.studio-app .timeline-p0 .caption-block{cursor:grab}
+.studio-app .timeline-p0.is-compact .track:not(.is-empty-track){height:38px}
+.studio-app .timeline-p0.is-compact .clip{top:5px;height:28px}
+.studio-app .timeline-p0.is-compact .track.caption-track{height:38px!important}
+.studio-app .timeline-p0.is-compact .caption-block{top:5px;height:28px}
+.studio-app .timeline-p0.is-compact .track.source-track{height:68px}
+.studio-app .timeline-p0.is-compact .source-clip{height:58px}
+.studio-app .timeline-p0 .timeline-menu button:disabled{opacity:.4;cursor:not-allowed}
+.studio-app .timeline-p0 .timeline-menu button>svg{flex-shrink:0;margin-right:8px}
+.studio-app .timeline-p0 .timeline-menu button{gap:6px}
+@media(max-width:1050px){.studio-app .timeline-p0 .timeline-summary{display:none}.studio-app .timeline-p0 .timeline-toolbar input[type=range]{width:60px}}
+/* The time indicator must not intercept clip clicks, trims or context menus. */
+.studio-app .timeline-p0 .playhead-hit{pointer-events:none;z-index:9}
+.studio-app .timeline-p0 .playhead-grip{pointer-events:auto;position:sticky;top:0;left:2px;height:20px;cursor:ew-resize}
+
+/* Portal tooltips remain visible above the scroll-clipped toolbar. */
+.toolbar-help-anchor{display:inline-flex;align-items:center;flex-shrink:0}
+.toolbar-help-anchor>button:disabled{pointer-events:none}
+.toolbar-help{position:fixed;z-index:10000;max-width:min(300px,calc(100vw - 16px));padding:9px 12px;border:1px solid #485260;border-radius:7px;background:#252b34;color:#f1f4f8;font:12px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 5px 20px #0005;pointer-events:none;white-space:normal}
+
+/* Camera effects share track geometry and selection styling with visual clips. */
+.studio-app .timeline-p0 .camera-label-spacer{width:23px;flex:0 0 23px}
+.studio-app .timeline-p0 .camera-clip:not(.selected){background:#323c43;border-color:#52616d}
+.camera-phases{position:absolute;inset:0;display:flex;pointer-events:none;opacity:.1}
+.camera-phases>div{background:#c0cbd5;min-width:0}
+.camera-phases>.camera-hold{background:transparent}
+
+/* Keep the time origin stable while the sticky controls collapse on scroll. */
+.studio-app .timeline-p0 .track-label,.studio-app .timeline-p0 .timeline-label-head{width:132px;padding:0 10px;gap:6px}
+.studio-app .timeline-p0 .track-title{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;font-weight:500;color:#c4cbd5}
+.studio-app .timeline-p0 .track-title small{display:block;font-size:10px;font-weight:400;color:#8793a3;margin-top:2px}
+.studio-app .timeline-p0 .track-label.is-disabled .track-title{opacity:.5}
+.studio-app .timeline-p0 .track-label .track-options{border:0;background:transparent;box-shadow:none;padding:0;min-width:20px;width:20px;height:26px;margin-left:auto;color:#8793a3;border-radius:3px}
+.studio-app .timeline-p0 .track-label .track-options:hover{color:#dce2eb;background:#ffffff0a}
+.studio-app .timeline-p0 .track-lock-badge{display:flex;flex-shrink:0;color:#8c98a7}
+.studio-app .timeline-p0 .track-label .timeline-cover-thumb{width:28px;height:34px;min-width:28px;padding:0}
+.studio-app .timeline-p0.headers-collapsed .track-label,.studio-app .timeline-p0.headers-collapsed .timeline-label-head{width:40px;padding:0 10px;gap:0}
+.studio-app .timeline-p0.headers-collapsed .track-title,.studio-app .timeline-p0.headers-collapsed .timeline-cover-thumb{display:none}
+.studio-app .timeline-p0.headers-collapsed .track-lock-badge{position:absolute;left:2px;top:3px;pointer-events:none}
+.timeline-track-drop{height:24px}
+.track-insertion-guide{position:absolute;height:2px;background:#839fc5;z-index:9;pointer-events:none;box-shadow:0 0 0 2px #839fc522}
+.track-insertion-guide span{position:relative;top:-12px;display:inline-block;white-space:nowrap;font-size:11px;padding:4px 8px;border-radius:4px;background:#334458;color:#e0e8f1}
+
+.studio-app .timeline-p0 .track-label .track-name-input{min-width:0;width:0;flex:1;height:26px;padding:3px 5px;font:inherit;color:#e0e7f0;border:1px solid #7998c4;border-radius:4px;background:#191d24;outline:none}
+
+.studio-app .timeline-p0 .timeline-menu[aria-label="轨道菜单"] button{justify-content:flex-start;gap:10px}
+.studio-app .timeline-p0 .timeline-menu[aria-label="轨道菜单"] button>svg{margin-right:0;color:#a8b4c5}
+
+/* Keep both source trim edges usable when a short clip is selected. */
+.studio-app .timeline-p0 .source-clip.selected[data-density="compact"]{overflow:visible;z-index:4}
+.studio-app .timeline-p0 .source-clip.selected[data-density="compact"] .handle{width:6px;z-index:3;background:#7a9ac799}
+.studio-app .timeline-p0 .source-clip.selected[data-density="compact"] .handle.left{left:-6px}
+.studio-app .timeline-p0 .source-clip.selected[data-density="compact"] .handle.right{right:-6px}
+.studio-app .timeline-p0 .source-clip.selected[data-density="compact"] .handle::after{left:1px;opacity:1}

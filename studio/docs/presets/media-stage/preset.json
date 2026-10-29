@@ -1,0 +1,249 @@
+{
+  "version": 1,
+  "id": "media-stage",
+  "name": "标题素材展示",
+  "description": "姓名背景墙承托一张图片或一段视频，短标题带设计字体与入场动画。",
+  "engine": "remotion",
+  "compositionId": "PresetMediaStage",
+  "componentSource": "templates/remotion-base/src/presets/MediaStage.tsx",
+  "status": "draft",
+  "baselineVersion": 2,
+  "canvas": [
+    "1920x1080",
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 1,
+    "max": 3600,
+    "default": 6
+  },
+  "tags": [
+    "media",
+    "title",
+    "image",
+    "video",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 0,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 1,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "motion": {
+    "character": "calm",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "暖色短线展开；0.08秒标题开始错峰上浮，素材0.18秒开始淡入上浮",
+        "easing": "cubic-out"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "标题与容器静止，姓名纹样缓慢移动，视频继续播放"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "titleFace": {
+      "label": "标题字体",
+      "type": "enum",
+      "values": [
+        "smiley",
+        "serif",
+        "bold"
+      ],
+      "default": "smiley",
+      "description": "得意黑 / 编辑感宋体 / 粗黑体"
+    },
+    "titleFx": {
+      "label": "标题入场",
+      "type": "enum",
+      "values": [
+        "stagger",
+        "reveal",
+        "tracking"
+      ],
+      "default": "stagger",
+      "description": "逐字错峰上浮 / 整体揭示 / 字距收拢"
+    },
+    "fit": {
+      "label": "素材适配",
+      "type": "enum",
+      "values": [
+        "contain",
+        "cover"
+      ],
+      "default": "contain",
+      "description": "完整展示或铺满裁切；指定比例时有效"
+    },
+    "ratio": {
+      "label": "展示框比例",
+      "type": "enum",
+      "values": [
+        "auto",
+        "16:9",
+        "9:16",
+        "1:1"
+      ],
+      "default": "auto",
+      "description": "auto 保持原图比例，横竖素材均可"
+    },
+    "videoEnd": {
+      "label": "视频播完后",
+      "type": "enum",
+      "values": [
+        "freeze",
+        "loop"
+      ],
+      "default": "freeze",
+      "description": "末帧停留或从选定起点循环"
+    },
+    "sound": {
+      "label": "素材声音",
+      "type": "enum",
+      "values": [
+        "off",
+        "keep"
+      ],
+      "default": "off",
+      "description": "默认静音，避免与口播叠加"
+    }
+  },
+  "slots": {
+    "title": {
+      "type": "text",
+      "label": "标题",
+      "required": true,
+      "role": "hero",
+      "fontSize": 70,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 1600,
+        "shrinkFloorPx": 24
+      },
+      "description": "一行短标题，最多36字，自动缩小长标题；入场后保持静止"
+    },
+    "image": {
+      "type": "image",
+      "label": "图片素材",
+      "required": false,
+      "assetDir": "screens",
+      "description": "选择图片会替换已有视频"
+    },
+    "clip": {
+      "type": "video",
+      "label": "视频素材",
+      "required": false,
+      "assetDir": "footage",
+      "description": "选择视频会替换已有图片"
+    },
+    "imgW": {
+      "type": "number",
+      "label": "图片宽",
+      "required": false,
+      "derivedFrom": "image",
+      "description": "导入素材后自动探测"
+    },
+    "imgH": {
+      "type": "number",
+      "label": "图片高",
+      "required": false,
+      "derivedFrom": "image",
+      "description": "导入素材后自动探测"
+    },
+    "srcW": {
+      "type": "number",
+      "label": "视频宽",
+      "required": false,
+      "derivedFrom": "clip",
+      "description": "导入素材后自动探测"
+    },
+    "srcH": {
+      "type": "number",
+      "label": "视频高",
+      "required": false,
+      "derivedFrom": "clip",
+      "description": "导入素材后自动探测"
+    },
+    "srcDur": {
+      "type": "number",
+      "label": "视频时长",
+      "required": false,
+      "derivedFrom": "clip",
+      "description": "导入素材后自动探测"
+    },
+    "startSeconds": {
+      "type": "number",
+      "label": "视频起点（秒）",
+      "required": false,
+      "description": "从原视频的此时刻开始播放"
+    },
+    "mediaScale": {
+      "type": "number",
+      "label": "素材大小",
+      "required": false,
+      "description": "1为适配展示区，支持0.4–1.2倍"
+    },
+    "radius": {
+      "type": "number",
+      "label": "素材圆角",
+      "required": false,
+      "description": "0为直角，单位为1920画布像素"
+    }
+  },
+  "anchors": {
+    "start": "姓名墙在场，标题和素材依次入场",
+    "end": "退场前：短标题与居中素材保持静止，视频正常播放；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【标题素材展示】简单背景墙承托素材，标题「{title}」精简入场",
+  "sample": {
+    "variant": {
+      "titleFace": "smiley",
+      "titleFx": "stagger",
+      "fit": "contain",
+      "ratio": "auto",
+      "videoEnd": "freeze",
+      "sound": "off"
+    },
+    "slots": {
+      "title": "人物定妆参考",
+      "image": "media-stage-character.png",
+      "imgW": 1536,
+      "imgH": 1024,
+      "clip": "",
+      "startSeconds": 0,
+      "mediaScale": 1,
+      "radius": 18
+    }
+  },
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "根据SC-0032人物定妆参考沉淀；图片视频替换、三种字体与入场、全模板背景系统。"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ]
+}

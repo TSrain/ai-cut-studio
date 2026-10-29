@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "id": "card-swarm",
+  "name": "卡片群收束",
+  "engine": "remotion",
+  "compositionId": "PresetCardSwarm",
+  "componentSource": "templates/remotion-base/src/presets/CardSwarm.tsx",
+  "status": "draft",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 3,
+    "max": 8,
+    "default": 5
+  },
+  "tags": [
+    "card",
+    "layout",
+    "kinetic",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 0,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "motion": {
+    "character": "deliberate",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "卡片由内向外依次弹入填满网格(1.15 帧/张快 stagger);第 0 帧底与眉题已在,不淡入",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "move",
+        "seconds": "40%–68%",
+        "action": "dedup:非留存卡被网格距离最近的留存卡吸走并缩没 / filter:变暗下滑出画",
+        "easing": "MOVE"
+      },
+      {
+        "phase": "move",
+        "seconds": "52%–80%",
+        "action": "留存卡收束到画面中心区并点亮 accent 描边+微光(**与上一拍重叠**,避免出现空窗死帧)",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "静止读取(时长伸缩全部落在这里,末段约 1.5–2s 完全静止)"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "slots": {
+    "total": {
+      "label": "一共多少张",
+      "hint": "铺满网格的卡片总数。8–48 之间，30 左右最像「很多」",
+      "type": "number",
+      "required": true,
+      "description": "网格总卡数,决定「多」的量感。超过 48 会小到读不出是卡片"
+    },
+    "keep": {
+      "label": "最后留几张",
+      "hint": "收束后剩下的高亮卡数量。1–6 之间最好读，超过 6 就不像「少数」了",
+      "type": "number",
+      "required": true,
+      "description": "幸存卡数,必须小于 total。留存卡由 layout() 均匀撒开,不随机挑"
+    },
+    "eyebrow": {
+      "label": "顶部眉题",
+      "hint": "画面顶部的一行小字。不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "label",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 860,
+        "shrinkFloorPx": 22
+      },
+      "description": "顶部眉题,可省"
+    },
+    "keepLabel": {
+      "label": "给留下那批起个名",
+      "hint": "贴在高亮卡上方的一行 accent 小字，比如「真正新增的信息」。不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "label",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 860,
+        "shrinkFloorPx": 22
+      },
+      "description": "留存卡群的标签,跟着收束一起出现,可省"
+    },
+    "caption": {
+      "label": "底部结论句",
+      "hint": "一句话把「多 → 少」的意思说破。可以按回车折行",
+      "type": "text",
+      "required": false,
+      "role": "body",
+      "fontSize": 60,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 936,
+        "shrinkFloorPx": 40
+      },
+      "description": "底部结论句,可省"
+    }
+  },
+  "variants": {
+    "mode": {
+      "label": "怎么少下去",
+      "hint": "dedup 是被合并（讲重复/同质），filter 是被刷掉（讲筛选/过滤）",
+      "type": "enum",
+      "values": [
+        "dedup",
+        "filter"
+      ],
+      "default": "dedup",
+      "description": "中间那拍的语义:dedup 吸入合并 / filter 变暗滑出。要更细的分阶段请走 custom 镜"
+    },
+    "cols": {
+      "label": "网格列数",
+      "hint": "5 列最稳。4 列卡更大更醒目，6 列更密更像「海量」",
+      "type": "enum",
+      "values": [
+        4,
+        5,
+        6
+      ],
+      "default": 5,
+      "description": "网格列数,卡片尺寸随它自动算"
+    }
+  },
+  "anchors": {
+    "start": "深色层次底+眉题已在场,卡片正由内向外弹入填格",
+    "end": "退场前：{keep} 张 accent 描边卡居中一排,上方 accent 标签,底部结论句,全静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【卡片群收束 preset:card-swarm@v1】口播讲「东西很多 → 真正有用的很少」时的固定画面:{total} 张卡铺满 → 收束到 {keep} 张高亮卡 + 结论句",
+  "audit": {
+    "keyframes": [
+      "start",
+      "mid",
+      "end"
+    ]
+  },
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-12",
+      "note": "初版。固化历史上手搓过四次的画面(SC-0020 Shot2 / SC-0025 Shot3·Shot5·Shot6),候选登记簿点名 CardFlowGrid。三拍骨架来自 Shot6 的精简结论;settle 与 cull 重叠是本次新增的修正——原先等吸入结束再聚拢会出现一段空窗死帧。"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "slots": {
+      "total": 30,
+      "keep": 4,
+      "keepLabel": "真正新增的信息",
+      "caption": "看起来有几十条,\n真正新增的只有几条。"
+    },
+    "variant": {
+      "mode": "dedup",
+      "cols": 5
+    }
+  }
+}

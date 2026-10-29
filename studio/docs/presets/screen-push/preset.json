@@ -1,0 +1,336 @@
+{
+  "version": 6,
+  "id": "screen-push",
+  "name": "截图推近·关键标注",
+  "engine": "remotion",
+  "compositionId": "PresetScreenPush",
+  "componentSource": "templates/remotion-base/src/presets/ScreenPush.tsx",
+  "status": "draft",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 2.5,
+    "max": 10,
+    "default": 4
+  },
+  "tags": [
+    "screenshot",
+    "camera",
+    "evidence",
+    "annotation",
+    "highlight",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 1,
+    "shader3d": 0,
+    "kineticType": 0,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "motion": {
+    "character": "deliberate",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "截图第 0 帧已完整在场(硬切,不淡入);窗口上下各一条 accent 细线把它和底分开",
+        "easing": "—"
+      },
+      {
+        "phase": "move",
+        "seconds": "0%–78%",
+        "action": "Ken Burns:焦点由起点推向终点并缩放。push 收紧 / pull 退到全景 / pan 横向扫过",
+        "easing": "MOVE"
+      },
+      {
+        "phase": "enter",
+        "seconds": "18%–42%",
+        "action": "底部说明句上浮淡入",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "accent",
+        "seconds": "26%–46%",
+        "action": "批注与运镜同步画出(红笔下划线/荧光笔/手绘圈/方框,由 mark 变体决定)。笔迹挂在图像坐标系里跟着镜头走,不漂;下划线是近直的一笔,不是波浪线",
+        "easing": "MOVE"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "78% 起完全定格,静止读取(时长伸缩全部落在这里)"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "move='graze' 时:相机以 12–20° 倾角贴着页面低掠,从 focus 起依次巡览 focus2/focus3(给几站走几站),站间一条稳的 bezier 位移 + 倾角微调,每站短暂停留;末站收到最平的英雄机位定格,批注在此时才画",
+        "easing": "bezier(0.45,0,0.25,1)"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "slots": {
+    "image": {
+      "label": "用哪张截图",
+      "hint": "放在 build/public/screens/ 下的图片文件名。控制台「上传」传图后可一键装进去",
+      "type": "image",
+      "required": true,
+      "description": "public/screens/ 下的文件名。必须是本地文件——渲染期不许联网取图",
+      "assetDir": "screens"
+    },
+    "imgW": {
+      "label": "源图宽",
+      "hint": "截图的真实像素宽度。控制台会自动填，手写合同用 sips -g pixelWidth 量",
+      "type": "number",
+      "required": true,
+      "description": "源图真实像素宽。填错会让推镜焦点整体偏移",
+      "derivedFrom": "image"
+    },
+    "imgH": {
+      "label": "源图高",
+      "hint": "截图的真实像素高度。控制台会自动填",
+      "type": "number",
+      "required": true,
+      "description": "源图真实像素高",
+      "derivedFrom": "image"
+    },
+    "focusX": {
+      "label": "焦点横向位置",
+      "hint": "0 是最左、1 是最右。**不要目测**——跑 node tools/locate.mjs 用网格法量，目测平均误差 6.5%",
+      "type": "number",
+      "required": false,
+      "description": "归一化焦点 X(0–1)。必须走 docs/locate-protocol.md 的网格法取值"
+    },
+    "focusY": {
+      "label": "焦点纵向位置",
+      "hint": "0 是最上、1 是最下。同样要用网格法量，别目测",
+      "type": "number",
+      "required": false,
+      "description": "归一化焦点 Y(0–1)"
+    },
+    "markW": {
+      "label": "标注框宽度",
+      "hint": "要勾选的那段字占整张图宽度的比例(0–1)。不填就不画标注。控制台里不用手填:在图上拖个框,或输文字点「自动找」",
+      "type": "number",
+      "required": false,
+      "description": "批注框归一化宽度。缺省 = 不画批注;要不要画由它决定,画成什么样由 mark 变体决定"
+    },
+    "markH": {
+      "label": "标注框高度",
+      "hint": "那段字占整张图高度的比例。不填按 0.05(约一行正文)",
+      "type": "number",
+      "required": false,
+      "description": "批注框归一化高度,默认 0.05"
+    },
+    "markX": {
+      "label": "标注框中心 X",
+      "hint": "不填就用焦点位置(推近的终点通常就是要勾的字)",
+      "type": "number",
+      "required": false,
+      "description": "批注框归一化中心 X,默认取 focusX"
+    },
+    "markY": {
+      "label": "标注框中心 Y",
+      "hint": "不填就用焦点位置",
+      "type": "number",
+      "required": false,
+      "description": "批注框归一化中心 Y,默认取 focusY"
+    },
+    "eyebrow": {
+      "label": "顶部眉题",
+      "hint": "画面顶部的一行小字。不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "label",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 860,
+        "shrinkFloorPx": 22
+      },
+      "description": "顶部眉题,可省"
+    },
+    "caption": {
+      "label": "底部说明句",
+      "hint": "告诉观众该看这张图的哪一处。可以按回车折行",
+      "type": "text",
+      "required": false,
+      "role": "body",
+      "fontSize": 62,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 936,
+        "shrinkFloorPx": 40
+      },
+      "description": "底部说明句,可省"
+    },
+    "credit": {
+      "label": "来源角标",
+      "hint": "截图来自哪儿。用了第三方网页/产品截图就该写，会全程压在画面右下",
+      "type": "text",
+      "required": false,
+      "role": "caption",
+      "fontSize": 22,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 620,
+        "shrinkFloorPx": 16
+      },
+      "description": "来源署名,烧进画面全程可见。第三方素材建议必填"
+    },
+    "focus2X": {
+      "label": "巡览第 2 站 X",
+      "hint": "只有镜头选 graze 时才用。第二个要看的位置，横向 0–1。坐标必须用 ocr-locate 或网格法量，不许目测",
+      "type": "number",
+      "required": false,
+      "description": "graze 巡览第 2 站的归一化横坐标,可省"
+    },
+    "focus2Y": {
+      "label": "巡览第 2 站 Y",
+      "hint": "同上，纵向 0–1",
+      "type": "number",
+      "required": false,
+      "description": "graze 巡览第 2 站的归一化纵坐标,可省"
+    },
+    "focus3X": {
+      "label": "巡览第 3 站 X",
+      "hint": "只有镜头选 graze 时才用。第三个要看的位置，横向 0–1。不填就只巡两站",
+      "type": "number",
+      "required": false,
+      "description": "graze 巡览第 3 站的归一化横坐标,可省"
+    },
+    "focus3Y": {
+      "label": "巡览第 3 站 Y",
+      "hint": "同上，纵向 0–1",
+      "type": "number",
+      "required": false,
+      "description": "graze 巡览第 3 站的归一化纵坐标,可省"
+    }
+  },
+  "variants": {
+    "move": {
+      "label": "镜头怎么动",
+      "hint": "push 推近看细节（默认），pull 退开看全局，pan 横扫读一条线，static 镜头不动（标注本身就是动作时选它），graze 贴着页面低掠巡览几个位置（像在桌面上滑过一份文件）",
+      "type": "enum",
+      "values": [
+        "push",
+        "pull",
+        "pan",
+        "static",
+        "graze"
+      ],
+      "default": "push",
+      "description": "四种镜头语言,全部由起止焦点+起止缩放表达,不是四段代码。static = 无运镜,批注承担全部动作 graze:低掠贴面巡览 —— 相机以 12–20° 倾角贴着截图飞,依次经过 focus / focus2 / focus3,每站短暂停留,末站定格为英雄帧;浅景深 + 远端雾化,批注只在末站画。"
+    },
+    "mark": {
+      "label": "怎么勾选关键字",
+      "hint": "underline 红笔下划线（默认），marker 荧光笔描字，circle 手绘圈，box 方框；none 不标注。笔迹是当场画出来的,不是淡入",
+      "type": "enum",
+      "values": [
+        "underline",
+        "marker",
+        "circle",
+        "box",
+        "none"
+      ],
+      "default": "underline",
+      "description": "批注样式。真正的开关是 markW 槽位(缺省不画);荧光笔在深色截图上不成立,深底用红笔系"
+    },
+    "ink": {
+      "label": "笔用什么颜色",
+      "hint": "auto 按样式选（荧光笔黄、其余红），也可以强制 red / yellow / accent（跟皮肤强调色）",
+      "type": "enum",
+      "values": [
+        "auto",
+        "red",
+        "yellow",
+        "accent"
+      ],
+      "default": "auto",
+      "description": "批注墨色。墨色是戏中物(纸上笔迹),不占合同 palette 的强调色名额"
+    }
+  },
+  "anchors": {
+    "start": "截图完整在场(硬切),窗口上下 accent 细线,眉题已在",
+    "end": "退场前：镜头定格在 ({focusX},{focusY}) 处,批注已画完压在 ({markX},{markY}),底部说明句已上屏,右下角来源角标可见；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【截图推近·关键标注 preset:screen-push@v5】口播提到某个网页/产品/图表时的固定画面:截图上屏 + 一次缓慢{move}(或 static 不动)+ 关键字被{mark}当场勾出来 + 一句说明指出该看哪儿",
+  "audit": {
+    "keyframes": [
+      "start",
+      "end"
+    ]
+  },
+  "changelog": [
+    {
+      "version": 5,
+      "date": "2026-08-20",
+      "note": "宽图截断修复(用户报修:16:9 上传图两边被裁):MOVES 的缩放数字从\"源图像素倍率\"改为\"相对 fit 的倍率\"(1.0 = 整图按宽度正好装进窗口),scaleStart/End 乘 CANVAS.w/imgW。此前 0.98 只对 ~1100px 宽的图成立,2000px 宽的图两边各裁约 1/4。static 由 1.06 改 1.0——相对语义下 1.06 会白裁 3%。"
+    },
+    {
+      "version": 4,
+      "date": "2026-08-20",
+      "note": "路径 bug 修复,无视觉变化:expand-presets 把 image 槽改写为 assets/<名字>,组件却无条件补 screens/ 前缀,拼成 screens/assets/x.png → staticFile 404(空底,报错只在浏览器控制台)。改为:含路径分隔符的 src 原样走 staticFile,裸文件名才补 screens/。首个经 expand-presets 走通的批次:2026-08-19-broll-SC-DSH01-final 第二波(6 支证据镜)。"
+    },
+    {
+      "version": 3,
+      "date": "2026-08-19",
+      "note": "反馈修正两条:①下划线第一版抖动过猛(±0.54 笔宽、双频叠加),被指出\"笔不直、七拐八绕\"——改为近直线(浅弓 ±0.12 + 微抖 ±0.07 + 收笔下坠),手感来自不完美的直,不是波浪;②批注原来等镜头 70% 停稳才画,是\"先移动后勾选\"两段式——改为 26% 起笔与运镜同步,46% 画完。"
+    },
+    {
+      "version": 2,
+      "date": "2026-08-19",
+      "note": "加关键字勾选:新组件 AnnotationMark(红笔下划线/荧光笔描字/手绘圈/方框,确定性抖动的手绘感,strokeDashoffset 当场画出),挂进 KenBurns 新增的图像坐标系 overlay,批注跟随运镜不漂。新槽位 markX/markY/markW/markH(网格法取值),新变体 mark(标注样式)/ ink(墨色),move 增加 static(镜头不动,批注承担全部动作)。样例图换成真实文档截图 sample-docs.png。"
+    },
+    {
+      "version": 1,
+      "date": "2026-08-12",
+      "note": "初版。固化历史上手搓过四次的画面(METR 曲线、WideSeek 精选列表等)。KenBurns 组件早已存在,这一版补的是整镜层:窗口尺寸、眉题/说明句/来源角标的固定位置、末段 78% 定格。同批修掉 KenBurns 的一个 bug:含斜杠的 src 会绕过 staticFile,导致 public 子目录里的图 404。"
+    },
+    {
+      "version": 6,
+      "date": "2026-08-21",
+      "note": "新增 move='graze' 低掠贴面巡览档(从 video-shotcraft 的 graze-face-tour 融合进来),配套新增 focus2X/Y、focus3X/Y 四个可选站点槽。三件套照搬参考实现:大平面 + 近 perspective 的贴面机位、radial mask 浅景深、远端雾化(兼作平面边缘的穿帮保险)。批注只在末站停留段画(飞行途中画了也读不到),默认框同步挪到末站坐标。**push/pull/pan/static 四档逐帧不变**,历史项目原样重渲"
+    },
+    {
+      "version": 6,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "slots": {
+      "image": "sample-docs.png",
+      "imgW": 1140,
+      "imgH": 530,
+      "focusX": 0.227,
+      "focusY": 0.278,
+      "markX": 0.227,
+      "markY": 0.278,
+      "markW": 0.164,
+      "markH": 0.083,
+      "caption": "模型名换成这一个,\n其他什么都不用动。",
+      "credit": "api-docs.deepseek.com"
+    },
+    "variant": {
+      "move": "push",
+      "mark": "underline",
+      "ink": "auto"
+    }
+  }
+}

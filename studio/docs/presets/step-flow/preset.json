@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "id": "step-flow",
+  "name": "流程推进",
+  "engine": "remotion",
+  "compositionId": "PresetStepFlow",
+  "componentSource": "templates/remotion-base/src/presets/StepFlow.tsx",
+  "status": "draft",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 5,
+    "max": 16,
+    "default": 9
+  },
+  "tags": [
+    "layout",
+    "diagram",
+    "flow",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 1,
+    "webUi": 0,
+    "shader3d": 0,
+    "kineticType": 0,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "motion": {
+    "character": "calm",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "第 0 帧骨架已在:题目 + 完整脊线 + 全部节点与步骤名(压暗)。观众先知道一共几步",
+        "easing": "CALM"
+      },
+      {
+        "phase": "enter",
+        "seconds": "16%–70%",
+        "action": "脊线逐段画到下一个节点 → 节点点亮放大 → 步骤名放大 → 它的说明句展开;上一步收成一行可读灰。一拍 0.9 秒",
+        "easing": "CALM"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "最后一步到达后完全静止,约占全片 30%"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "slots": {
+    "steps": {
+      "label": "几个步骤",
+      "hint": "一行一步,2–6 步。想给某步加一句说明就用 | 隔开：拆分镜 | 一句话配一个画面",
+      "type": "list",
+      "required": true,
+      "role": "h2",
+      "fontSize": 64,
+      "minItems": 2,
+      "maxItems": 6,
+      "splitOn": "|",
+      "noteRatio": 0.56,
+      "fit": {
+        "maxWidthPx": 688,
+        "shrinkFloorPx": 34
+      },
+      "description": "流程步骤。每项可用 ` | ` 分成步骤名与说明句;**说明句一次只显示当前步那一条**",
+      "noteMaxLines": 2
+    },
+    "title": {
+      "label": "这是什么流程",
+      "hint": "比如「一支口播片子是怎么出来的」。它是上下文不是主角，字号比当前步小一号。不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "h2",
+      "fontSize": 62,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 880,
+        "shrinkFloorPx": 40
+      },
+      "description": "题目,可省"
+    },
+    "eyebrow": {
+      "label": "顶部眉题",
+      "hint": "画面最顶上的一行小字。默认不填——解释性标签观众看一眼就知道",
+      "type": "text",
+      "required": false,
+      "role": "label",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 860,
+        "shrinkFloorPx": 22
+      },
+      "description": "顶部眉题,可省。没有兜底文案"
+    }
+  },
+  "variants": {
+    "emphasis": {
+      "label": "怎么强调当前步",
+      "hint": "focus 是当前步明显更大（推荐，一眼看出在第几步）；even 是全部一样大，只靠亮度区分",
+      "type": "enum",
+      "values": [
+        "focus",
+        "even"
+      ],
+      "default": "focus",
+      "description": "focus:当前步字号放大到 1.8 倍;even:全部同字号,只有亮度差"
+    },
+    "marker": {
+      "label": "要不要步骤号",
+      "hint": "number 是 01/02/03（流程天然有序，推荐）；dot 只留节点圆点",
+      "type": "enum",
+      "values": [
+        "number",
+        "dot"
+      ],
+      "default": "number",
+      "description": "脊线左侧的步骤号。等宽数字,01 与 10 左边缘不抖"
+    }
+  },
+  "anchors": {
+    "start": "深色层次底 + 题目 + 完整脊线与 {n} 个节点全部压暗在场,accent 段尚未画出",
+    "end": "退场前：脊线全部画完,最后一步节点放大点亮、步骤名最大、说明句展开,其余步骤退为可读灰,全静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【流程推进 preset:step-flow@v1】口播讲「先 A 再 B 最后 C」时的固定画面:脊线逐段画出 → {n} 步依次到达 → 末段静止",
+  "audit": {
+    "keyframes": [
+      "start",
+      "mid",
+      "end"
+    ]
+  },
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-16",
+      "note": "初版。规格来自 taste.md SC-0025 Shot5/Shot6 两次手搓漏斗流水线后写下的可复用结论「多阶段流水线用『每阶段一个顶部标签 + 焦点逐段转移』承载」——竖版里顶部标签会和题目打架,所以改成脊线上的当前节点。与 bullet-run 的分界是**有向性**:脊线逐段画出 + 当前步放大 + 一次只有一句说明在屏上。判据是「把步骤顺序打乱,画面还成立吗」——成立就该用 bullet-run。"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "slots": {
+      "title": "一支口播片子是怎么出来的",
+      "steps": [
+        "写稿 | 先把话说顺,画面的事一个字都别想",
+        "拆分镜 | 一句话配一个画面,配不出来的那句多半是废话",
+        "套模板 | 八成的画面已经有模板,剩下两成才值得设计",
+        "拼成片 | 时间轴对齐口播,末段留静止"
+      ]
+    },
+    "variant": {
+      "emphasis": "focus",
+      "marker": "number"
+    }
+  }
+}

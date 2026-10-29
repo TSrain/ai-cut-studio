@@ -1,0 +1,1 @@
+export function mediaRecognitionStatus(item: any, context: {document: any; jobs?: any[]; submitting?: any[]}): "recognizing" | "filled" | "failed" | "cancelled" | "stale" | "ignored" | "unmatched" | null;

@@ -1,0 +1,26 @@
+/* Keep the preview useful when saved widths exceed a smaller desktop viewport. */
+@media (min-width: 901px) {
+ .studio-app .workspace.workspace {
+  position:relative;
+  --panel-rail-width:64px;
+  --panel-library-effective:min(var(--library-width,260px),max(200px,calc((100vw - 384px)/2)));
+  --panel-inspector-effective:min(var(--inspector-width,284px),max(200px,calc((100vw - 384px)/2)));
+  grid-template-columns:var(--panel-rail-width) var(--panel-library-effective) minmax(200px,1fr) var(--panel-inspector-effective);
+ }
+ .studio-app.hide-inspector .workspace.workspace {grid-template-columns:var(--panel-rail-width) var(--panel-library-effective) minmax(200px,1fr);}
+ .panel-resize {position:absolute;top:0;bottom:0;width:8px;z-index:25;cursor:col-resize;touch-action:none;outline:none;}
+ .panel-resize-library {left:calc(var(--panel-rail-width) + var(--panel-library-effective) - 4px);}
+ .panel-resize-inspector {right:calc(var(--panel-inspector-effective) - 4px);}
+ .panel-resize::after {content:'';position:absolute;top:0;bottom:0;left:3px;width:2px;background:transparent;}
+ .panel-resize:hover::after,.panel-resize:focus-visible::after {background:#87b6ff;}
+ .studio-app.hide-inspector .panel-resize-inspector {display:none;}
+}
+@media (min-width:901px) and (max-width:1200px) {.studio-app .workspace.workspace {--panel-rail-width:58px;}}
+@media (max-width:900px) {.panel-resize {display:none;}}
+.asset-usage {margin-top:12px;padding-top:12px;border-top:1px solid var(--line,#383f4a);font-size:12px;}
+.asset-usage h4 {margin:0 0 8px;font-size:12px;}
+.asset-usage ul {list-style:none;margin:0;padding:0;max-height:220px;overflow:auto;}
+.asset-usage button {display:flex;width:100%;gap:8px;align-items:center;text-align:left;margin:4px 0;padding:7px 8px;}
+.asset-usage button span {min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;}
+.asset-usage time {font-variant-numeric:tabular-nums;color:var(--muted,#9ca8bb);white-space:nowrap;}
+.asset-usage p {color:var(--muted,#9ca8bb);}

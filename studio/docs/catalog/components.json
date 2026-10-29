@@ -1,0 +1,3154 @@
+[
+ {
+  "id": "surface-panel",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "SurfacePanel",
+  "tags": [
+   "layout",
+   "panel",
+   "ui"
+  ],
+  "source": "templates/remotion-base/src/components/visual/SurfacePanel.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/surface-panel.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "node-chip",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "NodeChip",
+  "tags": [
+   "ui",
+   "diagram",
+   "layout"
+  ],
+  "source": "templates/remotion-base/src/components/visual/NodeChip.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/node-chip.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "state-toggle",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "StateToggle",
+  "tags": [
+   "ui",
+   "state",
+   "transition"
+  ],
+  "source": "templates/remotion-base/src/components/visual/StateToggle.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/state-toggle.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "status-strip",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "StatusStrip",
+  "tags": [
+   "ui",
+   "status",
+   "overlay"
+  ],
+  "source": "templates/remotion-base/src/components/visual/StatusStrip.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/status-strip.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "background-system",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "BackgroundSystem",
+  "tags": [
+   "background",
+   "texture",
+   "layout"
+  ],
+  "source": "templates/remotion-base/src/components/visual/BackgroundSystem.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/background-system.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "stage-layers",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "StageLayers",
+  "tags": [
+   "layout",
+   "stage",
+   "background"
+  ],
+  "source": "templates/remotion-base/src/components/visual/StageLayers.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/stage-layers.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "hero-frame",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "HeroFrame",
+  "tags": [
+   "layout",
+   "type",
+   "stage"
+  ],
+  "source": "templates/remotion-base/src/components/visual/HeroFrame.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/hero-frame.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "metadata-rail",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "MetadataRail",
+  "tags": [
+   "layout",
+   "overlay",
+   "type"
+  ],
+  "source": "templates/remotion-base/src/components/visual/MetadataRail.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/metadata-rail.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "screenshot-stage",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "ScreenshotStage",
+  "tags": [
+   "screenshot",
+   "stage",
+   "layout"
+  ],
+  "source": "templates/remotion-base/src/components/visual/ScreenshotStage.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/screenshot-stage.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "device-mockup",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "DeviceMockup",
+  "tags": [
+   "device",
+   "screenshot",
+   "ui"
+  ],
+  "source": "templates/remotion-base/src/components/visual/DeviceMockup.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/device-mockup.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "logo-cloud",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "LogoCloud",
+  "tags": [
+   "logo",
+   "brand",
+   "layout"
+  ],
+  "source": "templates/remotion-base/src/components/visual/LogoCloud.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/logo-cloud.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "image-collage",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "ImageCollage",
+  "tags": [
+   "image",
+   "layout",
+   "texture"
+  ],
+  "source": "templates/remotion-base/src/components/visual/ImageCollage.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/image-collage.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "metric-cluster",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "MetricCluster",
+  "tags": [
+   "data",
+   "metric",
+   "type"
+  ],
+  "source": "templates/remotion-base/src/components/visual/MetricCluster.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/metric-cluster.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "chart-stage",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "ChartStage",
+  "tags": [
+   "data",
+   "chart",
+   "stage"
+  ],
+  "source": "templates/remotion-base/src/components/visual/ChartStage.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/chart-stage.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "connection-map",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "ConnectionMap",
+  "tags": [
+   "map",
+   "diagram",
+   "data"
+  ],
+  "source": "templates/remotion-base/src/components/visual/ConnectionMap.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/connection-map.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "kinetic-text",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "KineticText",
+  "tags": [
+   "kinetic",
+   "type"
+  ],
+  "source": "templates/remotion-base/src/components/visual/KineticText.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/kinetic-text.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "transition-bridge",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "TransitionBridge",
+  "tags": [
+   "transition",
+   "layout"
+  ],
+  "source": "templates/remotion-base/src/components/visual/TransitionBridge.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/transition-bridge.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "three-stage",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "ThreeStage",
+  "tags": [
+   "3d",
+   "stage"
+  ],
+  "source": "templates/remotion-base/src/components/visual/ThreeStage.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/three-stage.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "high",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "data-chart",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "Data Chart",
+  "tags": [
+   "data",
+   "chart"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add data-chart --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/data-chart.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "flowchart",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "Flowchart",
+  "tags": [
+   "diagram",
+   "layout"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add flowchart --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/flowchart.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "flowchart-vertical",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "Flowchart Vertical",
+  "tags": [
+   "diagram",
+   "layout"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add flowchart-vertical --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/flowchart-vertical.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1440x2560"
+  ]
+ },
+ {
+  "id": "logo-outro",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "Logo Outro",
+  "tags": [
+   "logo",
+   "brand"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add logo-outro --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/logo-outro.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "app-showcase",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "App Showcase",
+  "tags": [
+   "ui"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add app-showcase --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/app-showcase.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "ui-3d-reveal",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "UI 3D Reveal",
+  "tags": [
+   "ui",
+   "3d",
+   "reveal"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add ui-3d-reveal --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/ui-3d-reveal.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "high",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "grain-overlay",
+  "engine": "hyperframes",
+  "kind": "component",
+  "title": "Grain Overlay",
+  "tags": [
+   "overlay",
+   "texture",
+   "post"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add grain-overlay --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/grain-overlay.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "shimmer-sweep",
+  "engine": "hyperframes",
+  "kind": "component",
+  "title": "Shimmer Sweep",
+  "tags": [
+   "overlay",
+   "texture"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add shimmer-sweep --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/shimmer-sweep.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "grid-pixelate-wipe",
+  "engine": "hyperframes",
+  "kind": "component",
+  "title": "Grid Pixelate Wipe",
+  "tags": [
+   "transition",
+   "post"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add grid-pixelate-wipe --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/grid-pixelate-wipe.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "vfx-shatter",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "VFX Shatter",
+  "tags": [
+   "transition",
+   "post"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add vfx-shatter --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/vfx-shatter.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "high",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "texture-mask-text",
+  "engine": "hyperframes",
+  "kind": "component",
+  "title": "Texture Mask Text",
+  "tags": [
+   "type",
+   "texture",
+   "overlay"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add texture-mask-text --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/texture-mask-text.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "vignette",
+  "engine": "hyperframes",
+  "kind": "component",
+  "title": "Vignette",
+  "tags": [
+   "overlay",
+   "post"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add vignette --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/vignette.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "morph-text",
+  "engine": "hyperframes",
+  "kind": "component",
+  "title": "Morph Text",
+  "tags": [
+   "type",
+   "kinetic"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add morph-text --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/morph-text.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "parallax-zoom",
+  "engine": "hyperframes",
+  "kind": "component",
+  "title": "Parallax Zoom",
+  "tags": [
+   "camera",
+   "transition"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add parallax-zoom --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/parallax-zoom.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "parallax-unzoom",
+  "engine": "hyperframes",
+  "kind": "component",
+  "title": "Parallax Unzoom",
+  "tags": [
+   "camera",
+   "transition"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add parallax-unzoom --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/parallax-unzoom.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "editorial-flash-overlay",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "Editorial Flash Overlay",
+  "tags": [
+   "overlay",
+   "transition"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add editorial-flash-overlay --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/editorial-flash-overlay.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "organic-light-leak-overlay",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "Organic Light Leak Overlay",
+  "tags": [
+   "overlay",
+   "texture"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add organic-light-leak-overlay --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/organic-light-leak-overlay.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "freeze-frame-dressing",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "Freeze Frame Dressing",
+  "tags": [
+   "post",
+   "overlay"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add freeze-frame-dressing --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/freeze-frame-dressing.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "domain-warp-dissolve",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "Domain Warp Dissolve",
+  "tags": [
+   "transition",
+   "shader"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add domain-warp-dissolve --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/domain-warp-dissolve.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "high",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "vfx-portal",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "VFX Portal",
+  "tags": [
+   "transition",
+   "camera"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add vfx-portal --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/vfx-portal.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "high",
+  "canvas": [
+   "1920x1080"
+  ],
+  "auditNote": "缩略图取 5.5s(传送门撑满、两页同框、虹彩门环清晰)。注意该块的门径非单调:1s 无 / 2.5s 极小 / 4s 撑开 / 5.5s 撑满 / 9.7s 全暗——机械取中点或取 7.5s 会得到看不出效果的画面。"
+ },
+ {
+  "id": "cinematic-zoom",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "Cinematic Zoom",
+  "tags": [
+   "camera",
+   "transition"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add cinematic-zoom --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/cinematic-zoom.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "vfx-text-cursor",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "VFX Text Cursor",
+  "tags": [
+   "overlay",
+   "texture"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add vfx-text-cursor --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/vfx-text-cursor.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "high",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "vfx-liquid-background",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "VFX Liquid Background",
+  "tags": [
+   "background",
+   "shader"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add vfx-liquid-background --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/vfx-liquid-background.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "high",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "vfx-iphone-device",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "VFX iPhone Device",
+  "tags": [
+   "device",
+   "screenshot"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add vfx-iphone-device --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/vfx-iphone-device.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "high",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "liquid-glass-widgets",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "Liquid Glass Widgets",
+  "tags": [
+   "ui",
+   "texture"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add liquid-glass-widgets --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/liquid-glass-widgets.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "high",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "code-morph",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "Code Morph",
+  "tags": [
+   "code",
+   "type",
+   "kinetic"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add code-morph --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/code-morph.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "code-typing",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "Code Typing",
+  "tags": [
+   "code",
+   "type",
+   "kinetic"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add code-typing --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/code-typing.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "code-diff",
+  "engine": "hyperframes",
+  "kind": "block",
+  "title": "Code Diff",
+  "tags": [
+   "code",
+   "type"
+  ],
+  "source": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "install": "npx hyperframes add code-diff --dir templates/hyperframes-base --no-clipboard",
+  "thumbnail": "docs/catalog/thumbnails/hyperframes/code-diff.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "preset-recede",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetRecede 退让镜",
+  "tags": [
+   "type",
+   "background",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/Recede.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-recede.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "preset-key-concept",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetKeyConcept 关键概念强调卡",
+  "tags": [
+   "type",
+   "kinetic",
+   "layout",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/KeyConcept.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-key-concept.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "preset-quote-card",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetQuoteCard 引用卡",
+  "tags": [
+   "type",
+   "panel",
+   "layout",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/QuoteCardShot.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-quote-card.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "preset-contrast-pair",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetContrastPair 左右对照",
+  "tags": [
+   "type",
+   "layout",
+   "state",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/ContrastPair.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-contrast-pair.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "preset-number-beat",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetNumberBeat 数字强调",
+  "tags": [
+   "data",
+   "metric",
+   "type",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/NumberBeat.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-number-beat.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "lottie-clip",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "LottieClip",
+  "tags": [
+   "icon",
+   "lottie",
+   "accent",
+   "motion",
+   "semantic"
+  ],
+  "source": "templates/remotion-base/src/components/LottieClip.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/lottie-clip.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920",
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "film-grain",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "FilmGrain",
+  "tags": [
+   "overlay",
+   "texture",
+   "grain",
+   "film",
+   "foreground"
+  ],
+  "source": "templates/remotion-base/src/components/visual/FilmGrain.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/overlay-layers.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920",
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "vignette-layer",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "Vignette",
+  "tags": [
+   "overlay",
+   "vignette",
+   "cinematic",
+   "focus",
+   "foreground"
+  ],
+  "source": "templates/remotion-base/src/components/visual/Vignette.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/overlay-layers.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920",
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "shimmer-text",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "ShimmerSweep",
+  "tags": [
+   "text",
+   "highlight",
+   "accent",
+   "effect",
+   "shimmer"
+  ],
+  "source": "templates/remotion-base/src/components/visual/ShimmerSweep.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/overlay-layers.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920",
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "annotation-mark",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "AnnotationMark",
+  "tags": [
+   "annotation",
+   "highlight",
+   "screenshot",
+   "underline",
+   "circle",
+   "handdrawn",
+   "effect"
+  ],
+  "source": "templates/remotion-base/src/components/AnnotationMark.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/annotation-mark.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920",
+   "1920x1080"
+  ]
+ },
+ {
+  "id": "preset-card-swarm",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetCardSwarm 卡片群收束",
+  "tags": [
+   "card",
+   "layout",
+   "kinetic",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/CardSwarm.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-card-swarm.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "preset-screen-push",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetScreenPush 截图推近·关键标注",
+  "tags": [
+   "screenshot",
+   "camera",
+   "evidence",
+   "preset",
+   "annotation",
+   "highlight"
+  ],
+  "source": "templates/remotion-base/src/presets/ScreenPush.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-screen-push.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "preset-bullet-run",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetBulletRun 列点推进",
+  "tags": [
+   "type",
+   "layout",
+   "list",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/BulletRun.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-bullet-run.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "preset-step-flow",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetStepFlow 流程推进",
+  "tags": [
+   "layout",
+   "diagram",
+   "flow",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/StepFlow.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-step-flow.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "preset-trend-chart",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetTrendChart 趋势图表",
+  "tags": [
+   "data",
+   "chart",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/TrendChart.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-trend-chart.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ]
+ },
+ {
+  "id": "ken-burns",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "KenBurns",
+  "tags": [
+   "camera",
+   "image"
+  ],
+  "source": "templates/remotion-base/src/components/KenBurns.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/ken-burns.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "focusStart / focusEnd",
+    "typical": "源图像素坐标",
+    "feel": "起止焦点。**必须走 locate.mjs 网格法**;目测平均误差 6.5%,推镜会推偏"
+   },
+   {
+    "name": "scaleStart / scaleEnd",
+    "typical": "1.0 → 1.15 之间",
+    "feel": "差值就是推的力度。差 >0.25 一眼看出在\"拉伸\",<0.05 等于没动"
+   },
+   {
+    "name": "moveEnd",
+    "typical": "合成总长 −20~30 帧",
+    "feel": "运镜结束帧。**必须早于合成结尾**,末段静止是给观众读画面的,不是浪费"
+   },
+   {
+    "name": "moveStart",
+    "typical": "0",
+    "feel": "插片默认 0(首帧图已完整可见,不淡入,避免黑帧)"
+   },
+   {
+    "name": "clampEdges",
+    "typical": "true",
+    "feel": "钳制图边不进裁窗。关掉会露底色;开着时焦点靠边会贴边而不是对准"
+   }
+  ],
+  "pitfalls": [
+   "imgW/imgH 必须是源图**原始**像素尺寸,写错焦点映射整个偏掉",
+   "钳制优先于对准:焦点靠近图边时组件选择贴边,末帧焦点不在窗正中是正确行为不是 bug;想真对准就调大 scale 或把焦点往图内挪",
+   "批注/标记挂进 children(源图像素坐标系)才会跟着运镜走,在外层自算 transform 会差一帧出现\"标记漂移\""
+  ]
+ },
+ {
+  "id": "contrast-columns",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "ContrastColumns",
+  "tags": [
+   "layout",
+   "type"
+  ],
+  "source": "templates/remotion-base/src/components/ContrastColumns.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/contrast-columns.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "timing",
+    "typical": "{left:0, right:22, divider:44, symbol:60}",
+    "feel": "四段逐个到位,总节奏约 2.5s。**绝不左右同时淡入**——同时出场就没有\"对比\"这个动作了"
+   },
+   {
+    "name": "halfGap",
+    "typical": "每列内缘距中线的距离",
+    "feel": "给中央符号让位。太小符号会骑到文字上,太大两列失去对峙感"
+   },
+   {
+    "name": "symbol",
+    "typical": "≠ / vs / →",
+    "feel": "给 null 则不画符号和圆盘"
+   },
+   {
+    "name": "knockoutColor",
+    "typical": "必须等于画面底色",
+    "feel": "圆盘底色,不等于底色就 knockout 不干净,中线会从符号里穿出来"
+   },
+   {
+    "name": "centerY",
+    "typical": "竖版 940 左右",
+    "feel": "内容垂直中心,要落在安全区内"
+   }
+  ],
+  "pitfalls": [
+   "两列必须贴中线向内对齐,不是各自居中——向内对齐才形成对峙",
+   "typography 必填,组件不挑默认字体(那会让画面性格取决于谁先写的组件)"
+  ]
+ },
+ {
+  "id": "skeleton-card",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "SkeletonCard",
+  "tags": [
+   "card",
+   "layout"
+  ],
+  "source": "templates/remotion-base/src/components/SkeletonCard.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/skeleton-card.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "title",
+    "typical": "短词或留空",
+    "feel": "留空则只有骨架条,更纯粹的\"一堆东西\""
+   },
+   {
+    "name": "highlight",
+    "typical": "false / true",
+    "feel": "选中态:强调色描边 + 微光。同屏最多一个 true"
+   },
+   {
+    "name": "dim",
+    "typical": "0–1,演\"被过滤掉\"用 0.35 左右",
+    "feel": "整体明暗。给 0 会彻底消失,失去\"它还在但被排除了\"的意思"
+   },
+   {
+    "name": "lines",
+    "typical": "2–3",
+    "feel": "骨架条行数。给多了卡片变成真内容,焦点就散了"
+   }
+  ],
+  "pitfalls": [
+   "卡里的字是**肌理不是内容**——标题必须弱化(muted + 小字 + 低透明),一旦可读观众就会去读"
+  ]
+ },
+ {
+  "id": "keyword-highlight",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "KeywordHighlight",
+  "tags": [
+   "highlight",
+   "type"
+  ],
+  "source": "templates/remotion-base/src/components/KeywordHighlight.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/keyword-highlight.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "delay",
+    "typical": "整句入场结束之后",
+    "feel": "色带开始长出的帧。**必须晚于句子安定**,同时出现读成\"这句话本来就有底色\""
+   },
+   {
+    "name": "dur",
+    "typical": "15–45f,关键词越长越靠上限",
+    "feel": "长出时长"
+   },
+   {
+    "name": "color",
+    "typical": "暖黄记号笔色;深底换低饱和强调色",
+    "feel": "高饱和色在深底上会发光,不像记号笔"
+   },
+   {
+    "name": "bandHeight / bandY",
+    "typical": "贴基线偏下",
+    "feel": "色带高度占行高的比例与垂直位置,偏上会像删除线"
+   }
+  ],
+  "pitfalls": [
+   "色带**后扫**且跨行连续",
+   "绝不放大关键词占满画面——那样丢掉上下文,划重点的意义就没了"
+  ]
+ },
+ {
+  "id": "number-ticker",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "NumberTicker",
+  "tags": [
+   "data",
+   "type"
+  ],
+  "source": "templates/remotion-base/src/components/NumberTicker.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/number-ticker.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "dur",
+    "typical": "36f(约 1.2s)",
+    "feel": "滚动时长。曲线是前快后慢(bezier .22,1,.36,1),最后 1/3 几乎停稳给观众读"
+   },
+   {
+    "name": "from / to",
+    "typical": "from 默认 0",
+    "feel": "从 0 起跳最有\"累加\"感;强调增量时才从非 0 起"
+   },
+   {
+    "name": "delay",
+    "typical": "跟随所在文字块入场之后",
+    "feel": "数字晚于标签出现,读起来才是\"这个指标是多少\""
+   },
+   {
+    "name": "format",
+    "typical": "n => 千分位 / 百分比 / 带单位",
+    "feel": "默认四舍五入取整。单位跟着数字一起格式化,别另起一个 span"
+   }
+  ],
+  "pitfalls": [
+   "已内置 tabular-nums,别再自己设 fontVariantNumeric,否则数字宽度会跳",
+   "滚动中的中间值是**假数字**——不要在滚动期叠加结论文案,观众会读到没意义的数"
+  ]
+ },
+ {
+  "id": "line-chart-reveal",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "LineChartReveal",
+  "tags": [
+   "data",
+   "chart"
+  ],
+  "source": "templates/remotion-base/src/components/LineChartReveal.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/line-chart-reveal.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "dur",
+    "typical": "45f(约 1.5s)",
+    "feel": "折线绘制时长。用 dasharray 走真实段长,不需要测 DOM"
+   },
+   {
+    "name": "strokeWidth",
+    "typical": "6",
+    "feel": "1080 宽画布的下限;更细在压缩后会断续"
+   },
+   {
+    "name": "label",
+    "typical": "端点直接标签",
+    "feel": "写了会在右侧留 240px。**直接标签优先于图例**,图例要观众来回对照"
+   },
+   {
+    "name": "grid",
+    "typical": "true",
+    "feel": "网格线。数据点少于 4 个时关掉更干净"
+   },
+   {
+    "name": "data",
+    "typical": "4–7 个点",
+    "feel": "点太多在竖屏里挤成锯齿,趋势反而读不出"
+   }
+  ],
+  "pitfalls": [
+   "端点圆点在绘制结束前 8 帧才出现(delay+dur−8),别把结论文案排在它之前",
+   "线宽/端点/网格线已按 docs/chart-rules.md 内置,不要在外层再调",
+   "演示数字必须在合同里写 facts.mode:\"illustrative\",画面上也要标"
+  ]
+ },
+ {
+  "id": "text-reveal",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "TextReveal",
+  "tags": [
+   "type",
+   "reveal"
+  ],
+  "source": "templates/remotion-base/src/components/TextReveal.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/text-reveal.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "dur",
+    "typical": "18f(0.6s)",
+    "feel": "上滑入场时长。>24f 会拖,<12f 观众来不及注意到它在动"
+   },
+   {
+    "name": "delay",
+    "typical": "按行 stagger 6–10f",
+    "feel": "多行时逐行错开;错开小于 4f 等于同时出场"
+   },
+   {
+    "name": "style",
+    "typical": "外层容器,必须给高度",
+    "feel": "裁剪容器——运动发生在文字自己的空间里,这是它避免\"廉价全屏飞入\"的全部理由"
+   }
+  ],
+  "pitfalls": [
+   "opacity 走 p*1.6 提前到顶,所以文字在还没滑完时就已经不透明——这是故意的,别改成线性,线性会显得\"飘上来\"",
+   "外层不给 overflow 生效的尺寸,裁剪就失效,退化成普通位移"
+  ]
+ },
+ {
+  "id": "semantic-icon",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "SemanticIcon",
+  "tags": [
+   "icon",
+   "semantic"
+  ],
+  "source": "templates/remotion-base/src/components/SemanticIcon.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/semantic-icon.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "name",
+    "typical": "clock/growth/decline/filter/duplicate/check/cross/search/doc/alert",
+    "feel": "10 个具名图标,零素材、免版权登记"
+   },
+   {
+    "name": "size",
+    "typical": "48–96",
+    "feel": "小于 40 在竖屏里读不出形状"
+   },
+   {
+    "name": "strokeWidth",
+    "typical": "7(100 viewBox 基准),细腻时 5–6",
+    "feel": "线宽。图标和正文字重要观感一致,别一个很细一个很粗"
+   }
+  ],
+  "pitfalls": [
+   "别去图库下图标——这 10 个就是全部词汇,不够用说明该换表达方式而不是加图标",
+   "要动效版走 LottieClip,不要给 SemanticIcon 手加 CSS 动画"
+  ]
+ },
+ {
+  "id": "sticker-chip",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "StickerChip",
+  "tags": [
+   "overlay",
+   "ui"
+  ],
+  "source": "templates/remotion-base/src/components/StickerChip.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/sticker-chip.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "enterFrame",
+    "typical": "0",
+    "feel": "弹入起始帧"
+   },
+   {
+    "name": "exitFrame",
+    "typical": "null = 一直留在画面上",
+    "feel": "收尾起始帧"
+   },
+   {
+    "name": "exitDur",
+    "typical": "收尾时长",
+    "feel": "太短像被删掉,给足才像\"贴纸揭走\""
+   },
+   {
+    "name": "background",
+    "typical": "默认 90% 不透明深色",
+    "feel": "再透就压不住花底片了——这是它存在的全部理由"
+   }
+  ],
+  "pitfalls": [
+   "小信息点别占独立全屏,做成 chip 叠上去",
+   "叠在未知底片上时不要改成半透明浅色,可读性会随底片赌运气"
+  ]
+ },
+ {
+  "id": "metal-coin",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "MetalCoin",
+  "tags": [
+   "texture",
+   "accent"
+  ],
+  "source": "templates/remotion-base/src/components/MetalCoin.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/metal-coin.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "size",
+    "typical": "直径 px,240–420",
+    "feel": "太小看不出齿边和双环,金属感就没了"
+   },
+   {
+    "name": "tone",
+    "typical": "金/银/铜色调",
+    "feel": "决定四件套的高光色"
+   },
+   {
+    "name": "face",
+    "typical": "¥ / $ / ★ / 1",
+    "feel": "币面符号,表意即可"
+   },
+   {
+    "name": "sweepStart",
+    "typical": "null = 不扫",
+    "feel": "反光扫过起始帧。**一次性**,扫两次就变促销横幅"
+   }
+  ],
+  "pitfalls": [
+   "币面只放表意符号,别写具体信息——会和旁边文字冗余",
+   "金属感靠齿边 + 偏心径向高光 + inset 双环 + 一次性反光,四件缺一就像扁平圆形"
+  ]
+ },
+ {
+  "id": "hesitant-cursor",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "HesitantCursor",
+  "tags": [
+   "ui",
+   "motion"
+  ],
+  "source": "templates/remotion-base/src/components/HesitantCursor.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/hesitant-cursor.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "attempts[].reach",
+    "typical": "0.5–0.6",
+    "feel": "走过去的比例。<0.5 看不出意图,>0.8 观众以为要点下去"
+   },
+   {
+    "name": "attempts",
+    "typical": "2–3 次",
+    "feel": "试探次数。每次之间必须回 home 停一下,连着走就成了随机漂移"
+   },
+   {
+    "name": "size",
+    "typical": "34",
+    "feel": "光标尺寸"
+   },
+   {
+    "name": "exitFrame",
+    "typical": "null = 不淡出",
+    "feel": "光标淡出帧"
+   }
+  ],
+  "pitfalls": [
+   "这个组件表达的是\"想选选不下去\",不是\"正在操作\"——真要演操作用直线到位加点击涟漪"
+  ]
+ },
+ {
+  "id": "stalled-progress",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "StalledProgress",
+  "tags": [
+   "ui",
+   "state"
+  ],
+  "source": "templates/remotion-base/src/components/StalledProgress.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/stalled-progress.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "pct",
+    "typical": "卡住的基准百分比",
+    "feel": "建议 60–80:太低像刚开始,太高像快好了"
+   },
+   {
+    "name": "probes[].delta",
+    "typical": "只给 1–2 个百分点",
+    "feel": "每次试探前进多少。给多了读成\"在推进\",努力感就没了"
+   },
+   {
+    "name": "probes",
+    "typical": "1–2 次",
+    "feel": "试探次数,多了变滑稽抖动"
+   },
+   {
+    "name": "showLabel",
+    "typical": "true",
+    "feel": "右侧百分比数字。数字不动才是\"卡住\"的实锤"
+   }
+  ],
+  "pitfalls": [
+   "表达的是\"努力过但没进展\",所以进度条必须**有微小动作**——完全不动读成静态图"
+  ]
+ },
+ {
+  "id": "dot-field",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "DotField",
+  "tags": [
+   "texture",
+   "background"
+  ],
+  "source": "templates/remotion-base/src/components/DotField.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/dot-field.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "opacity",
+    "typical": "0.55 已是上限区",
+    "feel": "实测原片亮度差只有 +3~+11。调到 1.0 点会清晰可见,那就不是肌理是装饰了"
+   },
+   {
+    "name": "gap",
+    "typical": "1080 宽画布 12",
+    "feel": "点间距。画布更大要按比例放大,别让点变稀"
+   },
+   {
+    "name": "radius",
+    "typical": "0.75(直径 1.5)",
+    "feel": "点半径"
+   },
+   {
+    "name": "offsetX / offsetY",
+    "typical": "多层叠加时错开",
+    "feel": "相位偏移,避免摩尔纹"
+   },
+   {
+    "name": "id",
+    "typical": "同帧多个必须不同",
+    "feel": "pattern id 前缀,撞车会串色"
+   }
+  ],
+  "pitfalls": [
+   "它是底纹不是图形——观众\"注意到有点\"就已经过头了",
+   "同一帧放多个必须给不同 id,否则 SVG pattern id 撞车"
+  ]
+ },
+ {
+  "id": "ken-burns-push-hold",
+  "engine": "remotion",
+  "kind": "recipe",
+  "title": "配方·静图推近定格",
+  "tags": [
+   "camera",
+   "image",
+   "media"
+  ],
+  "source": "docs/recipes/camera/ken-burns-push-hold.md",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/ken-burns-push-hold.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1080x1920"
+  ],
+  "usesComponents": [
+   "KenBurns"
+  ],
+  "usesSfx": [],
+  "camera": "push",
+  "externalRef": null,
+  "params": [
+   {
+    "name": "scaleStart → scaleEnd",
+    "typical": "0.82 → 1.12",
+    "feel": "推的力度。差 >0.25 一眼看出在拉伸,<0.05 等于没动"
+   },
+   {
+    "name": "focusStart → focusEnd",
+    "typical": "源图像素坐标",
+    "feel": "必须走 locate.mjs 网格法;目测误差 6.5%,推镜会推偏"
+   },
+   {
+    "name": "moveEnd",
+    "typical": "合成总长 −30f",
+    "feel": "末段定格。省掉这 1 秒观众没读完就切走了"
+   },
+   {
+    "name": "落幅 scale",
+    "typical": "只到 1.12",
+    "feel": "保留上下语境;塞满会丢掉\"这是一堆里的一条\""
+   }
+  ],
+  "pitfalls": [
+   "imgW/imgH 必须是源图原始像素尺寸,写错焦点映射整个偏掉",
+   "钳制优先于对准:焦点靠边时末帧不在窗正中,是设计不是 bug",
+   "末帧必查窗口边缘有没有被裁掉半截的图例/文字——这是本手法最常见的翻车点"
+  ]
+ },
+ {
+  "id": "keyword-band-sweep",
+  "engine": "remotion",
+  "kind": "recipe",
+  "title": "配方·关键词后扫",
+  "tags": [
+   "type",
+   "highlight",
+   "text"
+  ],
+  "source": "docs/recipes/typography/keyword-band-sweep.md",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/keyword-band-sweep.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "usesComponents": [
+   "TextReveal",
+   "KeywordHighlight"
+  ],
+  "usesSfx": [],
+  "camera": "none",
+  "externalRef": null,
+  "params": [
+   {
+    "name": "色带 delay",
+    "typical": "整句入场结束后 +12f",
+    "feel": "早于句子安定 = 读成\"这句话本来就有底色\",手法失效"
+   },
+   {
+    "name": "色带 dur",
+    "typical": "15–45f,词越长越靠上限",
+    "feel": "快了像闪一下,慢了观众等"
+   },
+   {
+    "name": "色带 color",
+    "typical": "浅底暖黄;深底换低饱和(如 rgba(57,135,229,0.42))",
+    "feel": "深底上用高饱和 = 白字压不住,踩过"
+   },
+   {
+    "name": "bandY",
+    "typical": "贴基线偏下",
+    "feel": "偏上会像删除线"
+   }
+  ],
+  "pitfalls": [
+   "绝不放大关键词占满画面——丢掉上下文,划重点就没意义了",
+   "跨行色带必须连续,断开会读成两个词",
+   "一镜只划一处;划两处等于没划"
+  ]
+ },
+ {
+  "id": "hesitation-stall",
+  "engine": "remotion",
+  "kind": "recipe",
+  "title": "配方·犹豫与停滞",
+  "tags": [
+   "ui",
+   "motion",
+   "state"
+  ],
+  "source": "docs/recipes/interaction/hesitation-stall.md",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/hesitation-stall.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "usesComponents": [
+   "HesitantCursor",
+   "StalledProgress",
+   "SkeletonCard"
+  ],
+  "usesSfx": [],
+  "camera": "none",
+  "externalRef": null,
+  "params": [
+   {
+    "name": "attempts[].reach",
+    "typical": "0.55 / 0.6",
+    "feel": "<0.5 看不出意图,>0.8 观众以为要点下去。两次给不同值,机械重复会露馅"
+   },
+   {
+    "name": "回 home 停顿",
+    "typical": "≥10f",
+    "feel": "停顿才是\"犹豫\"的载体,不是移动"
+   },
+   {
+    "name": "probes[].delta",
+    "typical": "1–2 个百分点",
+    "feel": "给多了读成\"在推进\",努力感变成进展"
+   },
+   {
+    "name": "两个动作时序",
+    "typical": "错开,不同时动",
+    "feel": "同时动会糊成一团"
+   }
+  ],
+  "pitfalls": [
+   "表达的是\"想选选不下去\",不是\"正在操作\";真要演操作用直线到位 + 点击涟漪",
+   "进度条必须有微小动作,完全不动会被读成静态图或渲染失败",
+   "候选项要有真实文案,空框看不出在犹豫什么"
+  ]
+ },
+ {
+  "id": "depth-surface-stack",
+  "engine": "remotion",
+  "kind": "recipe",
+  "title": "配方·纵深地板",
+  "tags": [
+   "layout",
+   "texture",
+   "background"
+  ],
+  "source": "docs/recipes/texture/depth-surface-stack.md",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/depth-surface-stack.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "usesComponents": [
+   "BackgroundSystem",
+   "SurfacePanel",
+   "Vignette",
+   "FilmGrain"
+  ],
+  "usesSfx": [],
+  "camera": "none",
+  "externalRef": null,
+  "params": [
+   {
+    "name": "BackgroundSystem.intensity",
+    "typical": "0.5–0.6",
+    "feel": "结构层不透明度。>0.75 网格开始抢戏"
+   },
+   {
+    "name": "variant",
+    "typical": "技术/数据 grid,情绪 aurora",
+    "feel": "信息密度高时 aurora 会抢戏"
+   },
+   {
+    "name": "SurfacePanel.material",
+    "typical": "glass",
+    "feel": "半透明能透出底场结构;solid 会把下面四层全挡掉"
+   },
+   {
+    "name": "FilmGrain.intensity",
+    "typical": "≤0.2",
+    "feel": "视频压缩最吃高频噪声"
+   }
+  ],
+  "pitfalls": [
+   "光源必须一致:底场 radial 从上方来,SurfacePanel 顶部高光同一个假设,不一致会看着脏",
+   "FilmGrain 暗底必须 blend=soft-light;overlay 在明度<0.5 的底上算出来还是黑",
+   "Vignette.color 只吃 hex,传 black 会 NaN 静默失效",
+   "判据是 frame-audit 明度层数 ≥6,不是\"看着够不够\""
+  ]
+ },
+ {
+  "id": "icon-stamp",
+  "engine": "remotion",
+  "kind": "recipe",
+  "title": "配方·图标盖章",
+  "tags": [
+   "type",
+   "icon",
+   "semantic"
+  ],
+  "source": "docs/recipes/typography/icon-stamp.md",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/icon-stamp.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "usesComponents": [
+   "TextReveal",
+   "SemanticIcon",
+   "LottieClip"
+  ],
+  "usesSfx": [],
+  "camera": "none",
+  "externalRef": null,
+  "params": [
+   {
+    "name": "图标 delay",
+    "typical": "文字结束后 +8f",
+    "feel": "<8f 读成同时出现,盖章感消失"
+   },
+   {
+    "name": "size",
+    "typical": "88(对 h2 正文)",
+    "feel": "<40 在竖屏里读不出形状"
+   },
+   {
+    "name": "图标数量",
+    "typical": "一屏 ≤3",
+    "feel": "超过变图标墙,语义被稀释"
+   }
+  ],
+  "pitfalls": [
+   "别去图库下图标——SemanticIcon 的 10 个具名图标就是全部词汇",
+   "LottieClip 是外来 Lottie 的唯一入口,别裸用 <Lottie>(末帧常是语义反面)",
+   "图标不承担信息只承担语义,信息写在字里"
+  ]
+ },
+ {
+  "id": "metal-object-beat",
+  "engine": "remotion",
+  "kind": "recipe",
+  "title": "配方·物件落地重击",
+  "tags": [
+   "texture",
+   "accent",
+   "kinetic"
+  ],
+  "source": "docs/recipes/object/metal-object-beat.md",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/metal-object-beat.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "usesComponents": [
+   "MetalCoin",
+   "StickerChip"
+  ],
+  "usesSfx": [
+   "impact",
+   "sparkle"
+  ],
+  "camera": "none",
+  "externalRef": null,
+  "params": [
+   {
+    "name": "落体时长",
+    "typical": "14–18f",
+    "feel": "太慢没重量,太快看不清形变"
+   },
+   {
+    "name": "squash 幅度",
+    "typical": "scaleY 0.86 / scaleX 1.08",
+    "feel": "超过 0.8/1.2 就成卡通"
+   },
+   {
+    "name": "弹起高度",
+    "typical": "落差的 22–28%",
+    "feel": "弹太高读成轻,不弹读成掉了块砖"
+   },
+   {
+    "name": "文字 spring delay",
+    "typical": "落定后 +6f",
+    "feel": "同时出现 = 两个弹跳打架"
+   }
+  ],
+  "pitfalls": [
+   "币面只放表意符号(¥/★),别写具体信息——会和旁边文字冗余",
+   "金属感靠齿边+偏心高光+inset 双环+一次性反光,缺一件就是扁平圆形",
+   "竖版长文案落物件右侧而非下方,避免挤下安全区",
+   "用掉的是合同 motion.springAccents 的名额,同镜别再给别的元素弹"
+  ]
+ },
+ {
+  "id": "texture-floor",
+  "engine": "remotion",
+  "kind": "recipe",
+  "title": "配方·质感地板",
+  "tags": [
+   "texture",
+   "background",
+   "post"
+  ],
+  "source": "docs/recipes/texture/texture-floor.md",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/texture-floor.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "usesComponents": [
+   "DotField",
+   "FilmGrain",
+   "Vignette"
+  ],
+  "usesSfx": [],
+  "camera": "none",
+  "externalRef": null,
+  "params": [
+   {
+    "name": "DotField.opacity",
+    "typical": "0.55 已是上限区",
+    "feel": "调到 1.0 点清晰可见,那就不是肌理是装饰"
+   },
+   {
+    "name": "DotField.gap",
+    "typical": "1080 宽画布 12",
+    "feel": "画布更大按比例放大,别让点变稀"
+   },
+   {
+    "name": "FilmGrain.intensity",
+    "typical": "≤0.2",
+    "feel": "视频压缩最吃高频噪声"
+   },
+   {
+    "name": "Vignette.strength",
+    "typical": "0.2–0.35",
+    "feel": "放别人的素材时最有用"
+   }
+  ],
+  "pitfalls": [
+   "同帧多个 DotField 必须给不同 id,否则 SVG pattern id 撞车串色",
+   "多层叠加要用 offsetX/offsetY 错开相位,不然出摩尔纹",
+   "成功标准很特别:观众注意到有颗粒就已经过头了"
+  ]
+ },
+ {
+  "id": "title-demote-to-label",
+  "engine": "remotion",
+  "kind": "recipe",
+  "title": "配方·标题降格成门牌",
+  "tags": [
+   "type",
+   "transition",
+   "layout"
+  ],
+  "source": "docs/recipes/typography/title-demote-to-label.md",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/title-demote-to-label.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "usesComponents": [
+   "TitleDemote",
+   "TextReveal"
+  ],
+  "usesSfx": [],
+  "camera": "none",
+  "externalRef": "title-demote-to-label",
+  "params": [
+   {
+    "name": "降格补间",
+    "typical": "20f inOut(cubic),scale → 0.3",
+    "feel": "<14f 读作标题被弹走;终点 >0.45 标签太大压内容"
+   },
+   {
+    "name": "站稳拍",
+    "typical": "显影后 ≥18f",
+    "feel": "省掉这拍观众没读完标题它就跑了,降格白做"
+   },
+   {
+    "name": "生长起点",
+    "typical": "降格开始后 +12f",
+    "feel": "等标题落位才生长会空 8f 冷场"
+   },
+   {
+    "name": "标题字数",
+    "typical": "≤3 个词",
+    "feel": "降到 0.3x 后还要当可读标签,长句缩完就是一条灰线"
+   }
+  ],
+  "pitfalls": [
+   "scale 与位置必须走同一条曲线;拆成\"先缩后飞\"会读成两个动作",
+   "居中修正量要随补间同步归零,不归零终点会偏一个半宽",
+   "降格路径上不许有其他元素动;内容生长要错开落点下方",
+   "多节连用时左上角标签换行不叠放,否则变成标签坟场"
+  ]
+ },
+ {
+  "id": "title-demote",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "TitleDemote",
+  "tags": [
+   "type",
+   "transition"
+  ],
+  "source": "templates/remotion-base/src/components/TitleDemote.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/title-demote-to-label.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "demoteDur",
+    "typical": "20f",
+    "feel": "降格补间时长。<14f 读作标题被弹走"
+   },
+   {
+    "name": "holdFrames",
+    "typical": "≥18f",
+    "feel": "显影后站稳多久再降格。别低于 18"
+   },
+   {
+    "name": "scaleEnd",
+    "typical": "0.3",
+    "feel": "终点缩放。>0.45 标签太大会压内容"
+   },
+   {
+    "name": "landing",
+    "typical": "竖版 {x:96, y:150}",
+    "feel": "落点,要在安全区内且避开其他元素"
+   },
+   {
+    "name": "appearDur",
+    "typical": "12f",
+    "feel": "显影 blur 12→0 + 淡入"
+   }
+  ],
+  "pitfalls": [
+   "scale 与位置走同一条曲线,拆两段就读成两个动作",
+   "居中修正量 translate(-(1-t)*50%) 必须随补间归零,否则终点偏一个半宽",
+   "demoteStartFrame() 导出给内容生长用:起点 = 降格开始 +12f,别等落位"
+  ]
+ },
+ {
+  "id": "page-cam",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PageCam",
+  "tags": [
+   "camera",
+   "screenshot",
+   "ui",
+   "layout"
+  ],
+  "source": "templates/remotion-base/src/components/visual/PageCam.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/page-cam.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "keys[].cx / cy",
+    "typical": "页面 CSS 坐标",
+    "feel": "落在画面正中的那个点。**用 capture-page 产出的 layout.json 里的坐标**,不要目测,也不用跑 locate.mjs 网格法"
+   },
+   {
+    "name": "keys[].zoom",
+    "typical": "0.62 → 0.8",
+    "feel": "1 = 1 CSS px 对 1 输出像素。竖版看整页要 <1;推到读得清正文约 1.0–1.2"
+   },
+   {
+    "name": "keys[].rotY / rotX",
+    "typical": "14–22° / 6–10°",
+    "feel": "**低于 8° 渲出来和平面 pan/zoom 没区别**(样张第一版就栽在这:首尾 8°→−4°,取样帧插值到 2°)"
+   },
+   {
+    "name": "persp",
+    "typical": "不给则按画布短边 ×1.3",
+    "feel": "越小透视越强。横屏那套 1400 直接用在 1080 宽竖版上会过强"
+   },
+   {
+    "name": "pageW / pageH",
+    "typical": "截图的 **CSS** 宽高",
+    "feel": "不是纹理像素宽高。2x 图给 CSS 宽,浏览器才会用上那两倍像素;给错了文字必糊"
+   },
+   {
+    "name": "dof",
+    "typical": "{focusY, strength: 6–12}",
+    "feel": "焦平面模糊,倾斜镜头用。strength >16 会糊到读不出内容"
+   }
+  ],
+  "pitfalls": [
+   "纹理要按原生尺寸 rasterize 再缩小;文字发糊先查纹理分辨率链路(采集时 --scale 2),不要靠加锐化补救",
+   "任何 key 都不声明 rot/persp 时组件退化成纯平面 pan/zoom —— 这是设计(引入它不会改变已有平面镜头的行为),不是失效",
+   "在 <Sequence> 里必须把绝对帧用 frame 参数传进来,否则 key 的 frame 会被 rebase",
+   "叠加层挂 children(页面坐标系)才跟着运镜走;在外层自算 transform 会差一帧出现标记漂移"
+  ]
+ },
+ {
+  "id": "depth-cam",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "DepthCam",
+  "tags": [
+   "camera",
+   "layout",
+   "media"
+  ],
+  "source": "templates/remotion-base/src/components/visual/DepthCam.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/depth-cam.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "medium",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "layers[].parallax",
+    "typical": "远 0.16 / 中 0.5 / 近 1.0",
+    "feel": "跟随相机平移的比例。**层间差 >0.5 会读成两张图各自在滑**,不是一个有厚度的空间"
+   },
+   {
+    "name": "layers[].zoomGain",
+    "typical": "正常 1;dolly-zoom 主体 0、背景 1.9",
+    "feel": "跟随推拉的比例。0 = 尺寸钉死 —— dolly-zoom 的全部说服力就在这个差上"
+   },
+   {
+    "name": "layers[].z",
+    "typical": "背景 260–300,主体 0",
+    "feel": "空间纵深,只有做环绕(yaw)时才需要。给 0 则各层共面,yaw 扫过去也看不出分层"
+   },
+   {
+    "name": "keys[].yaw",
+    "typical": "环绕扫 ±14–22°",
+    "feel": "**低于 8° 渲出来和平面没区别**;样张两次栽在这上面"
+   },
+   {
+    "name": "keys[].roll",
+    "typical": "斜角滚正 −8° → 0",
+    "feel": "起手角度别超过 10°,再多读成失误不是风格"
+   },
+   {
+    "name": "persp",
+    "typical": "不给则按画布短边 ×1.4",
+    "feel": "越小透视越强。竖版直接用横屏的 1400 会过强"
+   },
+   {
+    "name": "offset",
+    "typical": "配 lib/shake.ts 的 shakeAt()",
+    "feel": "整体位移,撞停震屏用。**只动位置不动缩放**,缩放抖会糊字"
+   }
+  ],
+  "pitfalls": [
+   "前景层必须真有 alpha(tools/matte.swift 抠);没有 alpha 的『前景』会把背景整块盖住,视差完全看不见",
+   "中景层不能是不透明的整屏底 —— 它会把远景整个盖住,三层当场退化成两层(样张第一版拿 BackgroundSystem 当中景就是这么废的)",
+   "背景内容要和前景不同。第一版背景和前景用同一张图,背景里的副本和抠出的主体重影,dolly-zoom 看起来像主体在放大",
+   "dolly-zoom 一支片最多一次;它是戏剧性蓄力,用两次第二次就没有了",
+   "抠不出前景就退回 KenBurns,不要拿两张平面图假装分层 —— 假分层比不分层更难看,观众能看出『该动的地方没动』"
+  ]
+ },
+ {
+  "id": "preset-brand-open",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetBrandOpen 品牌开场卡",
+  "tags": [
+   "type",
+   "kinetic",
+   "opening",
+   "brand",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/BrandOpen.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-brand-open.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "variant.style",
+    "typical": "letterspace(仪式感) / ink(工序感)",
+    "feel": "拉丁大写字标优先 letterspace;中西文栏目开场优先 ink"
+   },
+   {
+    "name": "slots.wordmark",
+    "typical": "1 个短字标,副标可省",
+    "feel": "字标越长越要依赖自适应步长与专用大写估宽,不要手填定字号"
+   }
+  ],
+  "pitfalls": [
+   "letterspace 必须全字符同步连续显形,逐字错峰会变成打字机语义",
+   "ink 的十字准星画完必须撤,且长字标的戳印步长必须自适应压进 0.9s 窗口"
+  ]
+ },
+ {
+  "id": "preset-card-showcase",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetCardShowcase 卡片列阵",
+  "tags": [
+   "layout",
+   "depth",
+   "ui",
+   "montage",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/CardShowcase.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-card-showcase.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "variant.mode",
+    "typical": "carousel(5–8 张) / fan(4–5 张)",
+    "feel": "要逐张读全用 carousel;要一摞卡的量感与中心主角用 fan"
+   },
+   {
+    "name": "slots.cards",
+    "typical": "4–8 张,每条「标题 | 小注」",
+    "feel": "fan 超过 5 张翼侧标题会被物理遮挡;需要全读就换 carousel"
+   }
+  ],
+  "pitfalls": [
+   "carousel 必须用正反两层同向贴图并转满 360°,否则会出现镜像字或歪斜末帧",
+   "fan 要等最后一张 deal 落定再展开,旋转轴保持在卡片下缘之外"
+  ]
+ },
+ {
+  "id": "preset-cube-nav",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetCubeNav 立方体导航",
+  "tags": [
+   "layout",
+   "depth",
+   "ui",
+   "transition",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/CubeNav.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-cube-nav.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "slots.faces",
+    "typical": "3–6 个短面标题",
+    "feel": "用于同一系统的不同面,不是互不相干的并列卡片"
+   },
+   {
+    "name": "durationSeconds",
+    "typical": "4–8",
+    "feel": "每个正视面要留出可读停顿,末段拉回等轴全景作为英雄帧"
+   }
+  ],
+  "pitfalls": [
+   "面文字必须背面剔除;相机动 rig 而不是逐面乱转,否则明暗和法线关系一起失效",
+   "顶底面在等轴末帧必然倒置,拉远时应淡出文字而不是破坏正视停点"
+  ]
+ },
+ {
+  "id": "preset-doc-typewriter",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetDocTypewriter 文档自书写",
+  "tags": [
+   "type",
+   "ui",
+   "layout",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/DocTypewriter.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-doc-typewriter.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "slots.lines",
+    "typical": "3–10 行,支持标题/列点/@成员/正文",
+    "feel": "行越多越要压缩两两一组的步长,但每行仍保持单行可读"
+   },
+   {
+    "name": "variant.history",
+    "typical": "show(默认) / none",
+    "feel": "需要持续产出与往期语义时 show;短片或单份文档用 none"
+   }
+  ],
+  "pitfalls": [
+   "永远只保留一个 caret,多光标会立刻穿帮;列点遮罩还要盖住圆点提前露出",
+   "每行不折行,缩到下限仍放不下就必须提炼文案,不能让字号继续跌"
+  ]
+ },
+ {
+  "id": "preset-flying-words",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetFlyingWords 关键词隧道",
+  "tags": [
+   "type",
+   "kinetic",
+   "depth",
+   "montage",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/FlyingWordsShot.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-flying-words.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "slots.words",
+    "typical": "6–24 个,每个 2–3 个中文字",
+    "feel": "表达量感而非逐条阅读;需要读清单时改用 bullet-run"
+   },
+   {
+    "name": "slots.finale",
+    "typical": "一句收尾定格结论",
+    "feel": "给关键词隧道一个出口;没有 finale 时下一镜必须立刻接结论"
+   }
+  ],
+  "pitfalls": [
+   "z 终点必须穿过 0 到观众身后,停在负值只会变成飞到脸前停住",
+   "词节点全程常驻 DOM 且中段亮度不低于 0.7,按帧增删会闪且画面会变空"
+  ]
+ },
+ {
+  "id": "preset-glass-pill",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetGlassPill 玻璃胶囊打字",
+  "tags": [
+   "ui",
+   "type",
+   "kinetic",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/GlassPill.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-glass-pill.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "variant.icon",
+    "typical": "mic / search / sparkle",
+    "feel": "图标决定听写、搜索或 AI 生成的输入语义"
+   },
+   {
+    "name": "slots.text",
+    "typical": "单行十几个字,46px 起缩至 30px",
+    "feel": "宽度按完整文本预估后固定,打字过程不跟着伸缩"
+   }
+  ],
+  "pitfalls": [
+   "胶囊随打字伸缩会读作 chip 而不是输入框,必须保持预估定宽",
+   "打字必须匀速且末段至少静置 0.5s;图标呼吸幅度不得超过约 3.5%"
+  ]
+ },
+ {
+  "id": "preset-phone-ripple",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetPhoneRipple 波纹手机芯片",
+  "tags": [
+   "ui",
+   "layout",
+   "product",
+   "screenshot",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/PhoneRipple.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-phone-ripple.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "slots.chips",
+    "typical": "2–5 个功能芯片",
+    "feel": "左右交替 pop,每个芯片只承担一个短卖点"
+   },
+   {
+    "name": "slots.screenshot",
+    "typical": "可选长截图 + imgW/imgH",
+    "feel": "无图用骨架流;有图时总高必须覆盖滚动距离与屏高"
+   }
+  ],
+  "pitfalls": [
+   "波纹必须由大到小绘制实色圆并错相,反序会只剩最大圆盖住全部",
+   "屏内滚动保持匀速;改手机宽度时必须同步改芯片锚点,否则芯片压进屏幕"
+  ]
+ },
+ {
+  "id": "preset-segmented-thumb",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetSegmentedThumb 分段开关特写",
+  "tags": [
+   "ui",
+   "interaction",
+   "cursor",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/SegmentedThumb.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-segmented-thumb.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "variant.land",
+    "typical": "right(默认) / left",
+    "feel": "决定二选一从哪侧切到哪侧,只用于两个选项"
+   },
+   {
+    "name": "slots.leftLabel/rightLabel",
+    "typical": "每侧 2–4 个中文字",
+    "feel": "标签是按钮不是句子;长到折行就应换 contrast-pair"
+   }
+  ],
+  "pitfalls": [
+   "光标滑入、按下涟漪、滑块移动、标签交换四拍缺一不可,否则因果链断",
+   "滑块弹簧过冲必须限在约 10px,涟漪圆心锁点击点而不是跟着滑块移动"
+  ]
+ },
+ {
+  "id": "preset-title-reveal",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetTitleReveal 标题入场卡",
+  "tags": [
+   "type",
+   "kinetic",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/TitleReveal.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-title-reveal.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "variant.style",
+    "typical": "blur(默认) / marker / brace",
+    "feel": "低能量让位用 blur;拎出一个词用 marker;技术语境短标题用 brace"
+   },
+   {
+    "name": "slots.accent",
+    "typical": "title 内的一个子串",
+    "feel": "只强调一个词;未命中时 marker 不划、brace 退回括整行"
+   }
+  ],
+  "pitfalls": [
+   "中文 blur 不能用空格拆词,要按标点和 2–4 字块切并避免孤字尾块",
+   "brace 档标题超过约 7 个汉字会被括号挤到字号下限;括号和文字必须共用同一进度"
+  ]
+ },
+ {
+  "id": "preset-space-steps",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetSpaceSteps 空间步进",
+  "tags": [
+   "layout",
+   "depth",
+   "camera",
+   "transition",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/SpaceSteps.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-space-steps.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "slots.steps",
+    "typical": "3–4 条,「站名 | 一句话」",
+    "feel": "3 站是甜区;4 站要给到 ≥8s,否则每站读卡被压到 0.7s 以下"
+   },
+   {
+    "name": "durationSeconds",
+    "typical": "5–10(默认 7)",
+    "feel": "伸缩先落总览定格,再压 hold,最后才压飞行——有旋转的飞行段不许快于 0.7s"
+   },
+   {
+    "name": "variant.spin",
+    "typical": "on(默认)/ off",
+    "feel": "on 时第 3 站 rz90° 画框侧躺,是这一式的记忆点,一支片只用一次;文案密时用 off 换成 ry"
+   },
+   {
+    "name": "slots.overview",
+    "typical": "一句结论",
+    "feel": "总览结论板上的话,是这一镜的英雄帧(3 站/4 站下恒 800px 宽、标题恒 88px);不填退回第一站站名"
+   }
+  ],
+  "pitfalls": [
+   "相机是站姿之逆,旋转顺序必须**反着**正变换(Z→Y→X);乱序在单轴旋转时看不出来,复合站会歪",
+   "总览里各站标题只有 ~30px,320px 缩略图认不出——英雄是结论板不是卡片,别指望总览还能读站名",
+   "站名超过 14 字、或小注要两行以上就不成立(卡在空间里飞,不是给人细读的版面);提炼不了就改用 bullet-run / recede"
+  ]
+ },
+ {
+  "id": "preset-timeline-travel",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetTimelineTravel 时间轴横移",
+  "tags": [
+   "camera",
+   "layout",
+   "timeline",
+   "data",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/TimelineTravel.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-timeline-travel.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "slots.stops",
+    "typical": "3–5 条,「刻度 | 一句话」",
+    "feel": "刻度名(v1.0 / 2024 / 今天)是识别锚,卡内写那一站发生了什么"
+   },
+   {
+    "name": "durationSeconds",
+    "typical": "4–8(默认 5.5)",
+    "feel": "行程 ≈0.9+(N−1)×0.85 秒;时长不够压行程,**不压末段静止**(≥30 帧)"
+   },
+   {
+    "name": "变速曲线断点",
+    "typical": "[0,0.15,0.88,1] → [0,0.055,0.9,1]",
+    "feel": "缓起→冲刺→末 12% 急刹。中段不够快就没有旅行感,全程匀速即廉价 PPT。改它等于改这张卡的性格,须升版本"
+   },
+   {
+    "name": "弹立提前量",
+    "typical": "相机到达刻度前 6 帧",
+    "feel": "由 camX 反查到达帧。到了才弹观众已经错过,早太多读作预告"
+   }
+  ],
+  "pitfalls": [
+   "唯一弹簧名额在卡片弹立(damping 11 明显过冲),别再给别的元素开弹簧",
+   "次刻度小点是速度感的参照物,删掉就感觉不到快",
+   "掠过速度要保证**至少末两张卡能读**;读不了就减 stops 或降中段速度,不要靠「反正会过去」"
+  ]
+ },
+ {
+  "id": "preset-text-mask",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetTextMask 字形遮罩开场",
+  "tags": [
+   "type",
+   "opening",
+   "transition",
+   "screenshot",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/TextMask.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-text-mask.png",
+  "verified": true,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "slots.title",
+    "typical": "中文 2–4 字(460px)",
+    "feel": "笔画就是视口。字数越多笔画越细,门里就越看不见东西;2 字最稳"
+   },
+   {
+    "name": "slots.image",
+    "typical": "可省",
+    "feel": "不填走内置的产品面板骨架流(样例就是它,任何皮肤下都成立);给真实截图要过下面那条硬判据"
+   },
+   {
+    "name": "variant.takeover",
+    "typical": "full(默认)/ hold",
+    "feel": "full 末段字形胀开、画面接管全屏(当章节转场,下一镜直接接画面);hold 全程留在字内静止(当独立开场卡)"
+   },
+   {
+    "name": "放大与描边",
+    "typical": "S = 7^endT,描边 0→0.55em(窗口 0.30–0.62)",
+    "feel": "描边把字腔和字缝吞掉,放大原点因此必然落在实心笔画里;线性插值会让字形只看得到前 8%"
+   }
+  ],
+  "pitfalls": [
+   "遮罩**不许**走 CSS `mask-image` + SVG data-URI:data-URI 里的 SVG 拿不到页面 `FontFace` 注册的字体,中文静默回退且不报错。必须行内 `<svg><mask><text>`",
+   "选图硬判据:门里那条带必须明显亮于 `P.bg` 且有结构。大片留白读作「白色的字」,整体偏暗时字直接消失在底里",
+   "漂移窗口只覆盖源图的**一条窄带**,页面别处再好看也没用——给图前先看那条带上是什么内容"
+  ]
+ },
+ {
+  "id": "preset-pill-stack",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetPillStack 胶囊标签堆叠层",
+  "tags": [
+   "overlay",
+   "type",
+   "caption",
+   "alpha",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/PillStack.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-pill-stack.png",
+  "verified": false,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920",
+   "1920x1080"
+  ],
+  "params": [
+   {
+    "name": "slots.items",
+    "typical": "3–5 条;「标签 | 秒数」可卡口播节奏",
+    "feel": "秒数不写就 0.4s 起每 0.9s 一条;写了就按写的出——跟口播对拍全靠它"
+   },
+   {
+    "name": "variant.bg",
+    "typical": "transparent(默认)/ scene",
+    "feel": "transparent=双通道 overlay,导出 .mov 叠在实拍上;scene=带皮肤底的独立插片"
+   },
+   {
+    "name": "variant.align",
+    "typical": "left / right",
+    "feel": "只定大致方向躲人脸;精确位置用户在剪映里拖(双通道形态的分工)"
+   }
+  ],
+  "pitfalls": [
+   "透明底时**不渲 Foreground/Backdrop**——颗粒暗角会把用户的实拍压脏;预览通道要传 preview:true 垫演播室底,不然一片黑",
+   "白胶囊不走皮肤暗面板色:overlay 要叠在未知画面上,白底深字对任何实拍成立;色相仍从 skin.accentHue 派生",
+   "落影是 overlay 的分界线:没有它白胶囊「印」在画面上而不是「浮」在画面前"
+  ]
+ },
+ {
+  "id": "preset-word-cascade",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetWordCascade 逐词飞入动字",
+  "tags": [
+   "kinetic",
+   "type",
+   "opening",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/WordCascade.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-word-cascade.png",
+  "verified": false,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1080x1920",
+   "1920x1080"
+  ],
+  "params": [
+   {
+    "name": "slots.lines",
+    "typical": "一行一句,句内空格分词,≤8 词/句",
+    "feel": "飞入以词为单位——空格是用户的分组权;qa 模式第一行进胶囊,其余是散点答案"
+   },
+   {
+    "name": "variant.mode",
+    "typical": "cascade(默认)/ qa",
+    "feel": "cascade 逐句换场;qa=问题胶囊+答案散点显影(引用观众提问)"
+   },
+   {
+    "name": "variant.bg",
+    "typical": "aurora(默认)/ scene / transparent",
+    "feel": "aurora 浅色光斑底是 Lindsey 的光感,色相跟 accentHue(要淡紫旋到 ~285)"
+   }
+  ],
+  "pitfalls": [
+   "蓝图 kinetic-word-cascade 四条命门:模糊落定前 2–3 帧必须归零/stagger(6f)<行程(8f)/禁弹簧/行漂移由词的到达驱动不是时间驱动",
+   "qa 散点 x 偏移不许单调递增——一路递增读作楼梯,是「没对齐的列表」不是散点",
+   "静帧自查看不出病——毛病全在 stagger 重叠率和模糊归零时机上,必须渲一段片看"
+  ]
+ },
+ {
+  "id": "preset-aspect-embed",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetAspectEmbed 尺寸镶嵌",
+  "tags": [
+   "media",
+   "layout",
+   "video",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/AspectEmbed.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-aspect-embed.png",
+  "verified": false,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1920x1080",
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "slots.clip",
+    "typical": "public/footage/ 的本地视频(video 槽首用)",
+    "feel": "srcW/srcH/srcDur 由控制台装载 ffprobe 自动填;手输素材时长是必错的坑"
+   },
+   {
+    "name": "variant.ratio",
+    "typical": "auto(默认)/ 9:16 / 1:1 / 4:5 / 16:9",
+    "feel": "嵌入卡片的画幅;素材不符时 cover 裁切"
+   },
+   {
+    "name": "variant.textFx",
+    "typical": "rise(默认)/ cascade / typewriter",
+    "feel": "标题入场三档;cascade 复用 word-cascade 的词飞入"
+   }
+  ],
+  "pitfalls": [
+   "srcDur 短于镜头时靠 <Loop> 无缝循环——不填且素材偏短会渲到末尾定格,所以合同也别省这三个数",
+   "竖画布必须整组垂直居中:卡片钉 9% 的话 16:9 矮卡片让下半屏空 40%,空画面能过掉其余所有检查",
+   "卡片 0.90 上下、四周留底——那圈底就是「被展示的素材」的语义,铺满等于硬切"
+  ]
+ },
+ {
+  "id": "preset-chapter-navigation",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "章节导航卡",
+  "tags": [
+   "overlay",
+   "type",
+   "navigation"
+  ],
+  "source": "templates/remotion-base/src/editor/ChapterNavigation.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-chapter-navigation.png",
+  "verified": false,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1920x1080",
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "slots.items / activeIndex",
+    "typical": "四条章节；activeIndex 从 0 开始",
+    "feel": "固定位置列表，只高亮当前章节。"
+   },
+   {
+    "name": "slots.activateAt",
+    "typical": "1.4 秒",
+    "feel": "相对实例起点，调整标题淡变与高亮时刻。"
+   },
+   {
+    "name": "variant.bg / tune",
+    "typical": "transparent；scale=1",
+    "feel": "透明画布保留局部面板，可调字体、缩放及位置。"
+   }
+  ],
+  "pitfalls": [
+   "当前章节索引必须小于条目数量。",
+   "实例使用局部时钟；每次调用前导透明帧为正常入场，不应裁掉。",
+   "默认现代字体与冷灰配色继承SC-0030 D；未选皮肤时不换色。"
+  ]
+ },
+ {
+  "id": "preset-media-stage",
+  "engine": "remotion",
+  "kind": "component",
+  "title": "PresetMediaStage 标题素材展示",
+  "tags": [
+   "media",
+   "title",
+   "image",
+   "video",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/MediaStage.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-media-stage.png",
+  "verified": false,
+  "seekSafe": true,
+  "cost": "low",
+  "canvas": [
+   "1920x1080",
+   "1080x1920"
+  ],
+  "params": [
+   {
+    "name": "slots.title",
+    "typical": "4–14字",
+    "feel": "一行短标题，三种设计字体与入场"
+   },
+   {
+    "name": "slots.image / slots.clip",
+    "typical": "本地图片或视频",
+    "feel": "默认完整展示，可指定比例裁切"
+   }
+  ],
+  "pitfalls": [
+   "图片视频二选一；替换素材自动更新尺寸并清空另一槽",
+   "默认无署名背景墙，可在统一背景控件更换"
+  ]
+ },
+ {
+  "id": "preset-behind-title",
+  "params": [
+   {"name": "slots.text", "typical": "一个重点", "feel": "放在人物后方的短标题"},
+   {"name": "slots.positionX", "typical": 0.5, "feel": "避开人物与字幕"}
+  ],
+  "pitfalls": ["依赖本地人物抠像，目前仅 macOS 支持", "必须实看人物边缘，不以抠像文件存在代替画质验收"],
+  "engine": "remotion",
+  "kind": "component",
+  "title": "人物身后大字",
+  "tags": [
+   "type",
+   "emphasis",
+   "presenter",
+   "preset"
+  ],
+  "source": "templates/remotion-base/src/presets/BehindTitle.tsx",
+  "install": null,
+  "thumbnail": "docs/catalog/thumbnails/remotion/preset-behind-title.png",
+  "verified": false,
+  "seekSafe": true,
+  "cost": "high",
+  "canvas": [
+   "1920x1080",
+   "1080x1920"
+  ]
+ }
+]

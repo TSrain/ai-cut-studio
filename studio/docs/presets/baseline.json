@@ -1,0 +1,43 @@
+{
+  "baselineVersion": 3,
+  "skin": "abyss",
+  "confirmedAt": "2026-08-06",
+  "confirmedBy": "user",
+  "note": "v2:深海科技蓝的骨架不变(深蓝黑渐变底 + 网格点质感 + 深蓝色板反白字),换掉字体与节奏。字体 modern → minimal:中文霞鹜新晰黑(细黑,不是思源黑体)、西文 Inter,字重上限 500;全系统 font-synthesis: none,单字重中文字不再被浏览器伪造粗体。背景两块斜切几何加径向羽化(原来的硬边在留白多的画面上是一道折痕)。动效新增 CALM 缓动与 BEAT=0.9s 一拍。用户 2026-08-15 原话:「元素太多…口播就要设计的和乔布斯的 ppt 一样,简单直接高级;字体不好看;画框占比太大留白过少;动画过于着急」。",
+  "skinSource": "templates/remotion-base/src/style/baseline.tsx",
+  "samples": [
+    "templates/remotion-base/review/skins/abyss-recede.png",
+    "templates/remotion-base/review/skins/abyss-keyconcept.png"
+  ],
+  "changelog": [
+    {
+      "baselineVersion": 1,
+      "date": "2026-08-06",
+      "note": "初版。候选 ember/slate/paper 被否(橘黄像教科书封皮、底太死黑),按用户反馈定制 abyss 后确认。"
+    },
+    {
+      "baselineVersion": 2,
+      "date": "2026-08-15",
+      "note": "kit modern → minimal(霞鹜新晰黑 + Inter,weightCap 500);全局 font-synthesis: none;Backdrop 斜切几何羽化;新增 CALM 缓动 / BEAT 一拍常量;各 preset 样例删掉自证性标签(「对照 · CONTRAST」「关键数字 · KEY NUMBER」「实物佐证 · EVIDENCE」等,槽位保留只是默认不填)。"
+    },
+    {
+      "baselineVersion": 3,
+      "date": "2026-09-05",
+      "note": "新增已确认 graphite 口播插片偏好；无全画幅边框和底部楔形，中性灰卡体与低饱和冷蓝，原有冻结皮肤保留。"
+    }
+  ],
+  "brollPreference": {
+    "skin": "graphite",
+    "confirmedAt": "2026-09-05",
+    "confirmedBy": "user",
+    "selection": "用 A 吧",
+    "scope": "口播 B-roll；已有冻结合同不追溯改色",
+    "accentShareRange": [
+      0,
+      8
+    ],
+    "decorativeFrame": false,
+    "bottomWedge": false,
+    "copyRule": "一镜一核心命题，导航与实例区分模板"
+  }
+}

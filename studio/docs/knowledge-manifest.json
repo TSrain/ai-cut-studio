@@ -1,0 +1,599 @@
+{
+  "version": 1,
+  "maxDynamic": 4,
+  "maxContextTokens": 12000,
+  "exclusiveKinds": [
+    "profile",
+    "blueprint"
+  ],
+  "note": "Tagged knowledge routing. Only docs/visual-first.md is always-on; every shot gets it plus at most maxDynamic dynamic resources whose estimatedTokens sum stays within maxContextTokens (priority-order packing; oversized entries are skipped, smaller ones still fit). Budget raised 10000->12000 on 2026-08-10: at 10000 the aesthetic layer (color.md, visual-language.md) was crowded out by the implementation layer on every measured shot, so maxDynamic (4) never bound and the cap silently dropped the style profile instead. requiredTags: shot tags must contain ALL of them for the entry to route — for narrow specialist resources that a mere tag overlap over-routes (e.g. captions). estimatedTokens: docs measured at bytes/3 (CJK-heavy), skills estimated at entry-doc + one reference. Read docs/knowledge-routing.md before editing.",
+  "engines": [
+    "remotion",
+    "hyperframes",
+    "both"
+  ],
+  "tagVocabulary": [
+    "core",
+    "data",
+    "chart",
+    "ui",
+    "screenshot",
+    "shader",
+    "3d",
+    "kinetic",
+    "type",
+    "transition",
+    "overlay",
+    "texture",
+    "brand",
+    "logo",
+    "code",
+    "device",
+    "map",
+    "layout",
+    "background",
+    "caption",
+    "audio",
+    "render",
+    "media"
+  ],
+  "entries": [
+    {
+      "id": "core-visual-first",
+      "kind": "contract",
+      "resource": "docs/visual-first.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "core"
+      ],
+      "priority": 100,
+      "always": true,
+      "estimatedTokens": 6000
+    },
+    {
+      "id": "skill-remotion-captions",
+      "kind": "skill",
+      "resource": "skill:remotion-captions",
+      "engines": [
+        "remotion"
+      ],
+      "tags": [
+        "caption",
+        "audio",
+        "type"
+      ],
+      "requiredTags": [
+        "caption"
+      ],
+      "priority": 92,
+      "always": false,
+      "estimatedTokens": 3000
+    },
+    {
+      "id": "skill-remotion-maps",
+      "kind": "skill",
+      "resource": "skill:remotion-maps",
+      "engines": [
+        "remotion"
+      ],
+      "tags": [
+        "map"
+      ],
+      "priority": 91,
+      "always": false,
+      "estimatedTokens": 2600
+    },
+    {
+      "id": "skill-hyperframes-core",
+      "kind": "skill",
+      "resource": "skill:hyperframes-core",
+      "engines": [
+        "hyperframes"
+      ],
+      "tags": [
+        "ui",
+        "layout",
+        "code",
+        "render",
+        "media"
+      ],
+      "priority": 92,
+      "always": false,
+      "estimatedTokens": 4000
+    },
+    {
+      "id": "skill-hyperframes-animation",
+      "kind": "skill",
+      "resource": "skill:hyperframes-animation",
+      "engines": [
+        "hyperframes"
+      ],
+      "tags": [
+        "kinetic",
+        "shader",
+        "3d",
+        "transition",
+        "type"
+      ],
+      "priority": 90,
+      "always": false,
+      "estimatedTokens": 3500
+    },
+    {
+      "id": "doc-chart-rules",
+      "kind": "rule",
+      "resource": "docs/chart-rules.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "data",
+        "chart"
+      ],
+      "priority": 89,
+      "always": false,
+      "estimatedTokens": 1550
+    },
+    {
+      "id": "skill-hyperframes-keyframes",
+      "kind": "skill",
+      "resource": "skill:hyperframes-keyframes",
+      "engines": [
+        "hyperframes"
+      ],
+      "tags": [
+        "shader",
+        "3d",
+        "kinetic",
+        "transition",
+        "overlay"
+      ],
+      "priority": 88,
+      "always": false,
+      "estimatedTokens": 3000
+    },
+    {
+      "id": "skill-remotion-markup",
+      "kind": "skill",
+      "resource": "skill:remotion-markup",
+      "engines": [
+        "remotion"
+      ],
+      "tags": [
+        "transition",
+        "audio",
+        "type",
+        "layout",
+        "media",
+        "code"
+      ],
+      "priority": 88,
+      "always": false,
+      "estimatedTokens": 2500
+    },
+    {
+      "id": "doc-typography",
+      "kind": "rule",
+      "resource": "docs/typography.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "type",
+        "caption",
+        "layout"
+      ],
+      "priority": 87,
+      "always": false,
+      "estimatedTokens": 5400
+    },
+    {
+      "id": "blueprint-bilingual-type-interleave",
+      "kind": "blueprint",
+      "resource": "docs/blueprints/bilingual-type-interleave.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "type",
+        "layout",
+        "brand"
+      ],
+      "requiredTags": [
+        "type"
+      ],
+      "priority": 86,
+      "always": false,
+      "estimatedTokens": 1223
+    },
+    {
+      "id": "blueprint-evidence-tile-accumulate",
+      "kind": "blueprint",
+      "resource": "docs/blueprints/evidence-tile-accumulate.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "layout",
+        "screenshot",
+        "ui",
+        "media"
+      ],
+      "requiredTags": [
+        "layout"
+      ],
+      "priority": 86,
+      "always": false,
+      "estimatedTokens": 1347
+    },
+    {
+      "id": "blueprint-scale-pullback-reveal",
+      "kind": "blueprint",
+      "resource": "docs/blueprints/scale-pullback-reveal.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "media",
+        "transition",
+        "overlay"
+      ],
+      "requiredTags": [
+        "media"
+      ],
+      "priority": 86,
+      "always": false,
+      "estimatedTokens": 1326
+    },
+    {
+      "id": "blueprint-kinetic-word-cascade",
+      "kind": "blueprint",
+      "resource": "docs/blueprints/kinetic-word-cascade.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "kinetic",
+        "type"
+      ],
+      "requiredTags": [
+        "kinetic"
+      ],
+      "priority": 86,
+      "always": false,
+      "estimatedTokens": 1281
+    },
+    {
+      "id": "blueprint-white-sweep-insert",
+      "kind": "blueprint",
+      "resource": "docs/blueprints/white-sweep-insert.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "transition",
+        "overlay",
+        "media"
+      ],
+      "requiredTags": [
+        "transition"
+      ],
+      "priority": 86,
+      "always": false,
+      "estimatedTokens": 1094
+    },
+    {
+      "id": "skill-hyperframes-registry",
+      "kind": "skill",
+      "resource": "skill:hyperframes-registry",
+      "engines": [
+        "hyperframes"
+      ],
+      "tags": [
+        "ui",
+        "device",
+        "background",
+        "texture",
+        "logo"
+      ],
+      "priority": 86,
+      "always": false,
+      "estimatedTokens": 2500
+    },
+    {
+      "id": "profile-visual-max",
+      "kind": "profile",
+      "resource": "docs/styles/visual-max.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "texture",
+        "background",
+        "layout",
+        "3d"
+      ],
+      "priority": 85,
+      "always": false,
+      "estimatedTokens": 1100
+    },
+    {
+      "id": "profile-data-cinematic",
+      "kind": "profile",
+      "resource": "docs/styles/data-cinematic.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "data",
+        "chart",
+        "ui",
+        "device"
+      ],
+      "priority": 85,
+      "always": false,
+      "estimatedTokens": 1300
+    },
+    {
+      "id": "profile-brand-energy",
+      "kind": "profile",
+      "resource": "docs/styles/brand-energy.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "brand",
+        "logo",
+        "kinetic"
+      ],
+      "priority": 85,
+      "always": false,
+      "estimatedTokens": 1100
+    },
+    {
+      "id": "profile-editorial-luxe",
+      "kind": "profile",
+      "resource": "docs/styles/editorial-luxe.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "media",
+        "screenshot",
+        "map"
+      ],
+      "priority": 85,
+      "always": false,
+      "estimatedTokens": 1300
+    },
+    {
+      "id": "skill-media-use",
+      "kind": "skill",
+      "resource": "skill:media-use",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "media",
+        "audio",
+        "logo",
+        "brand",
+        "texture"
+      ],
+      "priority": 84,
+      "always": false,
+      "estimatedTokens": 3000
+    },
+    {
+      "id": "doc-color",
+      "kind": "rule",
+      "resource": "docs/color.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "background",
+        "texture",
+        "brand",
+        "data"
+      ],
+      "priority": 83,
+      "always": false,
+      "estimatedTokens": 3700
+    },
+    {
+      "id": "doc-locate-protocol",
+      "kind": "protocol",
+      "resource": "docs/locate-protocol.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "screenshot",
+        "map",
+        "device",
+        "overlay"
+      ],
+      "priority": 82,
+      "always": false,
+      "estimatedTokens": 1100
+    },
+    {
+      "id": "doc-visual-language",
+      "kind": "rule",
+      "resource": "docs/visual-language.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "brand",
+        "texture",
+        "layout",
+        "type"
+      ],
+      "priority": 80,
+      "always": false,
+      "estimatedTokens": 2100
+    },
+    {
+      "id": "skill-hyperframes-creative",
+      "kind": "skill",
+      "resource": "skill:hyperframes-creative",
+      "engines": [
+        "hyperframes"
+      ],
+      "tags": [
+        "brand",
+        "background",
+        "audio",
+        "caption"
+      ],
+      "priority": 78,
+      "always": false,
+      "estimatedTokens": 3000
+    },
+    {
+      "id": "doc-styleframe-protocol",
+      "kind": "protocol",
+      "resource": "docs/styleframe-protocol.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "layout",
+        "texture",
+        "background"
+      ],
+      "priority": 76,
+      "always": false,
+      "estimatedTokens": 2200
+    },
+    {
+      "id": "doc-hybrid-bridge",
+      "kind": "rule",
+      "resource": "docs/hybrid-bridge.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "overlay",
+        "media",
+        "render"
+      ],
+      "priority": 74,
+      "always": false,
+      "estimatedTokens": 4000
+    },
+    {
+      "id": "skill-hyperframes-cli",
+      "kind": "skill",
+      "resource": "skill:hyperframes-cli",
+      "engines": [
+        "hyperframes"
+      ],
+      "tags": [
+        "render",
+        "code"
+      ],
+      "priority": 73,
+      "always": false,
+      "estimatedTokens": 2500
+    },
+    {
+      "id": "skill-remotion-best-practices",
+      "kind": "skill",
+      "resource": "skill:remotion-best-practices",
+      "engines": [
+        "remotion"
+      ],
+      "tags": [
+        "code",
+        "layout"
+      ],
+      "priority": 72,
+      "always": false,
+      "estimatedTokens": 1500
+    },
+    {
+      "id": "skill-remotion-render",
+      "kind": "skill",
+      "resource": "skill:remotion-render",
+      "engines": [
+        "remotion"
+      ],
+      "tags": [
+        "render",
+        "media"
+      ],
+      "priority": 70,
+      "always": false,
+      "estimatedTokens": 2000
+    },
+    {
+      "id": "doc-motion-vocabulary",
+      "kind": "rule",
+      "resource": "docs/motion-vocabulary.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "kinetic",
+        "transition",
+        "overlay"
+      ],
+      "priority": 68,
+      "always": false,
+      "estimatedTokens": 1500
+    },
+    {
+      "id": "doc-design-principles",
+      "kind": "rule",
+      "resource": "docs/design-principles.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "data",
+        "chart",
+        "layout",
+        "transition"
+      ],
+      "priority": 65,
+      "always": false,
+      "estimatedTokens": 4300
+    },
+    {
+      "id": "doc-engine-routing",
+      "kind": "rule",
+      "resource": "docs/engine-routing.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "code",
+        "render"
+      ],
+      "priority": 55,
+      "always": false,
+      "estimatedTokens": 5200
+    },
+    {
+      "id": "doc-quality-checklist",
+      "kind": "gate",
+      "resource": "docs/quality-checklist.md",
+      "engines": [
+        "both"
+      ],
+      "tags": [
+        "render",
+        "caption",
+        "type"
+      ],
+      "priority": 50,
+      "always": false,
+      "estimatedTokens": 4800
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "id": "flying-words",
+  "name": "关键词隧道",
+  "engine": "remotion",
+  "compositionId": "PresetFlyingWords",
+  "componentSource": "templates/remotion-base/src/presets/FlyingWordsShot.tsx",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 4,
+    "max": 8,
+    "default": 6
+  },
+  "tags": [
+    "type",
+    "kinetic",
+    "depth",
+    "montage",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 1,
+    "kineticType": 2,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "propulsive",
+    "springAccents": 1,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "隧道纵深底+中心光晕第 0 帧已在(首帧不淡入);关键词已在各自相位上飞行——本镜没有「开场」,观众切进来就已经在隧道里",
+        "easing": "无"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "关键词恒速过镜:每词一趟 3.0s(深处 z=-3940 生成 → 穿过相机平面 z=+1800),相位按词序均分错开;深处糊+暗、中段满亮、近端糊掉擦身而过。时长伸缩只改圈数不改速度",
+        "easing": "linear(恒速)"
+      },
+      {
+        "phase": "exit",
+        "seconds": 2.1,
+        "action": "从片尾倒数 2.1s 起进入 finale 相位:关键词 0.75s 内向外退散",
+        "easing": "linear"
+      },
+      {
+        "phase": "exit",
+        "seconds": 1.15,
+        "action": "finale 句从 z=-2600 推到 z=0 定格(1.15s,同帧淡入 + 去糊 16→0px),唯一弹簧名额=定格瞬间 1.5% 过冲",
+        "easing": "CALM + spring(damping 16)"
+      },
+      {
+        "phase": "exit",
+        "seconds": 0.4,
+        "action": "finale 落定后强调色锚点细线横向生长 0.4s,随后静止到末帧",
+        "easing": "ENTER"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "slots": {
+    "words": {
+      "label": "关键词",
+      "hint": "一行一个词，2–4 个字最好。它们会从深处飞出来擦身而过，观众读到的是「这么多事」的量感，不是逐个读完",
+      "type": "list",
+      "required": true,
+      "minItems": 6,
+      "maxItems": 24,
+      "role": "h1",
+      "fontSize": 82,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 620,
+        "shrinkFloorPx": 24
+      },
+      "description": "隧道里飞过的关键词。字号在 52–92 之间按词序伪随机错开(全同号读作贴图);超宽词自动缩字号。少于 6 个隧道会显空,多于 24 个观众只看见糊团"
+    },
+    "finale": {
+      "label": "收尾定格句",
+      "hint": "隧道散开后推到画面正中定格的那一句，通常是结论。不填就以最后一批词淡出收尾",
+      "type": "text",
+      "required": false,
+      "role": "hero",
+      "fontSize": 118,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 900,
+        "shrinkFloorPx": 56
+      },
+      "description": "收尾定格句,可省。存在时占用片尾 2.1s 作为 finale 相位(词退散 + 句推近 + 锚点线),是本镜的英雄帧"
+    }
+  },
+  "anchors": {
+    "start": "隧道纵深底已在场,关键词在各自深度上飞行(无开场,切进来即在途中)",
+    "end": "退场前：关键词已退散,「{finale}」在画面正中定格,下方强调色锚点细线,静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【关键词隧道 preset:flying-words@v1】口播列举一串事项时的量感画面:{words} 从深处掠过相机,收束到「{finale}」",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-21",
+      "note": "初版:从 video-shotcraft 的 flying-words 移植。横版 480×270 → 1080×1920 竖版重标定,系数一律 ×2.25(perspective 1100→2475、z 行程 ×2.25、近端模糊系数 26→58);散布椭圆由横版的 y×0.6 压扁反转为竖版 y×1.42 拉高。demo 的 200–330° 蓝紫带改由皮肤 accentHue±(−34…+58)° 派生。生命曲线中段由 0.5 提到 0.7、峰值后移到 0.3(demo 里词是背景层要给前景让位,本 preset 里词就是主角,压 0.5 任意静帧都读作画面太素)"
+    },
+    {
+      "version": 1,
+      "date": "2026-08-22",
+      "note": "用户看过 9 个模板的连播验收片(桌面 新模板验收.mp4,每个模板的真实文案样例动效),回「都 verified」——翻 verified,自此走快车道:批量出片时不再出三张 Styleframe、不逐镜全量自查,只做槽位校验 + 预览印张确认 + 输出成功 + 分辨率/时长/编码四项检查"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "slots": {
+      "words": [
+        "剪辑",
+        "配色",
+        "字体",
+        "节奏",
+        "转场",
+        "卡点",
+        "运镜",
+        "蒙版",
+        "调色",
+        "音效",
+        "分镜",
+        "特效"
+      ],
+      "finale": "全都交给模板"
+    }
+  },
+  "verifiedAt": "2026-08-22"
+}

@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "id": "space-steps",
+  "name": "空间步进",
+  "compositionId": "PresetSpaceSteps",
+  "componentSource": "templates/remotion-base/src/presets/SpaceSteps.tsx",
+  "engine": "remotion",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 5,
+    "max": 10,
+    "default": 7
+  },
+  "tags": [
+    "layout",
+    "depth",
+    "camera",
+    "transition",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 0,
+    "shader3d": 1,
+    "kineticType": 0,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "deliberate",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "第 1 站正视,第 0 帧即在场(不淡入);世界自 z+80 落位 0.7s —— 是轻推入,不是入场动画",
+        "easing": "CALM"
+      },
+      {
+        "phase": "hold",
+        "seconds": 1.05,
+        "action": "飞第 2 站 0.85s:右移 +340 / 下行 +700 / 后退 -260 / ry−38°(世界向左转过去)。相机取该站姿态之逆,链式插值,任一帧中断都是合法姿态",
+        "easing": "MOVE"
+      },
+      {
+        "phase": "hold",
+        "seconds": 1.9,
+        "action": "停留 0.95s 读卡(标题 + 小注);离焦站保持 0.28 底 + 5px 模糊,始终「在场」"
+      },
+      {
+        "phase": "hold",
+        "seconds": 2.75,
+        "action": "飞第 3 站 0.85s:左移 -340 / 下行 +700 / 后退 -260 / rz90°(画框侧躺,相机把它转正)。variant.spin='off' 时改用 ry+38°,不侧躺",
+        "easing": "MOVE"
+      },
+      {
+        "phase": "hold",
+        "seconds": 3.7,
+        "action": "停留 0.95s 读卡;结论板此时从画面底部露出一角(预告)"
+      },
+      {
+        "phase": "hold",
+        "seconds": 4.65,
+        "action": "飞 OVERVIEW 1.1s:相机退到所有站之前(z+180)并 1/1.8 拉远,全员点亮,幽灵序号淡出,结论板与 caption 入画;侧躺站的卡内文字同步反向旋转,屏幕上净旋转恒为 0(文字不动,卡片绕着它转)",
+        "easing": "MOVE"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "总览定格(英雄帧:结论板标题恒为 88px 屏幕像素)。时长伸缩优先落在这里;装不下先压 hold(最多压到一半),再压飞行(不低于 0.72 倍),末段真静止保底 0.85s"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "spin": {
+      "type": "enum",
+      "values": [
+        "on",
+        "off"
+      ],
+      "default": "on",
+      "description": "第 3 站是否用 rz90° 画框侧躺(相机跟着把它转正)。on = 记忆点,一支片只用一次;off = 只用位移与 ry,给信息密的文案让路"
+    }
+  },
+  "slots": {
+    "steps": {
+      "label": "每一站",
+      "hint": "一行一站，3–4 站。写成「标题 | 一句话」，竖线前是站名，后是小注。相机会依次飞到每一站正面对齐",
+      "type": "list",
+      "required": true,
+      "minItems": 3,
+      "maxItems": 4,
+      "role": "h1",
+      "fontSize": 72,
+      "maxLines": 1,
+      "splitOn": " | ",
+      "noteRatio": 0.46,
+      "noteMaxLines": 2,
+      "fit": {
+        "maxWidthPx": 512,
+        "shrinkFloorPx": 36
+      },
+      "description": "散布在 3D 空间各处的站点卡。每站有自己的位置与姿态,相机取其逆飞去对齐"
+    },
+    "overview": {
+      "label": "总览卡标题",
+      "hint": "末段拉远成总览时,底部结论板上的那句话 —— 这一镜的英雄帧,写结论不写标题。不填就用第一站的站名",
+      "type": "text",
+      "required": false,
+      "role": "h1",
+      "fontSize": 88,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 680,
+        "shrinkFloorPx": 48
+      },
+      "description": "OVERVIEW 站的标题(这一镜的英雄帧),可省"
+    },
+    "caption": {
+      "label": "结论句",
+      "hint": "画面底部那句话，说清这几站合起来是什么。可以按回车折行，不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "body",
+      "fontSize": 44,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 888,
+        "shrinkFloorPx": 32
+      },
+      "description": "底部结论句,可省"
+    }
+  },
+  "anchors": {
+    "start": "深色底,第 1 站卡片正视占据画面中带,其余站点在空间深处虚化待命",
+    "end": "退场前：相机拉远成总览,{steps} 全部点亮同框,「{overview}」居中静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【空间步进 preset:space-steps@v1】把几步讲述拍成在同一片空间里的旅行:相机依次飞到 {steps} 各自的姿态对齐,末段拉远一眼看全",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-26",
+      "note": "初版:从 video-shotcraft 的 basic-3d-scene 移植(合成 ScBasic3DScene 逐帧对照)。本体不动:camera = stepTransform.inverse(),逆变换旋转顺序 Z→Y→X 严格反着正变换。480×270 横版 → 1080×1920 竖版的三处刻意偏差:①**横版散点改成左右交替的下行纵队**(x=0/±340、y 每站 +700、z 每站 -260)——demo 四站散在横向平面,竖版画幅高是宽的 1.78 倍,横向散点总览时被宽度卡死、上下留大片空;纵队天然吃满竖画幅,读序也从「到处找下一张」变成「顺着往下读」。②**OVERVIEW 从「空间里一张巨卡」改成「纵队末端的结论板」,板内一切按屏幕像素授权**——demo 的总览卡 s=3.1、内容预除 2.2,压在别的卡上(原片定格里标题被 STEP01 挡掉半行);这里板挂在末站下方 540px、z=0 最前层,世界缩放 k=OVER_S/mag,于是 3 站和 4 站下板都恒为 800px 宽、标题恒为 88px,英雄帧字大且永不被挡,槽位 fit 因此直接用屏幕像素口径。③**rz90 站的卡内文字末段反向旋转,不是淡掉**——CubeNav 的顶/底面只能淡掉(法线朝上,两姿态差 180° 面内旋转,数学上无解),而 rz 是面内旋转,反向旋转精确可解:相机 rz 从 -90 归 0 的同时文字走 0→-90,屏幕净旋转恒为 0,文字全程稳住、卡片绕着它转;进站方向的「转正瞬间」照旧保留。另:卡内灰阶骨架条全删换成真实中文「标题 | 一句话」(h1 72px 估宽 + body 0.46 比最多 2 行);每站背后加一枚 400px 幽灵序号补层次与身份、总览时淡出;离焦模糊峰值 5px(demo 3.5px 在 480 坐标下等效 1080 的 7.9px,竖版卡面积大,糊到 7.9 就成色块);站点色相由 accentHue 派生邻近色相,零 hex。"
+    },
+    {
+      "version": 1,
+      "date": "2026-08-26",
+      "note": "用户看过三模板连播验收片(桌面 新模板验收-20260826.mp4,1080×1920,各自的真实中文样例文案)后回「没问题,这几个分别形成模板」——翻 verified,自此走快车道:批量出片时不再出三张 Styleframe、不逐镜全量自查,只做槽位校验 + 预览印张确认 + 输出成功 + 分辨率/时长/编码/音轨四项检查"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "slots": {
+      "steps": [
+        "先把话说顺 | 画面的事一个字都别想",
+        "一句话一个画面 | 配不出来的那句多半是废话",
+        "八成套模板 | 剩下两成才值得设计"
+      ],
+      "overview": "三步,一支片子",
+      "caption": "不是翻页,是在想法的空间里走一趟。"
+    }
+  },
+  "verifiedAt": "2026-08-26"
+}

@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "id": "phone-ripple",
+  "name": "波纹手机芯片",
+  "engine": "remotion",
+  "compositionId": "PresetPhoneRipple",
+  "componentSource": "templates/remotion-base/src/presets/PhoneRipple.tsx",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 4,
+    "max": 8,
+    "default": 5.6
+  },
+  "tags": [
+    "ui",
+    "layout",
+    "product",
+    "screenshot",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 2,
+    "shader3d": 0,
+    "kineticType": 0,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "calm",
+    "springAccents": 1,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "同心波纹与手机第 0 帧已在场(首帧不淡入);手机上浮 36px + scale 0.965→1 落位 0.55s",
+        "easing": "CALM"
+      },
+      {
+        "phase": "hold",
+        "seconds": 0.08,
+        "action": "屏内内容全片**匀速**滚动(片长的 8%→98%,linear 无缓动 —— 加 ease 立刻读作「有人在滑」,匀速才是自动播放)",
+        "easing": "linear"
+      },
+      {
+        "phase": "hold",
+        "seconds": 1,
+        "action": "功能芯片自上而下、左右交替弹出:每 0.5s 一个,单个 pop 0.55s 带过冲(唯一弹簧名额),落位后 0.75s 内渐入 ±6px 悬浮",
+        "easing": "outBack → ENTER"
+      },
+      {
+        "phase": "hold",
+        "seconds": 1.7,
+        "action": "caption 底部淡入上浮 0.5s",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "三层动作各自极慢地持续(波纹 0.27Hz 错相呼吸、屏内匀速滚、芯片 0.36Hz 悬浮),叠起来才不显静止。时长伸缩落在这里,呼吸频率按绝对秒定所以 4s 和 8s 性格一致"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "slots": {
+    "chips": {
+      "label": "功能芯片",
+      "hint": "一行一个卖点名，2–5 个。它们会左右交替从手机两侧弹出，一个一个说",
+      "type": "list",
+      "required": true,
+      "minItems": 2,
+      "maxItems": 5,
+      "role": "label",
+      "fontSize": 40,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 210,
+        "shrinkFloorPx": 24
+      },
+      "description": "两侧的功能芯片(白色亮面,暗皮肤下是画面高光点)。左起交替、纵向错落(确定性抖动 ±18px,不排成直线)。每个 4–6 字最稳,超过 210px 自动缩字"
+    },
+    "screenshot": {
+      "label": "手机屏截图",
+      "hint": "手机屏里滚动的真实截图（放在 build/public/screens/ 下）。不填就滚一段抽象的骨架流，一样成立",
+      "type": "image",
+      "required": false,
+      "assetDir": "screens",
+      "description": "屏内滚动的产品截图,可省。含 / 视为 public/ 完整相对路径,裸文件名自动补 screens/(与 screen-push 同一套约定)。**内容总高必须大于滚动距离 + 屏高**,否则滚到底露白 —— 组件已按 min(可滚上限, 1.15 屏高) 做了双保险"
+    },
+    "imgW": {
+      "label": "截图宽(像素)",
+      "hint": "填了截图才需要。控制台会自动探测，手写合同用 sips -g pixelWidth 量",
+      "type": "number",
+      "required": false,
+      "derivedFrom": "screenshot",
+      "description": "源图真实像素宽,用于按屏宽等比缩放并算滚动距离"
+    },
+    "imgH": {
+      "label": "截图高(像素)",
+      "hint": "填了截图才需要。控制台会自动探测，手写合同用 sips -g pixelHeight 量",
+      "type": "number",
+      "required": false,
+      "derivedFrom": "screenshot",
+      "description": "源图真实像素高"
+    },
+    "caption": {
+      "label": "结论句",
+      "hint": "画面底部那句话，一句说清这几个芯片合起来是什么。不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "h2",
+      "fontSize": 54,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 936,
+        "shrinkFloorPx": 34
+      },
+      "description": "底部结论句(top 1600),可省。锚在底部安全区,tune 的 x/y 挪波纹+手机+芯片整组时它不跟着走"
+    }
+  },
+  "anchors": {
+    "start": "同心波纹已在呼吸,手机正在上浮落位,屏内内容开始滚动",
+    "end": "退场前：手机居中定格、屏内仍在匀速滚,两侧「{chips}」全部弹出并轻微悬浮,底部「{caption}」静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【波纹手机芯片 preset:phone-ripple@v1】移动端产品的「这就是它」定格镜:手机屏内自动滚动,两侧弹出 {chips}",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-21",
+      "note": "初版:从 video-shotcraft 的 radial-ripple-phone-chips 移植。横版 480×270 demo 重排为 1080×1920 竖版:手机放大到 560 宽居中(中心 y830),芯片错落贴两侧,caption 落 y1600;骨架流卡片按屏宽比例放大 4.3 倍。波纹/手机壳/屏内骨架改由 oklch(L, neutralChroma, P.hue) 从皮肤中性系派生(暗皮肤外暗内亮=光从中心荡开,亮皮肤反向),最内层轻染 accent 色相;强调色只出现在骨架缩略图渐变里,面积天然 <10%"
+    },
+    {
+      "version": 1,
+      "date": "2026-08-22",
+      "note": "用户看过 9 个模板的连播验收片(桌面 新模板验收.mp4,每个模板的真实文案样例动效),回「都 verified」——翻 verified,自此走快车道:批量出片时不再出三张 Styleframe、不逐镜全量自查,只做槽位校验 + 预览印张确认 + 输出成功 + 分辨率/时长/编码四项检查"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "slots": {
+      "chips": [
+        "自动分镜",
+        "模板匹配",
+        "一键出片"
+      ],
+      "caption": "三步,从口播稿到成片。"
+    }
+  },
+  "verifiedAt": "2026-08-22"
+}

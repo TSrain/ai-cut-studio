@@ -1,0 +1,13 @@
+{
+  "name": "hyperframes-base",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.7.87 preview",
+    "lint": "npx --yes hyperframes@0.7.87 lint",
+    "check": "npx --yes hyperframes@0.7.87 check",
+    "snapshot": "npx --yes hyperframes@0.7.87 snapshot",
+    "render": "npx --yes hyperframes@0.7.87 render",
+    "publish": "npx --yes hyperframes@0.7.87 publish"
+  }
+}

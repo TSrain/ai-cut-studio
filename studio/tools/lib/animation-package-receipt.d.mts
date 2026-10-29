@@ -1,0 +1,2 @@
+import type { EditorDocument, PlanJob } from '../../templates/remotion-base/src/editor/types';
+export function finalizeAnimationReceipt(job: PlanJob & {outputDir:string}, document: EditorDocument, manifest: {workflowMode:string;fullPackageVersion?:number;runId?:string;outputs:{planPath:string;semanticPackagePath?:string};files:Array<{path:string;sha256:string}>}): {finalSummaryPath?:string;applicationReceiptPath?:string;appliedTemplates?:number;unappliedTemplates?:number;fullPackageState?:string;fullPackageBranches?:Array<any>};

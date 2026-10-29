@@ -1,0 +1,9 @@
+export type CameraSegment={from:number;to:number;zoomFrom:number;zoomTo:number;[key:string]:unknown};
+export const PURPOSES:Set<string>;
+export const DEFAULT_LEVELS:Readonly<{A:number;B:number;C:number}>;
+export const DEFAULT_ANCHOR:Readonly<{x:number;y:number}>;
+export function validateShotPlan(plan:any,options?:{duration?:number}):{errors:string[];warnings:string[]};
+export function compileShotPlan(plan:any,options?:{duration?:number}):CameraSegment[];
+export function sampleCameraZoom(segments:CameraSegment[],time:number):number;
+export function buildZoomExpression(segments:CameraSegment[]):string;
+export function buildCameraFilter(segments:CameraSegment[],options:{width:number;height:number;fps:number;anchor?:{x:number;y:number}}):string;

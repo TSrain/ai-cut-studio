@@ -1,0 +1,19 @@
+{
+  "name": "ai-cut-studio",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "description": "Local-first, editable talking-head video workflow",
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "setup": "npm ci --prefix studio/templates/remotion-base && python3 scripts/fonts.py",
+    "start": "node scripts/start.mjs",
+    "build": "node studio/tools/build-editor.mjs",
+    "doctor": "python3 scripts/doctor.py",
+    "smoke": "node scripts/smoke.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:studio": "cd studio && node --test --test-concurrency=4 --test-timeout=120000 tools/tests/*.test.mjs",
+    "test:workflow": "cd workflow && python3 -m unittest discover -s tests -t . -p 'test_*.py'",
+    "audit:release": "python3 scripts/audit_release.py"
+  }
+}

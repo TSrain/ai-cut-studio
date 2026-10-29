@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "id": "cube-nav",
+  "name": "立方体导航",
+  "engine": "remotion",
+  "compositionId": "PresetCubeNav",
+  "componentSource": "templates/remotion-base/src/presets/CubeNav.tsx",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 4,
+    "max": 8,
+    "default": 6.5
+  },
+  "tags": [
+    "layout",
+    "depth",
+    "ui",
+    "transition",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 1,
+    "shader3d": 1,
+    "kineticType": 0,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "keyframes": [
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "deliberate",
+    "springAccents": 0,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "第 1 面正视特写,第 0 帧即在场(首帧不淡入);caption 0.25s 起上浮淡入 0.4s",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "hold",
+        "seconds": 0.55,
+        "action": "转向下一面 0.55s:中段用 sin(π·u) 把相机拉到等轴测距离并加 -24° 俯角(等轴测过渡视角),两端归零无跳变;进度点过半即切到新面的色相",
+        "easing": "MOVE"
+      },
+      {
+        "phase": "hold",
+        "seconds": 0.45,
+        "action": "每面停留读面 0.45s(N-1 步循环:转 0.55s → 停 0.45s)"
+      },
+      {
+        "phase": "hold",
+        "seconds": 0.6,
+        "action": "末段拉出到等轴测全景定格(俯角 -26°、在末面基础上再退 38°、距离拉到 -380),三面受光;顶/底面的标题与角标同步淡出(几何上它们在俯视里是倒的)",
+        "easing": "MOVE"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "等轴测全景静止(英雄帧;时长伸缩全部落在这里,时长不够时巡览整段等比压缩,末段定格保底 0.8s)"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "slots": {
+    "faces": {
+      "label": "面标题",
+      "hint": "一行一个面，3–6 个。相机会逐面正视一遍，最后拉开成等轴测全景。第 5、6 个面会贴到顶面和底面",
+      "type": "list",
+      "required": true,
+      "minItems": 3,
+      "maxItems": 6,
+      "role": "label",
+      "fontSize": 56,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 476,
+        "shrinkFloorPx": 30
+      },
+      "description": "立方体各面的标题。前 4 个贴侧环(相机绕 Y 逐面转),第 5 个贴顶面、第 6 个贴底面;不足 6 个的剩余面退成中性素面(骨架条,不抢戏)。面色按面序落在 accentHue+{0,±28,±56,+84}° 上——「我在哪一面」的第一识别信号"
+    },
+    "caption": {
+      "label": "结论句",
+      "hint": "画面底部那句话，说清这几个面合起来是什么。可以按回车折行，不填就不显示",
+      "type": "text",
+      "required": false,
+      "role": "body",
+      "fontSize": 44,
+      "maxLines": 2,
+      "fit": {
+        "maxWidthPx": 888,
+        "shrinkFloorPx": 32
+      },
+      "description": "底部结论句(top 1560),可省。第 0.25s 就淡入并全程在场——它是这一镜的旁白,不是收尾"
+    }
+  },
+  "anchors": {
+    "start": "深色底+地面软阴影已在场,立方体第 1 面「{faces}」正视特写占满画面中带",
+    "end": "退场前：立方体拉到等轴测全景,三面受光,底部进度点停在末面色相,「{caption}」静止；末段约 0.35s 平滑溶出，最后实际帧退净。"
+  },
+  "objectiveTemplate": "【立方体导航 preset:cube-nav@v1】把一个系统的几个部分拍成同一个立方体的几个面:逐面巡览 {faces},末段拉开成全景",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-21",
+      "note": "初版:从 video-shotcraft 的 cube-navigation 移植。190px 横版 demo → 1080×1920 竖版:棱长 560、perspective 2240(persp/S≈4 是配方卡标定的「看清棱角又不畸变」均衡点),中心 (540,800) 居中偏上给 caption 让位。demo 的固定 3 面、面↔等轴各排独立停点,改为 N-1 步「面→面」过渡(中段插等轴测视角),停点数减半后 3–6 面都装得进 4–8s。六面色相改由 accentHue 派生,零 hex。等轴测定格帧里顶/底面标题会倒置(同一块面无法在特写与俯视两个姿态里都正立,差 180° 面内旋转),末段拉出时把这两面的标题与角标淡掉,只留方向中性的骨架条"
+    },
+    {
+      "version": 1,
+      "date": "2026-08-22",
+      "note": "用户看过 9 个模板的连播验收片(桌面 新模板验收.mp4,每个模板的真实文案样例动效),回「都 verified」——翻 verified,自此走快车道:批量出片时不再出三张 Styleframe、不逐镜全量自查,只做槽位校验 + 预览印张确认 + 输出成功 + 分辨率/时长/编码四项检查"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "slots": {
+      "faces": [
+        "总览",
+        "数据",
+        "时间线",
+        "素材",
+        "设置"
+      ],
+      "caption": "一个工作台,五个面。"
+    }
+  },
+  "verifiedAt": "2026-08-22"
+}

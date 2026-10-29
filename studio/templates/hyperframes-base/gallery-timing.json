@@ -1,0 +1,431 @@
+{
+  "registry": {
+    "file": "registry-gallery.html",
+    "harness": "gallery-registry",
+    "items": [
+      {
+        "name": "app-showcase",
+        "src": "compositions/app-showcase.html",
+        "compositionId": "app-showcase",
+        "width": 1920,
+        "height": 1080,
+        "duration": 5.5,
+        "start": 0,
+        "midpoint": 2.75
+      },
+      {
+        "name": "code-diff",
+        "src": "compositions/code-diff.html",
+        "compositionId": "code-diff",
+        "width": 1920,
+        "height": 1080,
+        "duration": 6,
+        "start": 5.5,
+        "midpoint": 8.5
+      },
+      {
+        "name": "code-morph",
+        "src": "compositions/code-morph.html",
+        "compositionId": "code-morph",
+        "width": 1920,
+        "height": 1080,
+        "duration": 7,
+        "start": 11.5,
+        "midpoint": 15
+      },
+      {
+        "name": "code-typing",
+        "src": "compositions/code-typing.html",
+        "compositionId": "code-typing",
+        "width": 1920,
+        "height": 1080,
+        "duration": 5,
+        "start": 18.5,
+        "midpoint": 21
+      },
+      {
+        "name": "data-chart",
+        "src": "compositions/data-chart.html",
+        "compositionId": "data-chart",
+        "width": 1920,
+        "height": 1080,
+        "duration": 15,
+        "start": 23.5,
+        "midpoint": 31
+      },
+      {
+        "name": "editorial-flash-overlay",
+        "src": "compositions/editorial-flash-overlay.html",
+        "compositionId": "editorial-flash-overlay",
+        "width": 1920,
+        "height": 1080,
+        "duration": 4,
+        "start": 38.5,
+        "midpoint": 40.5
+      },
+      {
+        "name": "freeze-frame-dressing",
+        "src": "compositions/freeze-frame-dressing.html",
+        "compositionId": "freeze-frame-dressing",
+        "width": 1920,
+        "height": 1080,
+        "duration": 4,
+        "start": 42.5,
+        "midpoint": 44.5
+      },
+      {
+        "name": "liquid-glass-widgets",
+        "src": "compositions/liquid-glass-widgets.html",
+        "compositionId": "liquid-glass-widgets",
+        "width": 1920,
+        "height": 1080,
+        "duration": 8,
+        "start": 46.5,
+        "midpoint": 50.5
+      },
+      {
+        "name": "logo-outro",
+        "src": "compositions/logo-outro.html",
+        "compositionId": "logo-outro",
+        "width": 1920,
+        "height": 1080,
+        "duration": 6,
+        "start": 54.5,
+        "midpoint": 57.5
+      },
+      {
+        "name": "organic-light-leak-overlay",
+        "src": "compositions/organic-light-leak-overlay.html",
+        "compositionId": "organic-light-leak-overlay",
+        "width": 1920,
+        "height": 1080,
+        "duration": 4,
+        "start": 60.5,
+        "midpoint": 62.5
+      },
+      {
+        "name": "ui-3d-reveal",
+        "src": "compositions/ui-3d-reveal.html",
+        "compositionId": "ui-3d-reveal",
+        "width": 1920,
+        "height": 1080,
+        "duration": 13,
+        "start": 64.5,
+        "midpoint": 71
+      },
+      {
+        "name": "vfx-shatter",
+        "src": "compositions/vfx-shatter.html",
+        "compositionId": "glass-shatter",
+        "width": 1920,
+        "height": 1080,
+        "duration": 12,
+        "start": 77.5,
+        "midpoint": 83.5
+      },
+      {
+        "name": "vfx-text-cursor",
+        "src": "compositions/vfx-text-cursor.html",
+        "compositionId": "vfx-text-cursor",
+        "width": 1920,
+        "height": 1080,
+        "duration": 8,
+        "start": 89.5,
+        "midpoint": 93.5
+      }
+    ],
+    "excluded": [
+      {
+        "name": "cinematic-zoom",
+        "src": "compositions/cinematic-zoom.html",
+        "compositionId": "cinematic-zoom",
+        "width": 1920,
+        "height": 1080,
+        "duration": 4,
+        "reason": "实测:通过 data-composition-src 挂载时内联脚本死于 TypeError: Illegal invocation,__timelines[\"main\"] 从不注册,WebGL 画布停在第 0 帧;同一文件当 index.html 独立跑正常。"
+      },
+      {
+        "name": "domain-warp-dissolve",
+        "src": "compositions/domain-warp-dissolve.html",
+        "compositionId": "domain-warp-dissolve",
+        "width": 1920,
+        "height": 1080,
+        "duration": 4,
+        "reason": "实测:同 cinematic-zoom —— 挂载即 Illegal invocation、时间线不注册、shader 画布不绘制;独立运行正常,缩略图取自 gallery-solo/domain-warp-dissolve。"
+      },
+      {
+        "name": "flowchart-vertical",
+        "src": "compositions/flowchart-vertical.html",
+        "compositionId": "flowchart-vertical",
+        "width": 1440,
+        "height": 2560,
+        "duration": 12,
+        "reason": "同 flowchart(同一个块的竖版孪生,同样带收尾 #fade-overlay)。它在某些采样时刻侥幸没被抽到,但采样点会随时间线总长漂移 —— 留着就是随机 exit 1,所以一并移出。"
+      },
+      {
+        "name": "flowchart",
+        "src": "compositions/flowchart.html",
+        "compositionId": "flowchart",
+        "width": 1920,
+        "height": 1080,
+        "duration": 12,
+        "reason": "实测:收尾的 #fade-overlay 盖住全部节点文字,layout 审计报 11 个 text_occluded + 1 个 contrast 1:1。那是这个块自己的淡出设计(该时刻本来就该看不见字),但审计不区分\"被设计成看不见\"和\"被压住看不见\"。"
+      },
+      {
+        "name": "vfx-iphone-device",
+        "src": "compositions/vfx-iphone-device.html",
+        "compositionId": "devices-canvas",
+        "width": 1920,
+        "height": 1080,
+        "duration": 15,
+        "reason": "实测:组合 gallery 的全部 23 个 layout content_overlap 错误都落在它的时间段(101.5–116.5s)。它是 html-in-canvas 块 —— 手机屏/笔记本屏的 HTML 源面板叠在一起当纹理采样,屏幕上永远不会同时出现,但 layout 审计只看 DOM 盒子,判成\"两块文字重叠\"。solo 宿主里它自己就有 67 个 layout + 75 个 motion 错误,属于块自带,不是本宿主造成的。"
+      },
+      {
+        "name": "vfx-liquid-background",
+        "src": "compositions/vfx-liquid-background.html",
+        "compositionId": "vfx-liquid-background",
+        "width": 1920,
+        "height": 1080,
+        "duration": 12,
+        "reason": "实测:唯一一个在组合宿主里仍抛 page_error \"Illegal invocation\" 的块(solo 宿主里同样抛,但 solo 里只污染它自己那一份检查)。留在组合 gallery 里会让整册 check 永远 exit 1。"
+      },
+      {
+        "name": "vfx-portal",
+        "src": "compositions/vfx-portal.html",
+        "compositionId": "portal-transition",
+        "width": 1920,
+        "height": 1080,
+        "duration": 10,
+        "reason": "实测:挂进组合 gallery 后新增 20 个 layout content_overlap(t=101.7–111.3s)+ 4 个 contrast 错误。它把亮色页面和暗色页面两份 HTML 源面板叠在同一位置当纹理,屏幕上由传送门遮罩二选一,layout 审计看不到遮罩,判成\"每一行文字都和自己重叠\"。"
+      },
+      {
+        "name": "morph-text",
+        "src": "compositions/components/morph-text.html",
+        "compositionId": "morph-text",
+        "width": 1920,
+        "height": 1080,
+        "duration": 15,
+        "reason": "实测:content_overlap #morph-a inside #morph-b。这个块的 gooey 变形**就是**靠两段文字同位叠放 + SVG 阈值滤镜实现的,重叠是效果本身而不是缺陷;layout 审计只看两个文字盒子相交。"
+      }
+    ],
+    "total": 97.5
+  },
+  "component": {
+    "file": "component-gallery.html",
+    "harness": "gallery-component",
+    "items": [
+      {
+        "name": "grain-overlay",
+        "src": "component-gallery.html",
+        "compositionId": "component-gallery",
+        "width": 1920,
+        "height": 1080,
+        "start": 0,
+        "duration": 6,
+        "midpoint": 3
+      },
+      {
+        "name": "vignette",
+        "src": "component-gallery.html",
+        "compositionId": "component-gallery",
+        "width": 1920,
+        "height": 1080,
+        "start": 6,
+        "duration": 6,
+        "midpoint": 9
+      },
+      {
+        "name": "grid-pixelate-wipe",
+        "src": "component-gallery.html",
+        "compositionId": "component-gallery",
+        "width": 1920,
+        "height": 1080,
+        "start": 12,
+        "duration": 6,
+        "midpoint": 15
+      },
+      {
+        "name": "shimmer-sweep",
+        "src": "component-gallery.html",
+        "compositionId": "component-gallery",
+        "width": 1920,
+        "height": 1080,
+        "start": 18,
+        "duration": 6,
+        "midpoint": 21
+      },
+      {
+        "name": "parallax-zoom",
+        "src": "component-gallery.html",
+        "compositionId": "component-gallery",
+        "width": 1920,
+        "height": 1080,
+        "start": 24,
+        "duration": 6,
+        "midpoint": 27
+      },
+      {
+        "name": "parallax-unzoom",
+        "src": "component-gallery.html",
+        "compositionId": "component-gallery",
+        "width": 1920,
+        "height": 1080,
+        "start": 30,
+        "duration": 6,
+        "midpoint": 33
+      },
+      {
+        "name": "texture-mask-text",
+        "src": "component-gallery.html",
+        "compositionId": "component-gallery",
+        "width": 1920,
+        "height": 1080,
+        "start": 36,
+        "duration": 6,
+        "midpoint": 39
+      }
+    ],
+    "total": 42
+  },
+  "solo": {
+    "dir": "gallery-solo",
+    "items": [
+      {
+        "name": "app-showcase",
+        "duration": 5.5,
+        "snapAt": 2.75,
+        "underlay": false
+      },
+      {
+        "name": "code-diff",
+        "duration": 6,
+        "snapAt": 3,
+        "underlay": false
+      },
+      {
+        "name": "code-morph",
+        "duration": 7,
+        "snapAt": 3.5,
+        "underlay": false
+      },
+      {
+        "name": "code-typing",
+        "duration": 5,
+        "snapAt": 2.5,
+        "underlay": false
+      },
+      {
+        "name": "data-chart",
+        "duration": 15,
+        "snapAt": 7.5,
+        "underlay": false
+      },
+      {
+        "name": "editorial-flash-overlay",
+        "duration": 4,
+        "snapAt": 2.46,
+        "underlay": true,
+        "snapReason": "闪白 hit = duration*0.58 = 2.32s,wash 在 hit+0.04 起用 0.18s 退场。2.46s 取的是\"白已经退掉一半、core 光斑与 sweep 斜光带还在\"的那一帧 —— 再早只有一片白(看不出叠在什么上),再晚效果已经没了。"
+      },
+      {
+        "name": "freeze-frame-dressing",
+        "duration": 4,
+        "snapAt": 2,
+        "underlay": true,
+        "snapReason": "hit = duration*0.24 = 0.96s,纸面 0.64 不透明度从 1.0s 持续到 exit=3.7s,两条胶带分别在 1.26s / 1.38s 落位。2.0s 是纸 + 两条胶带全部到位、闪白已退的稳定段。"
+      },
+      {
+        "name": "liquid-glass-widgets",
+        "duration": 8,
+        "snapAt": 4,
+        "underlay": false
+      },
+      {
+        "name": "logo-outro",
+        "duration": 6,
+        "snapAt": 3,
+        "underlay": false
+      },
+      {
+        "name": "organic-light-leak-overlay",
+        "duration": 4,
+        "snapAt": 2,
+        "underlay": false
+      },
+      {
+        "name": "ui-3d-reveal",
+        "duration": 13,
+        "snapAt": 6.5,
+        "underlay": false
+      },
+      {
+        "name": "vfx-shatter",
+        "duration": 12,
+        "snapAt": 6,
+        "underlay": false
+      },
+      {
+        "name": "vfx-text-cursor",
+        "duration": 8,
+        "snapAt": 4,
+        "underlay": false
+      },
+      {
+        "name": "cinematic-zoom",
+        "duration": 4,
+        "snapAt": 2,
+        "underlay": false,
+        "excludedFromRegistryGallery": "实测:通过 data-composition-src 挂载时内联脚本死于 TypeError: Illegal invocation,__timelines[\"main\"] 从不注册,WebGL 画布停在第 0 帧;同一文件当 index.html 独立跑正常。"
+      },
+      {
+        "name": "domain-warp-dissolve",
+        "duration": 4,
+        "snapAt": 2,
+        "underlay": false,
+        "excludedFromRegistryGallery": "实测:同 cinematic-zoom —— 挂载即 Illegal invocation、时间线不注册、shader 画布不绘制;独立运行正常,缩略图取自 gallery-solo/domain-warp-dissolve。"
+      },
+      {
+        "name": "flowchart-vertical",
+        "duration": 12,
+        "snapAt": 6,
+        "underlay": false,
+        "excludedFromRegistryGallery": "同 flowchart(同一个块的竖版孪生,同样带收尾 #fade-overlay)。它在某些采样时刻侥幸没被抽到,但采样点会随时间线总长漂移 —— 留着就是随机 exit 1,所以一并移出。"
+      },
+      {
+        "name": "flowchart",
+        "duration": 12,
+        "snapAt": 6,
+        "underlay": false,
+        "excludedFromRegistryGallery": "实测:收尾的 #fade-overlay 盖住全部节点文字,layout 审计报 11 个 text_occluded + 1 个 contrast 1:1。那是这个块自己的淡出设计(该时刻本来就该看不见字),但审计不区分\"被设计成看不见\"和\"被压住看不见\"。"
+      },
+      {
+        "name": "vfx-iphone-device",
+        "duration": 15,
+        "snapAt": 7.5,
+        "underlay": false,
+        "excludedFromRegistryGallery": "实测:组合 gallery 的全部 23 个 layout content_overlap 错误都落在它的时间段(101.5–116.5s)。它是 html-in-canvas 块 —— 手机屏/笔记本屏的 HTML 源面板叠在一起当纹理采样,屏幕上永远不会同时出现,但 layout 审计只看 DOM 盒子,判成\"两块文字重叠\"。solo 宿主里它自己就有 67 个 layout + 75 个 motion 错误,属于块自带,不是本宿主造成的。"
+      },
+      {
+        "name": "vfx-liquid-background",
+        "duration": 12,
+        "snapAt": 6,
+        "underlay": false,
+        "excludedFromRegistryGallery": "实测:唯一一个在组合宿主里仍抛 page_error \"Illegal invocation\" 的块(solo 宿主里同样抛,但 solo 里只污染它自己那一份检查)。留在组合 gallery 里会让整册 check 永远 exit 1。"
+      },
+      {
+        "name": "vfx-portal",
+        "duration": 10,
+        "snapAt": 5,
+        "underlay": false,
+        "excludedFromRegistryGallery": "实测:挂进组合 gallery 后新增 20 个 layout content_overlap(t=101.7–111.3s)+ 4 个 contrast 错误。它把亮色页面和暗色页面两份 HTML 源面板叠在同一位置当纹理,屏幕上由传送门遮罩二选一,layout 审计看不到遮罩,判成\"每一行文字都和自己重叠\"。"
+      },
+      {
+        "name": "morph-text",
+        "duration": 15,
+        "snapAt": 7.5,
+        "underlay": false,
+        "excludedFromRegistryGallery": "实测:content_overlap #morph-a inside #morph-b。这个块的 gooey 变形**就是**靠两段文字同位叠放 + SVG 阈值滤镜实现的,重叠是效果本身而不是缺陷;layout 审计只看两个文字盒子相交。"
+      }
+    ]
+  }
+}

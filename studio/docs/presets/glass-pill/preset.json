@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "id": "glass-pill",
+  "name": "玻璃胶囊打字",
+  "engine": "remotion",
+  "compositionId": "PresetGlassPill",
+  "componentSource": "templates/remotion-base/src/presets/GlassPill.tsx",
+  "status": "verified",
+  "baselineVersion": 2,
+  "canvas": [
+    "1080x1920"
+  ],
+  "duration": {
+    "min": 1.5,
+    "max": 4,
+    "default": 2.5
+  },
+  "tags": [
+    "ui",
+    "type",
+    "kinetic",
+    "preset"
+  ],
+  "signals": {
+    "framePrecision": 1,
+    "dataBinding": 0,
+    "continuity": 1,
+    "captions": 0,
+    "audioSync": 0,
+    "webUi": 1,
+    "shader3d": 0,
+    "kineticType": 1,
+    "registryFit": 0,
+    "remotionRisk": 0,
+    "hyperframesRisk": 1
+  },
+  "audit": {
+    "minInk": 4,
+    "keyframes": [
+      "start",
+      "mid",
+      "end"
+    ]
+  },
+  "motion": {
+    "character": "quiet",
+    "springAccents": 1,
+    "timeline": [
+      {
+        "phase": "enter",
+        "seconds": 0,
+        "action": "底+Backdrop 第 0 帧已在(首帧不黑);玻璃胶囊弹入 scale 1.16→1 + blur 14→0 收敛 0.3s,唯一弹簧名额=一次轻过冲",
+        "easing": "spring(damping 12) + ENTER"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.2,
+        "action": "竖线光标先行淡入 0.1s(「输入框已就绪」的信号,早于第一个字)",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.35,
+        "action": "打字机逐字匀速铺完 text(速度按字数自适应,结束于 durationSeconds−0.6s);内部渐变辉光沿胶囊长轴慢速游走(周期 3.2s)",
+        "easing": "linear(匀速;加 ease 读作「有人在犹豫」)"
+      },
+      {
+        "phase": "enter",
+        "seconds": 0.55,
+        "action": "caption 在下方上浮淡入 0.4s",
+        "easing": "ENTER"
+      },
+      {
+        "phase": "hold",
+        "seconds": "elastic",
+        "action": "打完静置 ≥0.5s:光标转慢闪,辉光收到 55% 继续游走,右端图标轻微呼吸(±3.5%)"
+      }
+    ],
+    "exit": {
+      "seconds": 0.35,
+      "easing": "smoothstep",
+      "endFrame": "N-1",
+      "implementation": "PresetExit",
+      "description": "末段平滑溶出，最后实际帧透明度归零；原生回收动作保留，透明度只执行一次。"
+    }
+  },
+  "variants": {
+    "icon": {
+      "label": "右端图标",
+      "hint": "mic 听写(默认),search 搜索框,sparkle AI 生成",
+      "type": "enum",
+      "values": [
+        "mic",
+        "search",
+        "sparkle"
+      ],
+      "default": "mic",
+      "description": "胶囊右端的内联 SVG 图标,决定这条输入框的语义"
+    }
+  },
+  "slots": {
+    "text": {
+      "label": "打出来的那句话",
+      "type": "text",
+      "required": true,
+      "role": "body",
+      "fontSize": 46,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 640,
+        "shrinkFloorPx": 30
+      },
+      "description": "胶囊内逐字打出的一句话。单行:先缩字号,缩到 30px 仍超宽则硬失败;胶囊定宽由估宽推导",
+      "hint": "想让观众看着被打出来的那句话,十几个字最好"
+    },
+    "caption": {
+      "label": "下方说明",
+      "type": "text",
+      "required": false,
+      "role": "label",
+      "fontSize": 32,
+      "maxLines": 1,
+      "fit": {
+        "maxWidthPx": 936,
+        "shrinkFloorPx": 22
+      },
+      "description": "胶囊下方居中的一行小字说明,可省",
+      "hint": "一句话点破这镜在演什么。不填就不显示"
+    }
+  },
+  "anchors": {
+    "start": "深色层次底已在,玻璃胶囊带强调色辉光略大弹入,竖线光标已就绪",
+    "end": "退场前：「{text}」打完静置于玻璃胶囊内,光标慢闪,辉光收敛游走,右端 {icon} 图标轻微呼吸,下方「{caption}」；末段约 0.35s 平滑溶出，最后实际帧退净。",
+    "_comment": "anchors 支持 {slot}/{variant} 插值"
+  },
+  "objectiveTemplate": "【玻璃胶囊打字 preset:glass-pill@v1】语音/AI 输入的登场画面:玻璃胶囊弹入,逐字打出「{text}」,辉光游走收敛,右端 {icon} 图标待命",
+  "changelog": [
+    {
+      "version": 1,
+      "date": "2026-08-20",
+      "note": "初版:video-shotcraft 15 效果移植批。自 shotcraft/GlassPillDictationTyping.tsx 复刻并重排 1080×1920 竖版;DOM 测宽换 fit.ts 估宽(确定性);紫 hex 换 skin.accentHue 派生辉光;光打完收到 55% 不全灭(竖版单主体,全灭墨量撑不住);新增 mic/search/sparkle 三档图标与 caption 槽"
+    },
+    {
+      "version": 1,
+      "date": "2026-08-22",
+      "note": "用户看过 9 个模板的连播验收片(桌面 新模板验收.mp4,每个模板的真实文案样例动效),回「都 verified」——翻 verified,自此走快车道:批量出片时不再出三张 Styleframe、不逐镜全量自查,只做槽位校验 + 预览印张确认 + 输出成功 + 分辨率/时长/编码四项检查"
+    },
+    {
+      "version": 1,
+      "date": "2026-10-10",
+      "note": "用户要求修复模板硬切退场：统一末段平滑溶出，保留总时长、槽位和已有回收动作；编辑器自定义背景同步退场。"
+    }
+  ],
+  "sample": {
+    "variant": {
+      "icon": "mic"
+    },
+    "slots": {
+      "text": "帮我把这段口播配上画面",
+      "caption": "说一句话,画面自己长出来。"
+    }
+  },
+  "verifiedAt": "2026-08-22"
+}

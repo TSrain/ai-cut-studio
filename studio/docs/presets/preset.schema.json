@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-motion-studio.local/schemas/preset.schema.json",
+  "title": "BrollPreset",
+  "description": "口播 b-roll 参数化镜头模板的定义。Mirrors tools/lib/preset.mjs 的 validatePresetDef——校验以那份 JS 为权威,本文件供人读与对拍测试。原则:atoms are sacred · slots are the only freedom · timing is frozen。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "id", "name", "engine", "compositionId", "componentSource", "status", "baselineVersion", "canvas", "duration", "tags", "signals", "motion", "slots", "anchors", "objectiveTemplate", "changelog"],
+  "properties": {
+    "version": {"type": "integer", "minimum": 1, "description": "preset 版本。组件改动必须 bump + changelog;合同引用的版本与此不符时展开器硬失败"},
+    "id": {"$ref": "#/$defs/nonBlankString"},
+    "name": {"$ref": "#/$defs/nonBlankString"},
+    "engine": {"enum": ["remotion", "hyperframes", "hybrid"]},
+    "compositionId": {"$ref": "#/$defs/nonBlankString", "description": "Remotion composition id,如 PresetRecede"},
+    "componentSource": {"$ref": "#/$defs/nonBlankString", "description": "模板组件源码路径(repo 相对)"},
+    "status": {"enum": ["draft", "verified"], "description": "verified 才允许走无 worker 快车道与自查降档;draft 按普通镜全量自查"},
+    "verifiedAt": {"type": "string"},
+    "baselineVersion": {"type": "integer", "minimum": 1, "description": "兼容的风格皮肤版本(docs/presets/baseline.json)"},
+    "canvas": {"type": "array", "items": {"type": "string", "pattern": "^\\d+x\\d+$"}, "minItems": 1},
+    "duration": {
+      "type": "object",
+      "required": ["min", "max", "default"],
+      "properties": {
+        "min": {"type": "number", "exclusiveMinimum": 0},
+        "max": {"type": "number", "exclusiveMinimum": 0},
+        "default": {"type": "number", "exclusiveMinimum": 0}
+      },
+      "description": "秒。时序规则:enter/exit 相位绝对秒,hold 相位弹性伸缩——不同时长下动作性格一致"
+    },
+    "tags": {"type": "array", "items": {"$ref": "#/$defs/nonBlankString"}, "minItems": 1, "description": "与组件目录/知识路由同一套标签词表,展开时回填合同 shots[].tags"},
+    "signals": {
+      "type": "object",
+      "description": "十一信号预填(0/1/2),展开器落 signals.json 并真跑 engine-router 保审计一致",
+      "required": ["framePrecision", "dataBinding", "continuity", "captions", "audioSync", "webUi", "shader3d", "kineticType", "registryFit", "remotionRisk", "hyperframesRisk"],
+      "additionalProperties": {"type": "integer", "minimum": 0, "maximum": 2}
+    },
+    "audit": {
+      "type": "object",
+      "properties": {
+        "minInk": {"type": "number", "description": "frame-audit 的 --min-ink 放宽值(如退让镜);review.md 引用本文件即为豁免理由"},
+        "keyframes": {"type": "array", "items": {"enum": ["start", "mid", "end"]}}
+      }
+    },
+    "motion": {
+      "type": "object",
+      "required": ["character", "springAccents", "timeline"],
+      "properties": {
+        "character": {"$ref": "#/$defs/nonBlankString"},
+        "springAccents": {"type": "integer", "minimum": 0},
+        "timeline": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["phase", "seconds", "action"],
+            "properties": {
+              "phase": {"enum": ["enter", "hold", "exit"]},
+              "seconds": {"anyOf": [{"type": "number"}, {"const": "elastic"}]},
+              "action": {"$ref": "#/$defs/nonBlankString"},
+              "easing": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "variants": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["type", "values", "default"],
+        "properties": {
+          "type": {"const": "enum"},
+          "values": {"type": "array", "minItems": 1},
+          "default": {},
+          "description": {"type": "string"}
+        }
+      }
+    },
+    "slots": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {"enum": ["text", "number", "image", "enum", "list", "video", "ranges"]},
+          "required": {"type": "boolean", "default": true},
+          "label": {"type": "string", "description": "控制台表单的字段名(给人看的中文,不是 key)"},
+          "hint": {"type": "string", "description": "控制台表单的一句话说明。没写才退到把 description 改写一遍"},
+          "assetDir": {"type": "string", "description": "image 槽:从 build/public/<assetDir>/ 里挑现成文件,表单渲下拉"},
+          "derivedFrom": {"type": "string", "description": "本槽的值由该素材槽自动填(如源图尺寸),表单里只读"},
+          "splitOn": {"type": "string", "description": "list 槽:一条 item 里的分段符(如 bullet-run 的「主句 | 小注」)。估宽时**分段各自量**,第二段按 noteRatio 倍字号——整串按主句字号量会把排得下的文案误判成超宽"},
+          "noteRatio": {"type": "number", "exclusiveMinimum": 0, "description": "splitOn 之后第二段的字号比例,默认 0.46。必须与组件里的实际比例一致"},
+          "noteMaxLines": {"type": "integer", "minimum": 1, "description": "splitOn 第二段允许折几行,默认 2。组件里小注是会折行的普通 div,拿单行预算量它会把正常文案误判成超宽"},
+          "role": {"type": "string", "description": "textStyle 角色名(hero/h1/body/label/caption/data…)"},
+          "fontSize": {"type": "number"},
+          "maxLines": {"type": "integer", "minimum": 1},
+          "fit": {
+            "type": "object",
+            "required": ["maxWidthPx", "shrinkFloorPx"],
+            "properties": {
+              "maxWidthPx": {"type": "number", "exclusiveMinimum": 0},
+              "shrinkFloorPx": {"type": "number", "exclusiveMinimum": 0}
+            },
+            "description": "字数上限是推导值:声明字号装不下就缩,缩到 shrinkFloorPx 仍装不下 = 硬失败"
+          },
+          "wrap": {"type": "boolean", "description": "true = 先折行(最多 maxLines 行)再缩字,而不是单行 shrink-to-fit。展开器与组件共用 layoutEmphasisText"},
+          "emphasisSlot": {"type": "string", "description": "另一个槽的名字,其值必须是本槽文字的子串;命中部分放大 emphasisRatio 倍成主焦点。要求 wrap: true"},
+          "emphasisRatio": {"type": "number", "exclusiveMinimum": 1, "description": "主焦点相对基准档的放大倍数,默认 1.6"},
+          "measuredIn": {"type": "string", "description": "本槽的宽度由该承载槽一起估算(如 recede 的 hero 是 line 的子串),因此本槽不需要 fit/fontSize"},
+          "format": {"type": "string"},
+          "values": {"type": "array"},
+          "default": {},
+          "minItems": {"type": "integer"},
+          "maxItems": {"type": "integer"},
+          "minWidthPx": {"type": "number"},
+          "aspectHint": {"type": "string"},
+          "description": {"type": "string"}
+        }
+      }
+    },
+    "sfx": {
+      "type": "object",
+      "properties": {
+        "enter": {"type": "string", "description": "build/public/sfx/ 下的本地文件"},
+        "hit": {"type": "string"}
+      }
+    },
+    "anchors": {
+      "type": "object",
+      "required": ["start", "end"],
+      "properties": {
+        "start": {"$ref": "#/$defs/nonBlankString"},
+        "end": {"$ref": "#/$defs/nonBlankString"}
+      },
+      "description": "支持 {slot}/{variant} 插值,展开后回填合同 startAnchor/endAnchor"
+    },
+    "objectiveTemplate": {"$ref": "#/$defs/nonBlankString"},
+    "changelog": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["version", "date", "note"],
+        "properties": {
+          "version": {"type": "integer"},
+          "date": {"type": "string"},
+          "note": {"$ref": "#/$defs/nonBlankString"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "nonBlankString": {"type": "string", "minLength": 1, "pattern": "\\S"}
+  }
+}
