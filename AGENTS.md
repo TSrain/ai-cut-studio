@@ -14,3 +14,4 @@ This is a local-first editing application, not a hosted multi-user service.
 - Build: `npm run build`. Release tests: `npm test`. Extended suites: `npm run test:studio` and `npm run test:workflow`.
 - Before publishing: `npm run audit:release`. Review license notices independently of test results.
 - Do not claim visual/listening acceptance from tests or successful rendering.
+- Extended Node image-compositing tests require Pillow in `/usr/bin/python3`; Ubuntu CI installs `python3-pil`. A missing fixture dependency is not a reason to skip those tests.
